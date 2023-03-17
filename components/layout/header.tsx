@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { Container } from "../util/container";
 import { useTheme } from ".";
 import { Icon } from "../util/icon";
+import { SearchIcon } from '@heroicons/react/outline'
 import { useState } from 'react'; // import useState hook
 
 export const Header = ({ data }) => {
@@ -67,6 +68,10 @@ export const Header = ({ data }) => {
     }
   }, []);
 
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+
+  const [searchQuery, setSearchQuery] = useState('')
+
   return (
     <div
       className={`relative bg-gradient-to-b ${headerColorCss}`}
@@ -99,7 +104,7 @@ export const Header = ({ data }) => {
             </button>
             {/* Render the original menu only on large screens */}
             <ul className="hidden md:flex items-end gap-6 md:gap-4 lg:gap-10 tracking-[.002em] -mx-4">
-              {data.nav &&
+              {!isSearchOpen && data.nav &&
                 data.nav.map((item, i) => {
                   const activeItem =
                     item.href === ""
@@ -124,6 +129,13 @@ export const Header = ({ data }) => {
                     </li>
                   );
                 })}
+                {!isSearchOpen ? (
+                <li>
+                  <button className="px-2 pb-6" onClick={() => setIsSearchOpen(true)}>
+                   <SearchIcon className= "h-6 w-6 text-gray-300" aria-hidden="true" />
+                  </button>
+                </li>
+                ) : null}
             </ul>
             {/* Render the burger menu only on small screens */}
             {showMenu ? (
@@ -154,6 +166,41 @@ export const Header = ({ data }) => {
               </ul>
             ) : null}
           </div>
+          {isSearchOpen && (
+            <form
+              className="flex items-center pt-3"
+              onSubmit={(e) => {
+                e.preventDefault()
+                setIsSearchOpen(false)
+                router.push(`/search?s=${searchQuery}`)
+              }}
+            >
+              <div className="flex flex-1 items-center">
+                <input
+                  type="text"
+                  className="w-full rounded-md border-gray-300 shadow-sm px-4 py-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="Search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button
+                  type="submit"
+                  className="ml-1 inline-flex items-center px-4 py-2 border border-transparent rounded-md hover:shadow-sm text-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  <SearchIcon className="-ml-1 mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+                </button>
+                <button
+                  type="button"
+                  className="inline-flex items-center px-2 py-2 border border-transparent rounded-md hover:shadow-sm text-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  onClick={() => setIsSearchOpen(false)}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="-ml-1 mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M5.293 5.293a1 1 0 011.414 0L10 8.586l3.293-3.293a1 1 0 111.414 1.414L11.414 10l3.293 3.293a1 1 0 01-1.414 1.414L10 11.414l-3.293 3.293a1 1 0 01-1.414-1.414L8.586 10 5.293 6.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+            </form>
+          )}
         </div>
         <div
           className={`absolute h-1 bg-gradient-to-r from-transparent ${

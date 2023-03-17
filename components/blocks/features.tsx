@@ -44,7 +44,7 @@ export const Features = ({ data, parentField }) => {
     <Section color={data.color}>
       <Container
         className={`flex flex-wrap gap-x-10 gap-y-8 text-left`}
-        size="large"
+        size="small"
       >
         {data.items &&
           data.items.map(function (block, i) {

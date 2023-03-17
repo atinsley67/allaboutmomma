@@ -1,16 +1,3 @@
-/**
-Copyright 2021 Forestry.io Holdings, Inc.
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    http://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
 import React from "react";
 import { Container } from "../util/container";
 import { Section } from "../util/section";
@@ -127,6 +114,8 @@ export const Category = (props) => {
       "from-orange-300 to-orange-600 dark:from-orange-200 dark:to-orange-500",
     yellow:
       "from-yellow-400 to-yellow-500 dark:from-yellow-300 dark:to-yellow-500",
+    gray_400:
+      "from-gray-400 to-gray-500 dark:from-gray-300 dark:to-gray-500",
   };
 
   const date = new Date(props.date);
@@ -135,14 +124,12 @@ export const Category = (props) => {
     formattedDate = format(date, "MMM dd, yyyy");
   }
 
-  //const posts = props.postConnection.edges;
-
   return (
     <Section className="flex-1">
-      <Container width="small" className={`flex-1 pb-2`} size="large">
+      <Container className={`flex-1 pb-2`} size="small">
         <h2
           data-tinafield="title"
-          className={`w-full relative	mb-8 text-6xl tracking-normal title-font`}
+          className={`w-full relative	mb-8 text-5xl tracking-normal title-font`}
         >
           <span
             className={`bg-clip-text text-transparent bg-gradient-to-r ${
@@ -152,32 +139,30 @@ export const Category = (props) => {
             {props.category.title}
           </span>
         </h2>
-      </Container>
+
       {props.category.heroImg && (
-        <div className="px-4 w-full">
-          <div
-            data-tinafield="heroImg"
-            className="relative max-w-4xl lg:max-w-5xl mx-auto"
+          <div className="relative"
           >
             <img
+              className="absolute z-0 w-full rounded-lg max-w-xs max-w-none h-auto blur-xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light max-h-[25rem] object-cover object-center object-top object-position-y-2/3"
               src={props.category.heroImg}
-              className="absolute z-0 block rounded-lg w-full h-auto blur-2xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light"
               aria-hidden="true"
             />
             <img
-              src={props.category.heroImg}
+              className="relative z-1 w-full max-w-xs rounded-lg max-w-none h-auto max-h-[25rem] object-cover object-center object-top object-position-y-2/3"
               alt={props.category.title}
-              className="relative z-1 mb-14 block rounded-lg w-full h-auto opacity-100"
+              src={props.category.heroImg}
             />
+            <div className="absolute inset-0 bg-gray-600 bg-opacity-30 w-full h-full rounded-lg"></div>
           </div>
-        </div>
       )}
-      <Container className={`flex-1 pt-4`} width="small" size="large">
-        <div className="prose dark:prose-dark w-full max-w-none">
+      </Container>
+      <Container className={`flex-1 pt-4`} width="medium" size="small">
+        <div className="prose dark:prose-dark w-full max-w-none pt-6">
           <TinaMarkdown components={components} content={props.category._body} />
         </div>
       </Container>
-      <Container>
+      <Container size="small">
         <>
         {props.postConnection.edges.map((postData) => {
             const post = postData.node;
@@ -192,44 +177,27 @@ export const Category = (props) => {
                 href={`/` + post._sys.filename}
                 passHref
               >
-                <a
-                  key={post.id}
-                  className="group block px-6 sm:px-8 md:px-10 py-10 mb-8 last:mb-0 bg-gray-50 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-1000 rounded-md shadow-sm transition-all duration-150 ease-out hover:shadow-md hover:to-gray-50 dark:hover:to-gray-800"
-                >
-                  <h3
-                    className={`text-gray-700 dark:text-white text-3xl lg:text-4xl font-semibold title-font mb-5 transition-all duration-150 ease-out ${
-                      titleColorClasses[theme.color]
-                    }`}
-                  >
-                    {post._values.title}{" "}
-                    <span className="inline-block opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out">
-                      <BsArrowRight className="inline-block h-8 -mt-1 ml-1 w-auto opacity-70" />
-                    </span>
-                  </h3>
-                  <div className="prose dark:prose-dark w-full max-w-none mb-5 opacity-70">
-                    <TinaMarkdown content={post._values.excerpt} />
-                  </div>
-                  <div className="flex items-center">
-                    <div className="flex-shrink-0 mr-2">
+                <a>
+                  <div className="flex justify-center">
+                    <div
+                      className="flex flex-col rounded-lg bg-white shadow-lg dark:bg-neutral-700 md:max-w-xxl sm:flex-row">
                       <img
-                        className="h-10 w-10 object-cover rounded-full shadow-sm"
-                        src={`../${post?.author?.avatar}`}
-                        alt={post?.author?.name}
-                      />
-                    </div>
-                    <p className="text-base font-medium text-gray-600 group-hover:text-gray-800 dark:text-gray-200 dark:group-hover:text-white">
-                      {post?.author?.name}
-                    </p>
-                    {formattedDate !== "" && (
-                      <>
-                        <span className="font-bold text-gray-200 dark:text-gray-500 mx-2">
-                          —
-                        </span>
-                        <p className="text-base text-gray-400 group-hover:text-gray-500 dark:text-gray-300 dark:group-hover:text-gray-150">
-                          {formattedDate}
+                        className="h-64 w-full rounded-t-lg object-cover sm:h-auto sm:w-48 sm:rounded-none sm:rounded-l-lg"
+                        src={post._values.heroImg}
+                        alt="" />
+                      <div className="flex flex-col justify-start p-6">
+                        <h5
+                          className="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
+                          {post._values.title}
+                        </h5>
+                        <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                          <TinaMarkdown content={post._values.excerpt} />
                         </p>
-                      </>
-                    )}
+                        <div className="px-6 pt-4 pb-2">
+                          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{post._values.category}</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </a>
               </Link>

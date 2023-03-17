@@ -23,7 +23,7 @@ export const Container = ({
 
   return (
     <div
-      className={`${widthClass[width]} mx-auto px-6 sm:px-8 ${verticalPadding[size]} ${className}`}
+      className={`${widthClass[width]} mx-auto px-4 sm:px-8 ${verticalPadding[size]} ${className}`}
       {...props}
     >
       {children}

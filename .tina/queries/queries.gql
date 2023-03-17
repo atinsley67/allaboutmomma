@@ -40,7 +40,6 @@ query blogPostQuery($relativePath: String!) {
 }
 
 query blogPostCardQuery($relativePath: String!) {
-  ...LayoutQueryFragment
   post(relativePath: $relativePath) {
     title
     category
