@@ -37,12 +37,6 @@ export const getStaticProps = async ({ params }) => {
       relativePath: `home.md`,
     });
 
-    /*
-    // We don't have access to the definition of PageBlocksFeaturedPosts so we need to go get it from the schema.
-    const featuredPostsDef = schema.definitions.find(
-      def => def.kind === 'ObjectTypeDefinition' && def.name.value === 'PageBlocksFeaturedPosts'
-    );
-    */
 
     // Get the featured posts data
     const featuredPosts = tinaProps.data.page.blocks.find(block => block.__typename === 'PageBlocksFeaturedPosts') as any;

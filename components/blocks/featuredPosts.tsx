@@ -1,6 +1,5 @@
 import { Actions } from "../util/actions";
 import { Section } from "../util/section";
-import { client } from "../../.tina/__generated__/client";
 import { Container } from "../util/container";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 
