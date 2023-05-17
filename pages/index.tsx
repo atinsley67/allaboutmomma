@@ -4,6 +4,7 @@ import { useTina } from "tinacms/dist/react";
 import { Layout } from "../components/layout";
 import { useRouter } from 'next/router'
 import schema from '../.tina/__generated__/_graphql.json';
+import { getIntro } from "../components/util/propsUtils"
 
 // Use the props returned by get static props
 export default function HomePage(
@@ -37,51 +38,28 @@ export const getStaticProps = async ({ params }) => {
       relativePath: `home.md`,
     });
 
+    await Promise.all(
+      tinaProps.data.page.blocks.map(async block => {
+        if (block.__typename === 'PageBlocksFeaturedPosts') {
+          await Promise.all(
+            block.items.map(async item => {
+              const postData = await client.queries.blogPostCardQuery({
+                relativePath: `${item.postLocation}.mdx`,
+              });
 
-    // Get the featured posts data
-    const featuredPosts = tinaProps.data.page.blocks.find(block => block.__typename === 'PageBlocksFeaturedPosts') as any;
-
-    
-    // Extract the postLocation values from the featured posts items
-    const postLocations = featuredPosts.items.map(item => item.postLocation);
-
-    // Fetch additional data for each postLocation value
-    const postDetails = await Promise.all(
-      postLocations.map(async postLocation => {
-        const postQuery = await client.queries.blogPostCardQuery({ relativePath: `${postLocation}.mdx` });
-        return postQuery.data;
+              const intro = getIntro(postData.data.post._body, 50)
+              delete postData.data.post._body
+              item.postDetails = postData.data.post;
+              item.postDetails.intro = intro
+            })
+          );
+        }
       })
     );
 
-    const newData = {
-    ...tinaProps.data,
-    global: {
-      ...tinaProps.data.global,
-    },
-    page: {
-      ...tinaProps.data.page,
-      blocks: tinaProps.data.page.blocks.map(block => {
-        if (block.__typename === 'PageBlocksFeaturedPosts') {
-          return {
-            ...block,
-            items: block.items.map((item, index) => {
-              return {
-                ...item,
-                postDetails: postDetails[index].post,
-              };
-            }),
-          };
-        } else {
-          return block;
-        }
-      }),
-    },
-  };
-
-
   return {
     props: {
-      data: newData,
+      data: tinaProps.data,
       query: tinaProps.query,
       variables: tinaProps.variables,
     },

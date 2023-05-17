@@ -37,7 +37,7 @@ const config = defineConfig({
         name: "post",
         path: "content/posts",
         format: "mdx",
-                fields: [
+        fields: [
           {
             type: "string",
             label: "Title",
@@ -47,8 +47,9 @@ const config = defineConfig({
           },
           {
             type: "string",
-            name: "category",
-            label: "Category",
+            name: "categories",
+            label: "Categories",
+            list: true,
           },
           {
             type: "image",

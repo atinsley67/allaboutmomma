@@ -2,6 +2,7 @@ import { Actions } from "../util/actions";
 import { Section } from "../util/section";
 import { Container } from "../util/container";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
+import Link from "next/link";
 
 export const FeaturedPost = ({ data, tinaField }) => {
 
@@ -10,33 +11,41 @@ export const FeaturedPost = ({ data, tinaField }) => {
   }
 
   return (
-    <div
-      data-tinafield={tinaField}
-      className="rounded-xl overflow-hidden shadow-lg"
-    >
-      <img className="w-full" src={data.postDetails.heroImg} alt={data.postDetails.title}/>
-      <div className="px-6 pt-4 pb-2">
-        {data.postDetails.title && (
-          <h3
-            data-tinafield={`${tinaField}.title`}
-            className="text-2xl font-semibold title-font"
-          >
-            {data.postDetails.title}
-          </h3>
-        )}
-        {data.postDetails.excerpt && (
-          <div
-            data-tinafield={`${tinaField}.text`}
-            className="text-base opacity-80 leading-relaxed"
-          >
-            <TinaMarkdown content={data.postDetails.excerpt} />
-          </div>
-        )}
+    <a href={data.postLocation}>
+      <div
+        data-tinafield={tinaField}
+        className="rounded-xl overflow-hidden shadow-lg"
+      >
+        <img className="w-full" src={data.postDetails.heroImg} alt={data.postDetails.title}/>
+        <div className="px-6 pt-4 pb-2">
+          {data.postDetails.title && (
+            <h3
+              data-tinafield={`${tinaField}.title`}
+              className="text-2xl font-semibold title-font"
+            >
+              {data.postDetails.title}
+            </h3>
+          )}
+          {data.postDetails.intro && (
+            <div
+              data-tinafield={`${tinaField}.text`}
+              className="text-base opacity-80 leading-relaxed"
+            >
+              {data.postDetails.intro}
+            </div>
+          )}
+        </div>
+        <div className="px-6 pt-4 pb-2 flex flex-wrap justify-center">
+          {data.postDetails.categories && data.postDetails.categories.map((category) => (
+            <div className="px-2 py-1">
+              <span className="bg-gray-200 rounded-full px-3 py-1 pb-2 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                {category}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="px-6 pt-4 pb-2">
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{data.postDetails.category}</span>
-      </div>
-    </div>
+    </a>
   );
 };
 
@@ -51,7 +60,7 @@ export const FeaturedPosts = ({ data, parentField }) => {
     <Section color={data.color}>
       <Container
         className="text-center justify-center"
-        size=""
+        size="small"
       >
         <div>
           <h2 className="text-xl font-bold">{data.title}</h2>

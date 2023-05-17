@@ -3,6 +3,7 @@ import { Blocks } from "../components/blocks-renderer";
 import { client } from "../.tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { Layout } from "../components/layout";
+import { getIntro } from "../components/util/propsUtils"
 
 const addTOCData = (data) => {
   const { _body } = data.post;
@@ -74,9 +75,29 @@ export const getStaticProps = async ({ params }) => {
       },
     };
   } catch (error) {
+
     const tinaProps = await client.queries.contentQuery({
       relativePath: `${params.filename}.md`,
     });
+
+    await Promise.all(
+      tinaProps.data.page.blocks.map(async block => {
+        if (block.__typename === 'PageBlocksFeaturedPosts') {
+          await Promise.all(
+            block.items.map(async item => {
+              const postData = await client.queries.blogPostCardQuery({
+                relativePath: `${item.postLocation}.mdx`,
+              });
+
+              const intro = getIntro(postData.data.post._body, 50)
+              delete postData.data.post._body
+              item.postDetails = postData.data.post;
+              item.postDetails.intro = intro
+            })
+          );
+        }
+      })
+    );
     return {
       props: {
         data: tinaProps.data,

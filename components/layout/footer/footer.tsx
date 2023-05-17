@@ -46,7 +46,7 @@ export const Footer = ({ data, icon, rawData }) => {
       <Container className="relative" size="small">
         <div className="flex justify-between items-center gap-6 flex-wrap">
           <Link href="/" passHref>
-            <a className="group mx-2 flex items-center font-bold tracking-tight text-gray-400 dark:text-gray-300 opacity-50 hover:opacity-100 transition duration-150 ease-out whitespace-nowrap">
+            <a className="group mx-2 flex items-center font-bold tracking-tight text-gray-400 dark:text-gray-300 opacity-50 hover:opacity-100 transition duration-300 ease-out whitespace-nowrap">
               <Icon
                 parentColor={data.color}
                 data={{
@@ -55,7 +55,7 @@ export const Footer = ({ data, icon, rawData }) => {
                   style: icon.style,
                   size: "huge",
                 }}
-                className="inline-block h-10 w-auto group-hover:text-orange-500"
+                className="inline-block w-auto group-hover:text-orange-500"
               />
             </a>
           </Link>

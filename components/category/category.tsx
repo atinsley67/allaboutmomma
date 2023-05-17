@@ -144,12 +144,12 @@ export const Category = (props) => {
           <div className="relative"
           >
             <img
-              className="absolute z-0 w-full rounded-lg max-w-xs max-w-none h-auto blur-xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light max-h-[25rem] object-cover object-center object-top object-position-y-2/3"
+              className="absolute z-0 w-full rounded-lg max-w-none h-auto blur-xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light max-h-[20rem] object-cover object-center object-top object-position-y-1/3"
               src={props.category.heroImg}
               aria-hidden="true"
             />
             <img
-              className="relative z-1 w-full max-w-xs rounded-lg max-w-none h-auto max-h-[25rem] object-cover object-center object-top object-position-y-2/3"
+              className="relative z-1 w-full rounded-lg max-w-none h-auto max-h-[20rem] object-cover object-center object-top object-position-y-1/3"
               alt={props.category.title}
               src={props.category.heroImg}
             />
@@ -162,7 +162,7 @@ export const Category = (props) => {
           <TinaMarkdown components={components} content={props.category._body} />
         </div>
       </Container>
-      <Container size="small">
+      <Container size="small" className={`flex flex-wrap gap-x-10 gap-y-8 text-left`}>
         <>
         {props.postConnection.edges.map((postData) => {
             const post = postData.node;
@@ -183,18 +183,24 @@ export const Category = (props) => {
                       className="flex flex-col rounded-lg bg-white shadow-lg dark:bg-neutral-700 md:max-w-xxl sm:flex-row">
                       <img
                         className="h-64 w-full rounded-t-lg object-cover sm:h-auto sm:w-48 sm:rounded-none sm:rounded-l-lg"
-                        src={post._values.heroImg}
+                        src={post.heroImg}
                         alt="" />
                       <div className="flex flex-col justify-start p-6">
                         <h5
                           className="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
-                          {post._values.title}
+                          {post.title}
                         </h5>
                         <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                          <TinaMarkdown content={post._values.excerpt} />
+                          {post.intro}
                         </p>
-                        <div className="px-6 pt-4 pb-2">
-                          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{post._values.category}</span>
+                        <div className="px-6 pt-4 pb-2 flex flex-wrap justify-left">
+                          {post.categories && post.categories.map((category) => (
+                            <div className="px-2 py-1">
+                              <span className="bg-gray-200 rounded-full px-3 py-1 pb-2 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                                {category}
+                              </span>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>

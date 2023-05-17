@@ -4,7 +4,10 @@ query pageQuery {
     edges {
       node {
         id
-        _values
+        _body
+        title
+        heroImg
+        categories
         date
         author {
           ... on Author {
@@ -42,9 +45,9 @@ query blogPostQuery($relativePath: String!) {
 query blogPostCardQuery($relativePath: String!) {
   post(relativePath: $relativePath) {
     title
-    category
+    categories
     heroImg
-    excerpt
+    _body
     date
     author {
       ... on Author {
@@ -56,18 +59,20 @@ query blogPostCardQuery($relativePath: String!) {
 }
 
 
-query categoryQuery($relativePath: String!, $category: String!) {
+query categoryQuery($relativePath: String!) {
   ...LayoutQueryFragment
   category(relativePath: $relativePath) {
     ...CategoryParts
   }
-  postConnection 
-  ( filter: { category: { eq: $category } } )
+  postConnection
   {
     edges {
       node {
         id
-        _values
+        _body
+        title
+        heroImg
+        categories
         date
         author {
           ... on Author {
@@ -81,3 +86,4 @@ query categoryQuery($relativePath: String!, $category: String!) {
     }
   }
 }
+

@@ -10,7 +10,9 @@ export const Layout = ({ rawData = {}, data = layoutData, children }) => {
     <>
       <Head>
         <title>All About Momma</title>
+        <meta name="description" content="Place the meta description text here."/>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta charSet="UTF-8"/>
         {data.theme.font === "nunito" && (
           <>
             <link rel="preconnect" href="https://fonts.googleapis.com" />

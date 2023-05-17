@@ -9,7 +9,7 @@ export const IconOptions = {
     <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
-    viewBox="30 80 150 80"
+    viewBox="30 70 150 100"
     {...props}
   >
     <defs>
