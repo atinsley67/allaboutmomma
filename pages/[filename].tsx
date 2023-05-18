@@ -84,7 +84,7 @@ export const getStaticProps = async ({ params }) => {
       tinaProps.data.page.blocks.map(async block => {
         if (block.__typename === 'PageBlocksFeaturedPosts') {
           await Promise.all(
-            block.items.map(async item => {
+            block.items.map(async (item: any) => {
               const postData = await client.queries.blogPostCardQuery({
                 relativePath: `${item.postLocation}.mdx`,
               });

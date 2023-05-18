@@ -39,7 +39,7 @@ export const getStaticProps = async ({ params }) => {
   );
 
   await Promise.all(
-    tinaProps.data.postConnection.edges.map(async post => {
+    tinaProps.data.postConnection.edges.map(async (post: any) => {
 
       const intro = getIntro(post.node._body, 50)
       delete post.node._body
