@@ -47,6 +47,11 @@ const config = defineConfig({
           },
           {
             type: "string",
+            label: "Description",
+            name: "description",
+          },
+          {
+            type: "string",
             name: "categories",
             label: "Categories",
             list: true,
@@ -158,7 +163,7 @@ const config = defineConfig({
                   },
                   {
                     name: "imageURL",
-                    label: "Affiliate Link URL",
+                    label: "Affiliate Image URL",
                     type: "string",
                   },
                   {
@@ -174,6 +179,11 @@ const config = defineConfig({
                   {
                     label: "Button",
                     name: "button",
+                    type: "boolean",
+                  },
+                  {
+                    label: "Float Left",
+                    name: "floatLeft",
                     type: "boolean",
                   },
                 ],
@@ -414,6 +424,11 @@ const config = defineConfig({
             required: true,
           },
           {
+            type: "string",
+            label: "Description",
+            name: "description",
+          },
+          {
             type: "object",
             list: true,
             name: "blocks",
@@ -444,6 +459,11 @@ const config = defineConfig({
             name: "title",
             isTitle: true,
             required: true,
+          },
+          {
+            type: "string",
+            label: "Description",
+            name: "description",
           },
           {
             type: "string",

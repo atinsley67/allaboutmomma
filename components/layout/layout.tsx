@@ -6,11 +6,23 @@ import layoutData from "../../content/global/index.json";
 import { Theme } from "./theme";
 
 export const Layout = ({ rawData = {}, data = layoutData, children }) => {
+  let title = "All About Momma"
+  let description = "All About Momma Description"
+  if ( rawData.page ) {
+    title = rawData.page.title + " | " + data.header.name
+    description = rawData.page.description
+  } else if ( rawData.post ) {
+    title = rawData.post.title
+    description = rawData.post.description
+  } else if (rawData.category ) {
+    title = rawData.category.title + " | " + data.header.name
+    description = rawData.category.description
+  }
   return (
     <>
       <Head>
-        <title>All About Momma</title>
-        <meta name="description" content="Place the meta description text here."/>
+        <title>{title}</title>
+        <meta name="description" content={`${description}`}/>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta charSet="UTF-8"/>
         {data.theme.font === "nunito" && (

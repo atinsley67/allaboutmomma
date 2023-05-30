@@ -172,12 +172,13 @@ const components: Components<{
     const imageUrl = props.image || props.imageURL || imageSnippet
     // Extract link URL
     const linkMatch = props.affiliateSnippet?.match(/<a.*?href="(.*?)"/) ?? null;
-    const linkUrl = props.linkURL || linkMatch ? linkMatch[1] : null;
+    const linkUrl = props.linkURL || (linkMatch ? linkMatch[1] : null);
+
     if (linkUrl && imageUrl) {
       return (
         <>
-        <div className="md:float-left ml-2 mr-6 mt-0 mb-6 justify-center items-center">
-          <a href={linkUrl}
+           <div className={`ml-2 mr-6 mt-0 mb-6 justify-center items-center ${props.floatLeft ? 'md:float-left' : ''}`}>
+           <a href={linkUrl}
             target="_blank"
             rel="nofollow noopener"
             className="no-underline">
@@ -288,7 +289,7 @@ export const Post = (props) => {
           </p>
         </div>
       </Container>
-      {props.heroImg && (
+      {false && (
         <div className="px-4 w-full">
           <div
             data-tinafield="heroImg"
