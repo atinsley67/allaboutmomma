@@ -54,6 +54,10 @@ const components: Components<{
     hLevel: string;
     headings: object;
   };
+  Table: {
+    headers: any;
+    rows: any;
+  }
 }> = {
   code_block: (props) => <Prism {...props} />,
   BlockQuote: (props: {
@@ -173,11 +177,12 @@ const components: Components<{
     // Extract link URL
     const linkMatch = props.affiliateSnippet?.match(/<a.*?href="(.*?)"/) ?? null;
     const linkUrl = props.linkURL || (linkMatch ? linkMatch[1] : null);
+    const floatLeft = false;
 
     if (linkUrl && imageUrl) {
       return (
         <>
-           <div className={`ml-2 mr-6 mt-0 mb-6 justify-center items-center ${props.floatLeft ? 'md:float-left' : ''}`}>
+           <div className={`ml-2 mr-6 mt-0 mb-6 justify-center items-center ${floatLeft ? 'md:float-left' : ''}`}>
            <a href={linkUrl}
             target="_blank"
             rel="nofollow noopener"
@@ -219,6 +224,56 @@ const components: Components<{
       </div>
     )
   },
+  Table: (props) => {
+
+    console.log(props)
+
+    if (!props.headers || props.headers.length === 0) {
+      return <p>Table: No table content.</p>;
+    } 
+
+    return (
+      <div>
+        <table className="table-auto w-full">
+          <thead className="bg-blue-100">
+            <tr>
+              {props.headers.map((header, index) => (
+                <th key={index} className="px-4 py-2">
+                  {header}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {props.rows && props.rows.length > 0 && props.rows.map((row, rowIndex) => (
+              <tr
+                key={rowIndex}
+                className="hover:bg-gray-100 transition-colors"
+              >
+                {row.cells && row.cells.length > 0 && row.cells.map((cell, cellIndex) => (
+                  <td key={cellIndex} className="border px-4 py-2">
+                    <div className="whitespace-pre-wrap">{cell.content && cell.content}</div>
+                    {cell.affiliateSnippet &&
+                        <a href={cell.affiliateSnippet.linkURL}
+                            target="_blank"
+                            rel="nofollow noopener"
+                            className="no-underline">
+                            <img decoding="async" src={cell.affiliateSnippet.imageURL} className="mx-auto px-2 mt-2 mb-4 border-0"/>
+                            <button
+                              className={`mx-auto z-10 relative flex text-center px-7 py-3 font-semibold text-lg transition duration-150 ease-out  rounded-lg transform focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 whitespace-nowrap `}>
+                                Check Amazon Price
+                            </button>
+                        </a>
+                      }
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+    </table>
+      </div>
+    )
+  }
 }
 
 export const Post = (props) => {

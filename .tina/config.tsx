@@ -6,6 +6,7 @@ import { heroBlockSchema } from "../components/blocks/hero";
 import { testimonialBlockSchema } from "../components/blocks/testimonial";
 import { ColorPickerInput } from "../components/fields/color";
 import { iconSchema } from "../components/util/icon";
+import { link } from "fs";
 
 const config = defineConfig({
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID!,
@@ -203,10 +204,105 @@ const config = defineConfig({
                     type: "string",
                   },
                 ],
-                defaultItem: {
-                    title: "In this Article:",
-                    hLevel: "H1",
+                ui: {
+                  defaultItem: {
+                      title: "In this Article:",
+                      hLevel: "H1",
                   },
+                },
+              },
+              {
+                name: "Table",
+                label: "Table",
+                fields: [
+                  {
+                    name: "headers",
+                    label: "Column Headers",
+                    type: "string",
+                    list: true,
+                  },
+                  {
+                    name: "rows",
+                    label: "Rows",
+                    type: "object",
+                    list: true,
+                    fields: [
+                      {
+                        name: "cells",
+                        label: "Cells",
+                        type: "object",
+                        list: true,
+                        fields: [
+                          {
+                            name: "content",
+                            label: "Content",
+                            type: "string",
+                            ui: {
+                              component: "textarea",
+                            }
+                          },
+                          {
+                            name: "affiliateSnippet",
+                            label: "Affiliate Snippet",
+                            type: "object",
+                            fields: [
+                              {
+                                name: "linkURL",
+                                type: "string",
+                              },
+                              {
+                                name: "imageURL",
+                                type: "string",
+                              }
+                            ],
+                            ui: {
+                              parse: (val) => {
+                                // Extract image URL
+                                const imageMatch = val.match(/<img.*?src="(.*?)"/)
+                                const imageSnippet = imageMatch ? imageMatch[1].replace(/&amp;/g, '&') : null;
+                                // Extract link URL
+                                const linkMatch = val.match(/<a.*?href="(.*?)"/)
+                                const linkSnippet = linkMatch ? linkMatch[1].replace(/&amp;/g, '&') : null;
+                                return (
+                                  {"linkURL": linkSnippet,
+                                  "imageURL": imageSnippet}
+                                );
+                              },
+                              component: ({ field, input, meta }) => {
+                                return (
+                                  <div>
+                                    <label className="block font-sans text-xs font-semibold text-gray-700 whitespace-normal mb-2 undefined">
+                                      {field.label}
+                                    </label>
+                                    <input
+                                      name="Snippet"
+                                      id="snippet"
+                                      type="string"
+                                      // This will pass along props.input.onChange to set our form values as this input changes.
+                                      onChange={input.onChange}
+                                    />
+                                    <p>{input.value.linkURL}</p>
+                                    <p>{input.value.imageURL}</p>
+                                  </div>
+                                );
+                              }
+                            }
+                          },
+                        ],
+                      }
+                    ]
+                  },
+                ],
+                ui: {
+                  defaultItem: {
+                    headers: [
+                      "Product",
+                      "Category",
+                      "Features",
+                    ],
+                    rows: []
+                  },
+                }
               },
             ],
             isBody: true,

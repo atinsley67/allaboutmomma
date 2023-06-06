@@ -8,15 +8,16 @@ import { Theme } from "./theme";
 export const Layout = ({ rawData = {}, data = layoutData, children }) => {
   let title = "All About Momma"
   let description = "All About Momma Description"
-  if ( rawData.page ) {
-    title = rawData.page.title + " | " + data.header.name
-    description = rawData.page.description
-  } else if ( rawData.post ) {
-    title = rawData.post.title
-    description = rawData.post.description
-  } else if (rawData.category ) {
-    title = rawData.category.title + " | " + data.header.name
-    description = rawData.category.description
+  const headerData = (rawData as any)
+  if ( headerData.page ) {
+    title = headerData.page.title + " | " + data.header.name
+    description = headerData.page.description
+  } else if ( headerData.post ) {
+    title = headerData.post.title
+    description = headerData.post.description
+  } else if (headerData.category ) {
+    title = headerData.category.title + " | " + data.header.name
+    description = headerData.category.description
   }
   return (
     <>
