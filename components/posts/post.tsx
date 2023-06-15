@@ -226,15 +226,13 @@ const components: Components<{
   },
   Table: (props) => {
 
-    console.log(props)
-
     if (!props.headers || props.headers.length === 0) {
       return <p>Table: No table content.</p>;
     } 
 
     return (
       <div>
-        <table className="table-auto w-full">
+        <table className="">
           <thead className="bg-blue-100">
             <tr>
               {props.headers.map((header, index) => (
@@ -251,19 +249,19 @@ const components: Components<{
                 className="hover:bg-gray-100 transition-colors"
               >
                 {row.cells && row.cells.length > 0 && row.cells.map((cell, cellIndex) => (
-                  <td key={cellIndex} className="border px-4 py-2">
+                  <td key={cellIndex} className="border px-4 py-2 ">
                     <div className="whitespace-pre-wrap">{cell.content && cell.content}</div>
                     {cell.affiliateSnippet &&
+                      <div className="inline">
                         <a href={cell.affiliateSnippet.linkURL}
                             target="_blank"
                             rel="nofollow noopener"
                             className="no-underline">
-                            <img decoding="async" src={cell.affiliateSnippet.imageURL} className="mx-auto px-2 mt-2 mb-4 border-0"/>
-                            <button
-                              className={`mx-auto z-10 relative flex text-center px-7 py-3 font-semibold text-lg transition duration-150 ease-out  rounded-lg transform focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 whitespace-nowrap `}>
-                                Check Amazon Price
-                            </button>
+                            <img decoding="async" className="inline" src={cell.affiliateSnippet.imageURL} />
+                            <div>Check Price On Amazon</div>
                         </a>
+          
+                      </div>
                       }
                   </td>
                 ))}

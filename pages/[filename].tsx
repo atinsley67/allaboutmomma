@@ -98,7 +98,6 @@ export const getStaticProps = async ({ params }) => {
         }
       })
     );
-    console.log(tinaProps)
     return {
       props: {
         data: tinaProps.data,
