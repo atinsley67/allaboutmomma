@@ -1,5 +1,6 @@
 ---
 name: Kristina
-avatar: 'tina.svg'
+avatar: bear.png
 ---
+
 

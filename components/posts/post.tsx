@@ -128,8 +128,9 @@ const components: Components<{
     );
   },
   img: (props) => (
-    <div className="flex items-center justify-center">
-      <img src={props.url} alt={props.alt} />
+    <div className="flex flex-col items-center justify-center">
+      <img className="mb-3" src={props.url} alt={props.alt} />
+      <div className="text-xs font-semibold text-gray-600">{props.caption}</div>
     </div>
   ), 
   h1: (props) => (
@@ -315,7 +316,7 @@ export const Post = (props) => {
         </h2>
         <div
           data-tinafield="author"
-          className="flex items-center justify-center mb-16"
+          className="flex items-center justify-center"
         >
           {props.author && (
             <>
