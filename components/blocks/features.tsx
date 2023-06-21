@@ -1,8 +1,6 @@
 import { Actions } from "../util/actions";
 import { Section } from "../util/section";
 import { Container } from "../util/container";
-import { Icon } from "../util/icon";
-import { iconSchema } from "../util/icon";
 
 export const Feature = ({ featuresColor, data, tinaField }) => {
   return (
@@ -65,11 +63,6 @@ export const Features = ({ data, parentField }) => {
 const defaultFeature = {
   title: "Here's Another Feature",
   text: "This is where you might talk about the feature, if this wasn't just filler text.",
-  icon: {
-    color: "",
-    style: "float",
-    name: "",
-  },
 };
 
 export const featureBlockSchema = {
@@ -98,7 +91,6 @@ export const featureBlockSchema = {
         },
       },
       fields: [
-        iconSchema,
         {
           type: "string",
           label: "Title",

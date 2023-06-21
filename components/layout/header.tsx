@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Container } from "../util/container";
 import { useTheme } from ".";
-import { Icon } from "../util/icon";
 import { SearchIcon } from '@heroicons/react/outline'
 import { useState } from 'react'; // import useState hook
 
@@ -81,14 +80,9 @@ export const Header = ({ data }) => {
           <h4 className="select-none text-lg font-medium tracking-tight mt-4 transition duration-150 ease-out transform">
             <Link href="/" passHref>
               <a className="flex gap-5 items-center whitespace-nowrap tracking-[.002em]">
-                <Icon
-                  parentColor={data.color}
-                  data={{
-                    name: data.icon.name,
-                    color: data.icon.color,
-                    style: data.icon.style,
-                  }}
-                />
+              <img className="w-28 h-20 flex-shrink-0" src="/momma.svg" alt="All About Momma" />
+
+                
                 <div className="hidden sm:flex md:hidden lg:flex">{data.name}</div>
               </a>
             </Link>

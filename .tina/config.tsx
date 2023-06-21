@@ -5,8 +5,6 @@ import { featuredPostsBlockSchema} from "../components/blocks/featuredPosts";
 import { heroBlockSchema } from "../components/blocks/hero";
 import { testimonialBlockSchema } from "../components/blocks/testimonial";
 import { ColorPickerInput } from "../components/fields/color";
-import { iconSchema } from "../components/util/icon";
-import { link } from "fs";
 
 const config = defineConfig({
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID!,
@@ -323,7 +321,6 @@ const config = defineConfig({
             label: "Header",
             name: "header",
             fields: [
-              iconSchema as any,
               {
                 type: "string",
                 label: "Name",

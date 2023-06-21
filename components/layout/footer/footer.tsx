@@ -4,7 +4,6 @@ import { FaFacebookF, FaGithub, FaTwitter } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import { Container } from "../../util/container";
 import { useTheme } from "..";
-import { Icon } from "../../util/icon";
 
 export const Footer = ({ data, icon, rawData }) => {
   const theme = useTheme();
@@ -47,16 +46,7 @@ export const Footer = ({ data, icon, rawData }) => {
         <div className="flex justify-between items-center gap-6 flex-wrap">
           <Link href="/" passHref>
             <a className="group mx-2 flex items-center font-bold tracking-tight text-gray-400 dark:text-gray-300 opacity-50 hover:opacity-100 transition duration-300 ease-out whitespace-nowrap">
-              <Icon
-                parentColor={data.color}
-                data={{
-                  name: icon.name,
-                  color: data.color === "primary" ? "primary" : icon.color,
-                  style: icon.style,
-                  size: "huge",
-                }}
-                className="inline-block w-auto group-hover:text-orange-500"
-              />
+            <img className="w-56 h-40 flex-shrink-0" src="/momma.svg" alt="All About Momma"/>
             </a>
           </Link>
           <div className="flex gap-4">
