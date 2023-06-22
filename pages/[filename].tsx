@@ -111,7 +111,7 @@ export const getStaticProps = async ({ params }) => {
 
 
 export const getStaticPaths = async () => {
-  const postsListData = await client.queries.postConnection();
+  const postsListData = await client.queries.allPostsQuery();
   const pagesListData = await client.queries.pageConnection();
   const listData = [...postsListData.data.postConnection.edges, ...pagesListData.data.pageConnection.edges];
   return {

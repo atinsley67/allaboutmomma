@@ -134,24 +134,24 @@ const components: Components<{
     </div>
   ), 
   h1: (props) => (
-    <div>
+    <p>
       <h1 id={getTextContentForId(props.children)}>{props.children}</h1>
-    </div>
+    </p>
   ),
   h2: (props) => (
-    <div>
+    <p>
       <h2 id={getTextContentForId(props.children)}>{props.children}</h2>
-    </div>
+    </p>
   ),
   h3: (props) => (
-    <div>
+    <p>
       <h3 id={getTextContentForId(props.children)}>{props.children}</h3>
-    </div>
+    </p>
   ),
   h4: (props) => (
-    <div>
+    <p>
       <h4 id={getTextContentForId(props.children)}>{props.children}</h4>
-    </div>
+    </p>
   ),
   AffiliateLink: (props) => {
     const theme = useTheme();
@@ -204,10 +204,10 @@ const components: Components<{
       return <div>Broken Affiliate Link</div>
     }
   },
-  TableOfContents: (props) => {
-    return (
-      <div className="my-4">
-        <h3>{props.title}</h3>
+  TableOfContents: (props) => (
+    <p>
+      <div className="border-2 border-gray-200 bg-gray-50 p-4">
+        <h3 className="mt-2">{props.title}</h3>
         <ul>
           {props.headings instanceof Array &&
             props.headings.map((headingData) => {
@@ -217,14 +217,15 @@ const components: Components<{
                 .replace(/[^\w]+/g, '-');
               return (
                 <li key={headingData.text}>
-                  <a href={`#${linkId}`}>{headingData.text}</a>
+                  <a className="text-teal-600" href={`#${linkId}`}>{headingData.text}</a>
                 </li>
               );
             })}
         </ul>
       </div>
-    )
-  },
+    </p>
+  ),
+
   Table: (props) => {
 
     if (!props.headers || props.headers.length === 0) {

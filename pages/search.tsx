@@ -87,7 +87,7 @@ const Result = ({ data }) => {
 
 export const getStaticProps = async ({ params }) => {
   
-    const tinaProps = await client.queries.pageQuery();
+    const tinaProps = await client.queries.allPostsQuery();
     const postsWithWords = extractPosts(tinaProps.data.postConnection);
 
     await Promise.all(

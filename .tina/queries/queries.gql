@@ -1,6 +1,6 @@
-query pageQuery {
+query allPostsQuery {
   ...LayoutQueryFragment
-  postConnection {
+  postConnection(sort: "date" first: 10000) {
     edges {
       node {
         id
@@ -64,7 +64,7 @@ query categoryQuery($relativePath: String!) {
   category(relativePath: $relativePath) {
     ...CategoryParts
   }
-  postConnection
+  postConnection(sort: "date" first: 10000)
   {
     edges {
       node {
