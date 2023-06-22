@@ -5,7 +5,7 @@ import { AiFillInstagram } from "react-icons/ai";
 import { Container } from "../../util/container";
 import { useTheme } from "..";
 
-export const Footer = ({ data, icon, rawData }) => {
+export const Footer = ({ data, rawData }) => {
   const theme = useTheme();
   const socialIconClasses = "h-7 w-auto";
   const socialIconColorClasses = {
