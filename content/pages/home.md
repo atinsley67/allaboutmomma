@@ -22,6 +22,7 @@ blocks:
     _template: hero
   - title: Featured Posts
     items:
+      - postLocation: best-rain-gear-for-toddlers
       - postLocation: plane-toys-for-3-year-olds
       - postLocation: best-toddler-hiking-pants-for-outdoor-toddlers
       - postLocation: best-rain-gear-for-toddlers
@@ -37,6 +38,7 @@ blocks:
     _template: featuredPosts
 description: This is the home screen SEO description of your dreams
 ---
+
 
 
 
