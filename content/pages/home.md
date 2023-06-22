@@ -34,12 +34,13 @@ blocks:
     _template: content
   - title: Top How-To Articles
     items:
-      - postLocation: how-to-dress-baby-toddler-hiking
+      - postLocation: road-cycling-with-your-toddler
       - postLocation: hiking-with-toddlers-ultimate-guide
-      - postLocation: how-to-survive-pregnancy-with-two-toddlers-at-home
+      - postLocation: hiking-with-you-baby-0-6-months
     _template: featuredPosts
 description: This is the home screen SEO description of your dreams
 ---
+
 
 
 
