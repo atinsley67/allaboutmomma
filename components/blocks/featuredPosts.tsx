@@ -84,7 +84,6 @@ export const featuredPostsBlockSchema = {
   name: "featuredPosts",
   label: "Featured Posts",
   ui: {
-    previewSrc: "",
   },
   fields: [
     {

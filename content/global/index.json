@@ -1,10 +1,5 @@
 {
   "header": {
-    "icon": {
-      "name": "Momma",
-      "color": "orange",
-      "style": "float"
-    },
     "name": "All About Momma",
     "color": "default",
     "nav": [
@@ -49,6 +44,6 @@
   "theme": {
     "color": "gray_400",
     "font": "montserrat",
-    "darkMode": "system"
+    "darkMode": "light"
   }
 }

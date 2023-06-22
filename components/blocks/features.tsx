@@ -2,52 +2,88 @@ import { Actions } from "../util/actions";
 import { Section } from "../util/section";
 import { Container } from "../util/container";
 
+import Link from 'next/link';
+
 export const Feature = ({ featuresColor, data, tinaField }) => {
-  return (
+  const featureCardStyle = data.imageBackground
+    ? {
+        backgroundImage: `url(${data.image})`,
+        backgroundColor: 'rgba(0,0,0,0.3)',
+        color: 'white', // Text color
+        backgroundBlendMode: 'multiply', // Optional: Apply blending mode for overlay
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }
+    : {};
+
+  const featureCard = (
     <div
       data-tinafield={tinaField}
-      className="flex-1 flex flex-col gap-6 text-center items-center lg:items-start lg:text-left max-w-xl mx-auto"
-      style={{ flexBasis: "16rem" }}
+      className="flex-1 flex flex-col text-center items-center lg:items-start lg:text-left max-w-xl mx-auto rounded-lg h-full"
+      style={{ flexBasis: '16rem', ...featureCardStyle }}
     >
-      {data.title && (
-        <h3
-          data-tinafield={`${tinaField}.title`}
-          className="text-2xl font-semibold title-font"
-        >
-          {data.title}
-        </h3>
+      {data.image && !data.imageBackground && (
+        <img
+          src={data.image}
+          alt=""
+          className="w-full max-h-60 auto object-cover rounded-lg"
+        />
       )}
-      {data.text && (
-        <p
-          data-tinafield={`${tinaField}.text`}
-          className="text-base opacity-80 leading-relaxed"
-        >
-          {data.text}
-        </p>
-      )}
+      <div className="p-6">
+        {data.title && (
+          <h3
+            data-tinafield={`${tinaField}.title`}
+            className="text-2xl font-semibold title-font"
+          >
+            {data.title}
+          </h3>
+        )}
+        {data.text && (
+          <p
+            data-tinafield={`${tinaField}.text`}
+            className="whitespace-pre-wrap text-base leading-relaxed"
+          >
+            {data.text}
+          </p>
+        )}
+      </div>
       {data.actions && <Actions actions={data.actions} />}
     </div>
   );
+
+  if (data.url) {
+    return (
+      <Link href={data.url} passHref>
+        <a className="h-full">{featureCard}</a>
+      </Link>
+    );
+  }
+
+  return featureCard;
 };
+
 
 export const Features = ({ data, parentField }) => {
   return (
     <Section color={data.color}>
       <Container
-        className={`flex flex-wrap gap-x-10 gap-y-8 text-left`}
+        className="text-left"
         size="small"
       >
-        {data.items &&
-          data.items.map(function (block, i) {
-            return (
-              <Feature
-                tinaField={`${parentField}.items.${i}`}
-                featuresColor={data.color}
-                key={i}
-                data={block}
-              />
-            );
-          })}
+        <div className="mx-auto px-0 py-4 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5 max-w-[500px] md:max-w-[800px] lg:max-w-[1200px] ">
+          {data.items &&
+            data.items.map(function (block, i) {
+              return (
+                <div key={i} className="flex flex-col ">
+                  <Feature
+                    tinaField={`${parentField}.items.${i}`}
+                    featuresColor={data.color}
+                    data={block}
+                  />
+                </div>
+              );
+            })}
+        </div>
       </Container>
     </Section>
   );
@@ -62,7 +98,6 @@ export const featureBlockSchema = {
   name: "features",
   label: "Features",
   ui: {
-    previewSrc: "/blocks/features.png",
     defaultItem: {
       items: [defaultFeature, defaultFeature, defaultFeature],
     },
@@ -97,6 +132,21 @@ export const featureBlockSchema = {
             component: "textarea",
           },
         },
+        {
+          type: "image",
+          name: "image",
+          label: "Image",
+        },
+        {
+          type: "string",
+          name: "url",
+          label: "Link URL",
+        },
+        {
+          type: "boolean",
+          name: "imageBackground",
+          label: "Use image as background",
+        }
       ],
     },
     {
