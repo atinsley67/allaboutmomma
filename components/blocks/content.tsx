@@ -1,8 +1,17 @@
 import React from "react";
 import { Container } from "../util/container";
 import { Section } from "../util/section";
-import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { TinaMarkdown,  Components, TinaMarkdownContent} from "tinacms/dist/rich-text";
 import type { TinaTemplate } from "tinacms";
+
+const components: Components<{}> =  {
+    img: (props) => (
+      <div className="flex flex-col items-center justify-center">
+        <img className="mb-3" src={props.url} alt={props.alt} />
+        <div className="text-xs font-semibold text-gray-600">{props.caption}</div>
+      </div>
+    )
+  }
 
 export const Content = ({ data, parentField = "" }) => {
   return (
@@ -15,7 +24,7 @@ export const Content = ({ data, parentField = "" }) => {
         size="large"
         width="medium"
       >
-        <TinaMarkdown content={data.body} />
+        <TinaMarkdown components={components} content={data.body} />
       </Container>
     </Section>
   );

@@ -5,6 +5,7 @@ import { featuredPostsBlockSchema} from "../components/blocks/featuredPosts";
 import { heroBlockSchema } from "../components/blocks/hero";
 import { testimonialBlockSchema } from "../components/blocks/testimonial";
 import { ColorPickerInput } from "../components/fields/color";
+import { TableInput } from "../components/fields/table";
 
 const config = defineConfig({
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID!,
@@ -156,19 +157,109 @@ const config = defineConfig({
                     type: "string",
                   },
                   {
-                    name: "affiliateSnippet",
-                    label: "Affiliate Snippet",
-                    type: "string",
-                  },
-                  {
-                    name: "imageURL",
-                    label: "Affiliate Image URL",
-                    type: "string",
-                  },
-                  {
-                    name: "linkURL",
-                    label: "Affiliate Link URL",
-                    type: "string",
+                    name: "affiliateURLs",
+                    label: "Affiliate URLs",
+                    type: "object",
+                    fields: [
+                      {
+                        name: "linkURL",
+                        type: "string",
+                      },
+                      {
+                        name: "imageURL",
+                        type: "string",
+                      }
+                    ],
+                    ui: {
+                      parse: (val) => {
+                        if (val.snippet) {
+                          // Execute existing code for snippet
+                          const imageMatch = val.snippet.match(/<img.*?src="(.*?)"/);
+                          const imageSnippet = imageMatch ? imageMatch[1].replace(/&amp;/g, '&') : null;
+                          const linkMatch = val.snippet.match(/<a.*?href="(.*?)"/);
+                          const linkSnippet = linkMatch ? linkMatch[1].replace(/&amp;/g, '&') : null;
+                      
+                          return {
+                            linkURL: linkSnippet,
+                            imageURL: imageSnippet,
+                          };
+                        } else {
+                          // Update linkURL or imageURL
+                          const updatedValue = {};
+                      
+                          if (val.linkURL) {
+                            updatedValue.linkURL = val.linkURL;
+                          }
+                      
+                          if (val.imageURL) {
+                            updatedValue.imageURL = val.imageURL;
+                          }
+                      
+                          return {
+                            ...val,
+                            ...updatedValue,
+                          };
+                        }
+                      },
+                      component: ({ field, input, meta }) => {
+                        const handleInputChange = (field, value, input, onChange) => {
+                          let updatedValue = {};
+                        
+                          switch (field) {
+                            case 'snippet':
+                              updatedValue = { snippet: value };
+                              break;
+                            case 'linkURL':
+                              updatedValue = { linkURL: value };
+                              break;
+                            case 'imageURL':
+                              updatedValue = { imageURL: value };
+                              break;
+                            default:
+                              break;
+                          }
+                        
+                          const mergedValue = { ...input.value, ...updatedValue };
+                          onChange(mergedValue);
+                        };
+                        return (
+                          <div>
+                            <label className="block font-sans text-xs font-semibold text-gray-700 whitespace-normal mb-2 undefined">
+                              {field.label}
+                            </label>
+                            <label className="text-xs">Affiliate Snippet</label>
+                            <input
+                              className="shadow-inner focus:shadow-outline focus:border-blue-500 focus:outline-none block text-base placeholder:text-gray-300 px-3 py-2 text-gray-600 w-full bg-white border border-gray-200 transition-all ease-out duration-150 focus:text-gray-900 rounded-md  undefined"
+                              name="Snippet"
+                              id="snippet"
+                              type="string"
+                              // This will pass along props.input.onChange to set our form values as this input changes.
+                              onChange={(e) => handleInputChange("snippet", e.target.value, input, input.onChange)}
+                            />
+                            <label className="text-xs">Affiliate Image URL</label>
+                            <input
+                              className="shadow-inner focus:shadow-outline focus:border-blue-500 focus:outline-none block text-base placeholder:text-gray-300 px-3 py-2 text-gray-600 w-full bg-white border border-gray-200 transition-all ease-out duration-150 focus:text-gray-900 rounded-md  undefined"
+                              name="ImageURL"
+                              id="imageURL"
+                              type="string"
+                              value={input.value.imageURL}
+                              // This will pass along props.input.onChange to set our form values as this input changes.
+                              onChange={(e) => handleInputChange("imageURL", e.target.value, input, input.onChange)}
+                            />
+                            <label className="text-xs">Affiliate Link URL</label>
+                            <input
+                              className="shadow-inner focus:shadow-outline focus:border-blue-500 focus:outline-none block text-base placeholder:text-gray-300 px-3 py-2 text-gray-600 w-full bg-white border border-gray-200 transition-all ease-out duration-150 focus:text-gray-900 rounded-md  undefined"
+                              name="LinkURL"
+                              id="linkURL"
+                              type="string"
+                              value={input.value.linkURL}
+                              // This will pass along props.input.onChange to set our form values as this input changes.
+                              onChange={(e) => handleInputChange("linkURL", e.target.value, input, input.onChange)}
+                            />
+                          </div>
+                        );
+                      }
+                    }
                   },
                   {
                     name: "image",
@@ -179,6 +270,11 @@ const config = defineConfig({
                     label: "Button",
                     name: "button",
                     type: "boolean",
+                  },
+                  {
+                    label: "Caption",
+                    name: "caption",
+                    type: "string",
                   },
                   {
                     label: "Float Left",
@@ -279,7 +375,9 @@ const config = defineConfig({
                                       // This will pass along props.input.onChange to set our form values as this input changes.
                                       onChange={input.onChange}
                                     />
+                                    <label>Link URL</label>
                                     <p>{input.value.linkURL}</p>
+                                    <label>Image URL</label>
                                     <p>{input.value.imageURL}</p>
                                   </div>
                                 );
@@ -302,6 +400,20 @@ const config = defineConfig({
                   },
                 }
               },
+              {
+                name: "table2",
+                label: "Table2",
+                fields: [
+                  {
+                    name: "data",
+                    label: "Table",
+                    type: "string",
+                    ui: {
+                      component: TableInput,
+                    }
+                  }
+                ]
+              }
             ],
             isBody: true,
           },
@@ -641,6 +753,14 @@ const config = defineConfig({
         ],
       },
     ],
+  },
+  search: {
+    tina: {
+      indexerToken: process.env.TINA_SEARCH_TOKEN,
+      stopwordLanguages: ['eng']
+    },
+    indexBatchSize: 100,
+    maxSearchIndexFieldLength: 100
   },
 });
 

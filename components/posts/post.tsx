@@ -43,11 +43,13 @@ const components: Components<{
   };
   AffiliateLink: {
     altText: string;
-    affiliateSnippet: string;
+    affiliateURLs: object;
     imageURL: string;
     linkURL: string;
     image: string;
     button: boolean;
+    caption: string;
+    floatLeft: boolean;
   };
   TableOfContents: {
     title: string;
@@ -57,7 +59,12 @@ const components: Components<{
   Table: {
     headers: any;
     rows: any;
+  };
+  table2: {
+    data: string;
   }
+
+  
 }> = {
   code_block: (props) => <Prism {...props} />,
   BlockQuote: (props: {
@@ -110,6 +117,7 @@ const components: Components<{
                 className="w-full px-5 py-3 border border-gray-300 shadow-sm placeholder-gray-400 focus:ring-1 focus:ring-teal-500 focus:border-teal-500 sm:max-w-xs rounded-md"
                 placeholder={props.placeholder}
               />
+
               <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0">
                 <button
                   type="submit"
@@ -172,30 +180,35 @@ const components: Components<{
 
 
     // Extract image URL
-    const imageMatch = props.affiliateSnippet?.match(/<img.*?src="(.*?)"/) ?? null;
-    const imageSnippet = imageMatch ? imageMatch[1] : null;
-    const imageUrl = props.image || props.imageURL || imageSnippet
+    const imageUrl = props.image || props.affiliateURLs.imageURL
     // Extract link URL
-    const linkMatch = props.affiliateSnippet?.match(/<a.*?href="(.*?)"/) ?? null;
-    const linkUrl = props.linkURL || (linkMatch ? linkMatch[1] : null);
-    const floatLeft = false;
+    const linkUrl = props.affiliateURLs.linkURL
+    const floatLeft = props.floatLeft;
 
     if (linkUrl && imageUrl) {
       return (
         <>
-           <div className={`ml-2 mr-6 mt-0 mb-6 justify-center items-center ${floatLeft ? 'md:float-left' : ''}`}>
-           <a href={linkUrl}
-            target="_blank"
-            rel="nofollow noopener"
-            className="no-underline">
-            <img decoding="async" src={imageUrl} className="mx-auto px-2 mt-2 mb-4 border-0"/>
-            <button
-              className={`mx-auto z-10 relative flex text-center px-7 py-3 font-semibold text-lg transition duration-150 ease-out  rounded-lg transform focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 whitespace-nowrap ${
-                  buttonColorClasses[theme.color]
-                }`}>
-              Check Amazon Price
-            </button>
-          </a>
+          <div className={`flex ml-2 mr-6  mt-0 mb-6 justify-center items-center ${floatLeft ? 'md:float-left' : ''}`}>
+            
+              <a href={linkUrl}
+                target="_blank"
+                rel="nofollow noopener"
+                className="no-underline">
+                <div className="rounded-xl overflow-hidden shadow-lg bg-white justify-center flex flex-col items-center m-0">
+                  <img decoding="async" src={imageUrl} className="border-0 m-0"/>
+                  {props.caption &&
+                    <div className="text-xs font-semibold text-gray-600">{props.caption}</div>
+                  }
+                  {props.button &&
+                    <button
+                      className={`mx-auto z-10 relative flex text-center px-7 py-3 font-semibold text-lg transition duration-150 ease-out  rounded-lg transform focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 whitespace-nowrap ${
+                          buttonColorClasses[theme.color]
+                        }`}>
+                      Check Amazon Price
+                    </button>
+                  }
+                </div>
+              </a>
         </div>
         </>
       )
@@ -234,11 +247,11 @@ const components: Components<{
 
     return (
       <div>
-        <table className="">
-          <thead className="bg-blue-100">
+        <table className="border-2 border-gray-200  p-4">
+          <thead className="bg-gray-50">
             <tr>
               {props.headers.map((header, index) => (
-                <th key={index} className="px-4 py-2">
+                <th key={index} className="border-2 px-4 py-2 text-teal-600 font-s">
                   {header}
                 </th>
               ))}
@@ -248,18 +261,72 @@ const components: Components<{
             {props.rows && props.rows.length > 0 && props.rows.map((row, rowIndex) => (
               <tr
                 key={rowIndex}
-                className="hover:bg-gray-100 transition-colors"
+                className="hover:bg-gray-50 transition-colors"
               >
                 {row.cells && row.cells.length > 0 && row.cells.map((cell, cellIndex) => (
-                  <td key={cellIndex} className="border px-4 py-2 ">
-                    <div className="whitespace-pre-wrap">{cell.content && cell.content}</div>
+                  <td key={cellIndex} className="border-2 p-4 align-top">
+                    <div className="whitespace-pre-wrap align-top">{cell.content && cell.content}</div>
                     {cell.affiliateSnippet &&
                       <div className="inline">
                         <a href={cell.affiliateSnippet.linkURL}
                             target="_blank"
                             rel="nofollow noopener"
                             className="no-underline">
-                            <img decoding="async" className="inline" src={cell.affiliateSnippet.imageURL} />
+                            <img decoding="async" className="inline m-2" src={cell.affiliateSnippet.imageURL} />
+                            <div>Check Price On Amazon</div>
+                        </a>
+          
+                      </div>
+                      }
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+    </table>
+      </div>
+    )
+  },
+  table2: (props) => {
+
+    const jsonData = props.data ? props.data.replace(/'/g, '"') : ""
+    const parsedData = jsonData && jsonData.length > 0 ? JSON.parse(jsonData) : {}
+
+    const headers = parsedData.headers;
+    const rows = parsedData.rows;
+
+    if (!headers || headers.length === 0) {
+      return <p>Table: No table content.</p>;
+    } 
+
+    return (
+      <div>
+        <table className="border-2 border-gray-200  p-4">
+          <thead className="bg-gray-50">
+            <tr>
+              {headers.map((header, index) => (
+                <th key={index} className="border-2 px-4 py-2 text-teal-600 font-s">
+                  {header}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows && rows.length > 0 && rows.map((row, rowIndex) => (
+              <tr
+                key={rowIndex}
+                className="hover:bg-gray-50 transition-colors"
+              >
+                {row.length > 0 && row.map((cell, cellIndex) => (
+                  <td key={cellIndex} className="border-2 p-4 align-top">
+                    <div className="whitespace-pre-wrap align-top">{cell}</div>
+                    {cell.affiliateSnippet &&
+                      <div className="inline">
+                        <a href={cell.affiliateSnippet.linkURL}
+                            target="_blank"
+                            rel="nofollow noopener"
+                            className="no-underline">
+                            <img decoding="async" className="inline m-2" src={cell.affiliateSnippet.imageURL} />
                             <div>Check Price On Amazon</div>
                         </a>
           
@@ -275,6 +342,8 @@ const components: Components<{
     )
   }
 }
+
+
 
 export const Post = (props) => {
   const theme = useTheme();

@@ -16,7 +16,7 @@ export const FeaturedPost = ({ data, tinaField }) => {
         data-tinafield={tinaField}
         className="rounded-xl overflow-hidden shadow-lg"
       >
-        <img className="w-full" src={data.postDetails.heroImg} alt={data.postDetails.title}/>
+        <img className="w-full max-h-80 object-cover" src={data.postDetails.heroImg} alt={data.postDetails.title}/>
         <div className="px-6 pt-4 pb-2">
           {data.postDetails.title && (
             <h3
