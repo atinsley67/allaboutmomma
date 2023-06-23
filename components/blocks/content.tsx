@@ -1,10 +1,12 @@
 import React from "react";
 import { Container } from "../util/container";
 import { Section } from "../util/section";
-import { TinaMarkdown,  Components, TinaMarkdownContent} from "tinacms/dist/rich-text";
+import { TinaMarkdown,  Components} from "tinacms/dist/rich-text";
 import type { TinaTemplate } from "tinacms";
 
-const components: Components<{}> =  {
+const components: Components<{
+  img: React.ComponentType<{ url: string; alt: string; caption: string }>;
+}> =  {
     img: (props) => (
       <div className="flex flex-col items-center justify-center">
         <img className="mb-3" src={props.url} alt={props.alt} />

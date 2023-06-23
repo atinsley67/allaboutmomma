@@ -43,7 +43,10 @@ const components: Components<{
   };
   AffiliateLink: {
     altText: string;
-    affiliateURLs: object;
+    affiliateURLs: {
+      imageURL: string;
+      linkURL: string;
+    }
     imageURL: string;
     linkURL: string;
     image: string;
