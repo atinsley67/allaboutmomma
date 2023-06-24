@@ -15,8 +15,7 @@ blocks:
     image:
       src: >-
         https://res.cloudinary.com/ds8uw7t44/image/upload/v1678385544/Mountains-Momma-cover-with-Lucas_iy5es6.webp
-      alt: >-
-        Momma and baby exploring the outdoors
+      alt: Momma and baby exploring the outdoors
     color: default
     _template: hero
   - title: Featured Posts
@@ -37,7 +36,8 @@ blocks:
       - postLocation: hiking-with-toddlers-ultimate-guide
       - postLocation: hiking-with-you-baby-0-6-months
     _template: featuredPosts
-  - items:
+  - title: Categories To Explore
+    items:
       - title: Pregnancy
         text: >-
           Ways To Stay Active To Planning For Your New Bundle of Joy Whether It
@@ -74,6 +74,7 @@ blocks:
     _template: features
 description: All About Momma
 ---
+
 
 
 
