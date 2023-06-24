@@ -16,8 +16,7 @@ blocks:
       src: >-
         https://res.cloudinary.com/ds8uw7t44/image/upload/v1678385544/Mountains-Momma-cover-with-Lucas_iy5es6.webp
       alt: >-
-        Photo of palm trees at sunset by Adam Birkett -
-        unsplash.com/photos/75EFpyXu3Wg
+        Momma and baby exploring the outdoors
     color: default
     _template: hero
   - title: Featured Posts
@@ -38,7 +37,42 @@ blocks:
       - postLocation: hiking-with-toddlers-ultimate-guide
       - postLocation: hiking-with-you-baby-0-6-months
     _template: featuredPosts
-description: This is the home screen SEO description of your dreams
+  - items:
+      - title: Pregnancy
+        text: >-
+          Ways To Stay Active To Planning For Your New Bundle of Joy Whether It
+          Is Your First or Last Pregnancy
+        image: >-
+          https://res.cloudinary.com/ds8uw7t44/image/upload/v1685975588/hiking-while-pregnant-hiking-pants.jpg
+        url: /category/pregnancy
+        imageBackground: true
+      - title: Baby
+        text: >-
+          Essential Baby Gear To Planning For Your Baby's First Outdoor
+          Adventures Whether It Local Or A Trip Away
+        image: >-
+          https://res.cloudinary.com/ds8uw7t44/image/upload/v1685975576/camping-with-a-baby-have-fun.jpg
+        url: /category/baby
+        imageBackground: true
+      - title: Toddler
+        text: >-
+          Toddler Active Gear to Fostering a Toddler's Love for the Outdoors
+          whether it be hiking, camping, cycling or hanging out in the backyard
+        image: >-
+          https://res.cloudinary.com/ds8uw7t44/image/upload/v1685975482/columbia-fleece-toddler-jacket.jpg
+        url: /category/toddler
+        imageBackground: true
+      - title: Travel
+        text: >-
+          All The Information A Momma Needs To Travel With Kids from Airplanes
+          To Car Trips And What To Bring
+        image: >-
+          https://res.cloudinary.com/ds8uw7t44/image/upload/v1685975533/3-year-old-on-airplane.jpg
+        url: /category/travel
+        imageBackground: true
+    color: tint
+    _template: features
+description: All About Momma
 ---
 
 
