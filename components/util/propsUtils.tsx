@@ -1,10 +1,10 @@
 export function extractPosts(data) {
   const posts = data.edges.map(({ node }) => {
-    const { title = null, author = null, category = null, heroImg = null, excerpt = null} = node || {};
+    const { title = null, author = null, categories = null, heroImg = null, excerpt = null} = node || {};
     const _body = node._body
     const words = extractWords(_body);
     const filename = node._sys.filename
-    return { title, author, category, heroImg, _body, words, filename };
+    return { title, author, categories, heroImg, _body, words, filename };
   });
   return posts;
 }

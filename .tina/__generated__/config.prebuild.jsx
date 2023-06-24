@@ -59621,11 +59621,11 @@ var global_default = {
     color: "default",
     nav: [
       {
-        href: "/about",
+        href: "about",
         label: "About"
       },
       {
-        href: "/contact",
+        href: "contact",
         label: "Contact"
       }
     ],

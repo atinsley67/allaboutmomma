@@ -59,6 +59,10 @@ const components: Components<{
     hLevel: string;
     headings: object;
   };
+  a: {
+    url: string;
+    children: TinaMarkdownContent;
+  }
   Table: {
     headers: any;
     rows: any;
@@ -163,6 +167,15 @@ const components: Components<{
     <p>
       <h4 id={getTextContentForId(props.children)}>{props.children}</h4>
     </p>
+  ),
+  a: (props) =>
+  (
+    <a
+      href={props.url}
+      rel={props.url.includes('amazon.com/') ? 'nofollow noopener' : null}
+      >
+        <strong>{props.children}</strong>
+      </a>
   ),
   AffiliateLink: (props) => {
     const theme = useTheme();
@@ -375,7 +388,7 @@ export const Post = (props) => {
   return (
     <Section className="flex-1">
       <Container width="small" className={`flex-1 pb-2`} size="large">
-        <h2
+        <h1
           data-tinafield="title"
           className={`w-full relative	mb-8 text-6xl tracking-normal title-font`}
         >
@@ -386,7 +399,7 @@ export const Post = (props) => {
           >
             {props.title}
           </span>
-        </h2>
+        </h1>
         <div
           data-tinafield="author"
           className="flex items-center justify-center"
