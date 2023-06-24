@@ -30,6 +30,35 @@ blocks:
     _template: featuredPosts
   - body: "## The world is full of adventures waiting for you!\n\nActive lifestyles don’t have to stop once you get pregnant and have kids. Your type of adventures might change a bit, but I am here to help you navigate an active momma lifestyle.\_\n\nI am a momma of two boys and girl, I had 3 kids in 4 years. I am here to inspire you to stay active during the different phases of your mom life, as well as grow the love of the outdoors to your kids.\_\n\nThe best way to keep an outdoor active lifestyle is to incorporate your kids from a young age. Then, as your kids grow you can continue your love of the outdoors together!\n\nSome of my favorite things to do with my kids is to\_Hike\_and\_Cycle\_with my kids. But when stuck at home you can find us all\_outside exploring!\n"
     _template: content
+  - title: Featured In
+    items:
+      - title: ''
+        text: ''
+        image: >-
+          http://res.cloudinary.com/ds8uw7t44/image/upload/v1687650488/forbes_icon_oqubol.png
+        imageBackground: false
+      - title: ''
+        text: ''
+        image: >-
+          http://res.cloudinary.com/ds8uw7t44/image/upload/v1687650592/care_com_utoqkk.png
+      - title: ''
+        text: ''
+        image: >-
+          http://res.cloudinary.com/ds8uw7t44/image/upload/v1687650726/visit_bucks_county_icon_l1xpyk.jpg
+      - title: ''
+        text: ''
+        image: >-
+          http://res.cloudinary.com/ds8uw7t44/image/upload/v1687650800/BABY-CAN-TRAVEL-LOGO-1_zm4hgr.webp
+      - title: ''
+        text: ''
+        image: >-
+          http://res.cloudinary.com/ds8uw7t44/image/upload/v1687650929/momjunction_icon_eukth9.webp
+      - title: ''
+        text: ''
+        image: >-
+          http://res.cloudinary.com/ds8uw7t44/image/upload/v1687651011/lifney-1_lkk5yl.png
+        imageBackground: false
+    _template: features
   - title: Top How-To Articles
     items:
       - postLocation: road-cycling-with-your-toddler
@@ -74,6 +103,7 @@ blocks:
     _template: features
 description: All About Momma
 ---
+
 
 
 
