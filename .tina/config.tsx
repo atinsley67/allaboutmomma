@@ -1,7 +1,8 @@
 import { defineConfig } from "tinacms";
 import { contentBlockSchema } from "../components/blocks/content";
 import { featureBlockSchema } from "../components/blocks/features";
-import { featuredPostsBlockSchema} from "../components/blocks/featuredPosts";
+import { featuredPostsBlockSchema } from "../components/blocks/featuredPosts";
+import { paginatedPostsBlockSchema } from "../components/blocks/paginatedPosts";
 import { heroBlockSchema } from "../components/blocks/hero";
 import { testimonialBlockSchema } from "../components/blocks/testimonial";
 import { ColorPickerInput } from "../components/fields/color";
@@ -492,6 +493,29 @@ const config = defineConfig({
               },
               {
                 type: "object",
+                label: "Nav Links",
+                name: "nav",
+                list: true,
+                ui: {
+                  itemProps: (item) => {
+                    return { label: item?.label };
+                  },
+                },
+                fields: [
+                  {
+                    type: "string",
+                    label: "Link",
+                    name: "href",
+                  },
+                  {
+                    type: "string",
+                    label: "Label",
+                    name: "label",
+                  },
+                ],
+              },
+              {
+                type: "object",
                 label: "Social Links",
                 name: "social",
                 fields: [
@@ -512,8 +536,8 @@ const config = defineConfig({
                   },
                   {
                     type: "string",
-                    label: "Github",
-                    name: "github",
+                    label: "Pintreest",
+                    name: "pinterest",
                   },
                 ],
               },
@@ -646,6 +670,7 @@ const config = defineConfig({
               // @ts-ignore
               featureBlockSchema,
               featuredPostsBlockSchema,
+              paginatedPostsBlockSchema,
               contentBlockSchema,
               testimonialBlockSchema,
             ],

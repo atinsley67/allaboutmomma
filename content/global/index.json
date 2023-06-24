@@ -35,10 +35,21 @@
   },
   "footer": {
     "color": "default",
+    "nav": [
+      {
+        "href": "/about",
+        "label": "About"
+      },
+      {
+        "href": "/contact",
+        "label": "Contact"
+      }
+    ],
     "social": {
       "facebook": "/",
-      "twitter": "/",
-      "instagram": "/"
+      "twitter": "",
+      "instagram": "/",
+      "pinterest": "/"
     }
   },
   "theme": {

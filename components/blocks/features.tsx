@@ -67,9 +67,14 @@ export const Features = ({ data, parentField }) => {
   return (
     <Section color={data.color}>
       <Container
-        className="text-left"
+        className="text-center"
         size="small"
       >
+        {data.title && (
+          <div>
+            <h2 className="text-xl font-bold">{data.title}</h2>
+          </div>
+        )}
         <div className="mx-auto px-0 py-4 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5 max-w-[500px] md:max-w-[800px] lg:max-w-[1200px] ">
           {data.items &&
             data.items.map(function (block, i) {
@@ -103,6 +108,11 @@ export const featureBlockSchema = {
     },
   },
   fields: [
+    {
+      type: "string",
+      label: "Title",
+      name: "title",
+    },
     {
       type: "object",
       label: "Feature Items",

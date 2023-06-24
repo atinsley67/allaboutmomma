@@ -59477,6 +59477,7 @@ var ForwardRef230 = React230.forwardRef(ZoomOutIcon);
 import { useState } from "react";
 
 // components/layout/footer/footer.tsx
+import React234 from "react";
 import Link2 from "next/link";
 
 // node_modules/react-icons/lib/esm/iconBase.js
@@ -59618,10 +59619,21 @@ var global_default = {
   },
   footer: {
     color: "default",
+    nav: [
+      {
+        href: "/about",
+        label: "About"
+      },
+      {
+        href: "/contact",
+        label: "Contact"
+      }
+    ],
     social: {
       facebook: "/",
-      twitter: "/",
-      instagram: "/"
+      twitter: "",
+      instagram: "/",
+      pinterest: "/"
     }
   },
   theme: {
@@ -59632,8 +59644,8 @@ var global_default = {
 };
 
 // components/layout/theme.tsx
-import * as React234 from "react";
-var ThemeContext = React234.createContext(global_default.theme);
+import * as React235 from "react";
+var ThemeContext = React235.createContext(global_default.theme);
 
 // components/blocks/content.tsx
 import { TinaMarkdown } from "tinacms/dist/rich-text";
@@ -59682,6 +59694,11 @@ var featureBlockSchema = {
     }
   },
   fields: [
+    {
+      type: "string",
+      label: "Title",
+      name: "title"
+    },
     {
       type: "object",
       label: "Feature Items",
@@ -59771,6 +59788,31 @@ var featuredPostsBlockSchema = {
           name: "postLocation"
         }
       ]
+    },
+    {
+      type: "string",
+      label: "Color",
+      name: "color",
+      options: [
+        { label: "Default", value: "default" },
+        { label: "Tint", value: "tint" },
+        { label: "Primary", value: "primary" }
+      ]
+    }
+  ]
+};
+
+// components/blocks/paginatedPosts.tsx
+import { useState as useState3, useEffect as useEffect2 } from "react";
+var paginatedPostsBlockSchema = {
+  name: "paginatedPosts",
+  label: "Paginated Posts",
+  ui: {},
+  fields: [
+    {
+      type: "string",
+      label: "Title",
+      name: "title"
     },
     {
       type: "string",
@@ -59965,7 +60007,7 @@ var ColorPickerInput = wrapFieldsWithMeta(({ input }) => {
 });
 
 // components/fields/table.tsx
-import * as React235 from "react";
+import * as React237 from "react";
 import { wrapFieldsWithMeta as wrapFieldsWithMeta2 } from "tinacms";
 var TableInput = wrapFieldsWithMeta2(
   ({ input }) => {
@@ -59974,7 +60016,7 @@ var TableInput = wrapFieldsWithMeta2(
     const onChange = input.onChange;
     const headers = parsedData.headers;
     const rows = parsedData.rows;
-    const [cellModes, setCellModes] = React235.useState([]);
+    const [cellModes, setCellModes] = React237.useState([]);
     const initializeCellModes = () => {
       if (!rows || rows.length === 0 || !headers || headers.length === 0) {
         setCellModes([]);
@@ -59983,7 +60025,7 @@ var TableInput = wrapFieldsWithMeta2(
       const initialModes = rows.map(() => Array(headers.length).fill("text"));
       setCellModes(initialModes);
     };
-    React235.useEffect(() => {
+    React237.useEffect(() => {
       initializeCellModes();
     }, [headers, rows]);
     const toggleCellMode = (rowIndex, cellIndex) => {
@@ -60612,6 +60654,29 @@ var config = defineConfig({
               },
               {
                 type: "object",
+                label: "Nav Links",
+                name: "nav",
+                list: true,
+                ui: {
+                  itemProps: (item) => {
+                    return { label: item?.label };
+                  }
+                },
+                fields: [
+                  {
+                    type: "string",
+                    label: "Link",
+                    name: "href"
+                  },
+                  {
+                    type: "string",
+                    label: "Label",
+                    name: "label"
+                  }
+                ]
+              },
+              {
+                type: "object",
                 label: "Social Links",
                 name: "social",
                 fields: [
@@ -60632,8 +60697,8 @@ var config = defineConfig({
                   },
                   {
                     type: "string",
-                    label: "Github",
-                    name: "github"
+                    label: "Pintreest",
+                    name: "pinterest"
                   }
                 ]
               }
@@ -60763,6 +60828,7 @@ var config = defineConfig({
               heroBlockSchema,
               featureBlockSchema,
               featuredPostsBlockSchema,
+              paginatedPostsBlockSchema,
               contentBlockSchema,
               testimonialBlockSchema
             ]

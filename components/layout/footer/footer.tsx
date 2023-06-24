@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { FaFacebookF, FaGithub, FaTwitter } from "react-icons/fa";
+import { FaFacebookF, FaPinterest, FaTwitter } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import { Container } from "../../util/container";
 import { useTheme } from "..";
@@ -40,15 +40,42 @@ export const Footer = ({ data, rawData }) => {
       ? footerColor.primary[theme.color]
       : footerColor.default;
 
+  // If we're on an admin path, other links should also link to their admin paths
+  const [prefix, setPrefix] = React.useState("");
+
+  React.useEffect(() => {
+    if (window && window.location.pathname.startsWith("/admin")) {
+      setPrefix("/admin");
+    }
+  }, []);
+
   return (
     <footer className={`bg-gradient-to-br ${footerColorCss}`}>
       <Container className="relative" size="small">
         <div className="flex justify-between items-center gap-6 flex-wrap">
-          <Link href="/" passHref>
-            <a className="group mx-2 flex items-center font-bold tracking-tight text-gray-400 dark:text-gray-300 opacity-50 hover:opacity-100 transition duration-300 ease-out whitespace-nowrap">
-            <img className="w-56 h-40 flex-shrink-0" src="/momma.svg" alt="All About Momma"/>
-            </a>
-          </Link>
+          <div className="flex">
+            <Link href="/" passHref>
+              <a className="group mx-2 flex items-center font-bold tracking-tight text-gray-400 dark:text-gray-300 opacity-50 hover:opacity-100 transition duration-300 ease-out whitespace-nowrap">
+              <img className="w-56 h-40 flex-shrink-0" src="/momma.svg" alt="All About Momma"/>
+              </a>
+            </Link>
+            {data.nav &&
+            (
+              <ul className="flex flex-col gap-2 p-4">
+              {data.nav.map((item, i) => {
+                return (
+                    <li key={`${item.label}-${i}`} >
+                      <Link href={`${prefix}/${item.href}`} passHref>
+                        <a className={"relative select-none text-base text-gray-500 inline-block tracking-wide transition duration-150 ease-out hover:text-gray-900 px-2"} >
+                          {item.label}
+                        </a>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
           <div className="flex gap-4">
             {data.social && data.social.facebook && (
               <a
@@ -95,13 +122,13 @@ export const Footer = ({ data, rawData }) => {
                 />
               </a>
             )}
-            {data.social && data.social.github && (
+            {data.social && data.social.pinterest && (
               <a
                 className="inline-block opacity-80 hover:opacity-100 transition ease-out duration-150"
-                href={data.social.github}
+                href={data.social.pinterest}
                 target="_blank"
               >
-                <FaGithub
+                <FaPinterest
                   className={`${socialIconClasses} ${
                     socialIconColorClasses[
                       data.color === "primary" ? "primary" : theme.color
