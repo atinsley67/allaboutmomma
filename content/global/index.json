@@ -22,14 +22,6 @@
       {
         "href": "category/travel",
         "label": "Travel"
-      },
-      {
-        "href": "about",
-        "label": "About"
-      },
-      {
-        "href": "contact",
-        "label": "Contact"
       }
     ]
   },
