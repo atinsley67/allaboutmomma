@@ -402,6 +402,22 @@ const config = defineConfig({
                 }
               },
               {
+                name: "youtube",
+                label: "YouTube Video",
+                fields: [
+                  {
+                    name: "title",
+                    label: "Title",
+                    type: "string",
+                  },
+                  {
+                    name: "src",
+                    label: "YouTube embed code 'src' URL",
+                    type: "string",
+                  }
+                ]
+              },
+              {
                 name: "table2",
                 label: "Table2",
                 fields: [

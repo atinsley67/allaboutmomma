@@ -23,7 +23,7 @@ export const Layout = ({ rawData = {}, data = layoutData, children }) => {
     <>
       <Head>
         <title>{title}</title>
-        <meta http-equiv="content-language" content="en-us"/>
+        <meta httpEquiv="content-language" content="en-us"/>
         <meta name="description" content={`${description}`}/>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta charSet="UTF-8"/>

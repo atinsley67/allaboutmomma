@@ -67,6 +67,10 @@ const components: Components<{
     headers: any;
     rows: any;
   };
+  youtube: {
+    title: string;
+    src: string;
+  },
   table2: {
     data: string;
   }
@@ -211,7 +215,7 @@ const components: Components<{
                 rel="nofollow noopener"
                 className="no-underline">
                 <div className="rounded-xl overflow-hidden shadow-lg bg-white justify-center flex flex-col items-center m-0">
-                  <img decoding="async" src={imageUrl} className="border-0 m-0"/>
+                  <img decoding="async" src={imageUrl} className="border-0 m-0" alt="Amazon product image"/>
                   {props.caption &&
                     <div className="text-xs font-semibold text-gray-600">{props.caption}</div>
                   }
@@ -288,7 +292,7 @@ const components: Components<{
                             target="_blank"
                             rel="nofollow noopener"
                             className="no-underline">
-                            <img decoding="async" className="inline m-2" src={cell.affiliateSnippet.imageURL} />
+                            <img decoding="async" className="inline m-2" src={cell.affiliateSnippet.imageURL} alt="Amazon product image"/>
                             <div>Check Price On Amazon</div>
                         </a>
           
@@ -303,6 +307,12 @@ const components: Components<{
       </div>
     )
   },
+  youtube: (props) => {
+    return (
+    <div className="flex flex-col items-center justify-center">
+      <iframe width="768" height="432" src={props.src} title={props.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+    </div>
+    )},
   table2: (props) => {
 
     const jsonData = props.data ? props.data.replace(/'/g, '"') : ""

@@ -69,7 +69,7 @@ export const getStaticPaths = async () => {
     paths: categoryListData.data.categoryConnection.edges.map((post) => ({
       params: { filename: post.node._sys.filename },
     })),
-    fallback: "blocking",
+    fallback: false,
   };
 };
 

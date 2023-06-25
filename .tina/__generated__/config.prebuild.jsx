@@ -59606,14 +59606,6 @@ var global_default = {
       {
         href: "category/travel",
         label: "Travel"
-      },
-      {
-        href: "about",
-        label: "About"
-      },
-      {
-        href: "contact",
-        label: "Contact"
       }
     ]
   },
@@ -59630,10 +59622,10 @@ var global_default = {
       }
     ],
     social: {
-      facebook: "/",
+      facebook: "https://www.facebook.com/All-About-Momma-106998484996931",
       twitter: "",
-      instagram: "/",
-      pinterest: "/"
+      instagram: "https://www.instagram.com/all.about.momma/",
+      pinterest: "https://www.pinterest.com/AllAboutMomma/"
     }
   },
   theme: {
@@ -59744,6 +59736,20 @@ var featureBlockSchema = {
           label: "Use image as background"
         }
       ]
+    },
+    {
+      type: "string",
+      label: "Max Columns",
+      name: "maxCols",
+      options: [
+        { label: "1", value: "1" },
+        { label: "2", value: "2" },
+        { label: "3", value: "3" },
+        { label: "4", value: "4" }
+      ],
+      ui: {
+        defaultItem: "3"
+      }
     },
     {
       type: "string",
@@ -60561,6 +60567,22 @@ var config = defineConfig({
                     rows: []
                   }
                 }
+              },
+              {
+                name: "youtube",
+                label: "YouTube Video",
+                fields: [
+                  {
+                    name: "title",
+                    label: "Title",
+                    type: "string"
+                  },
+                  {
+                    name: "src",
+                    label: "YouTube embed code 'src' URL",
+                    type: "string"
+                  }
+                ]
               },
               {
                 name: "table2",

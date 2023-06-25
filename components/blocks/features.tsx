@@ -64,6 +64,17 @@ export const Feature = ({ featuresColor, data, tinaField }) => {
 
 
 export const Features = ({ data, parentField }) => {
+
+  let gridColsClasses = "grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"
+  if (data.maxCols === "1") {
+    gridColsClasses = 'grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1';
+  } else if (data.maxCols === "2") {
+    gridColsClasses = 'grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2';
+  } else if (data.maxCols === "3") {
+    gridColsClasses = 'grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3';
+  } else if (data.maxCols === "4") {
+    gridColsClasses = 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4';
+  }
   return (
     <Section color={data.color}>
       <Container
@@ -75,7 +86,7 @@ export const Features = ({ data, parentField }) => {
             <h2 className="text-xl font-bold">{data.title}</h2>
           </div>
         )}
-        <div className="mx-auto px-0 py-4 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5 max-w-[500px] md:max-w-[800px] lg:max-w-[1200px] ">
+        <div className={`mx-auto px-0 py-4 grid ${gridColsClasses} gap-5 gap-5 max-w-[500px] md:max-w-[800px] lg:max-w-[1200px]  `}>
           {data.items &&
             data.items.map(function (block, i) {
               return (
@@ -158,6 +169,20 @@ export const featureBlockSchema = {
           label: "Use image as background",
         }
       ],
+    },
+    {
+      type: "string",
+      label: "Max Columns",
+      name: "maxCols",
+      options: [
+        { label: "1", value: "1" },
+        { label: "2", value: "2" },
+        { label: "3", value: "3" },
+        { label: "4", value: "4" },
+      ],
+      ui: {
+        defaultItem: "3",
+      },
     },
     {
       type: "string",
