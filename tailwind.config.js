@@ -141,22 +141,26 @@ module.exports = {
               fontSize: "1.125rem",
             },
             h1: {
-              fontWeight: "normal",
+              fontWeight: "bold",
+              color: "teal-600"
             },
             h2: {
-              fontWeight: "normal",
+              fontWeight: "bold",
+              color: "teal",
             },
             h3: {
-              fontWeight: "normal",
+              fontWeight: "semibold",
+              color: "teal",
             },
             h4: {
-              fontWeight: "normal",
+              fontWeight: "semibold",
+              color: "teal",
             },
             h5: {
-              fontWeight: "normal",
+              fontWeight: "semibold",
             },
             h6: {
-              fontWeight: "normal",
+              fontWeight: "semibold",
             },
           },
         },

@@ -240,7 +240,7 @@ const components: Components<{
   TableOfContents: (props) => (
     <p>
       <div className="border-2 border-gray-200 bg-gray-50 p-4">
-        <h3 className="mt-2">{props.title}</h3>
+        <h2 className="mt-2">{props.title}</h2>
         <ul>
           {props.headings instanceof Array &&
             props.headings.map((headingData) => {
@@ -266,12 +266,12 @@ const components: Components<{
     } 
 
     return (
-      <div>
+      <p>
         <table className="border-2 border-gray-200  p-4">
           <thead className="bg-gray-50">
             <tr>
               {props.headers.map((header, index) => (
-                <th key={index} className="border-2 px-4 py-2 text-teal-600 font-s">
+                <th key={index} className="border-2 px-4 py-2 text-teal-700 font-s">
                   {header}
                 </th>
               ))}
@@ -303,8 +303,8 @@ const components: Components<{
               </tr>
             ))}
           </tbody>
-    </table>
-      </div>
+        </table>
+      </p>
     )
   },
   youtube: (props) => {
@@ -314,6 +314,7 @@ const components: Components<{
     </div>
     )},
   table2: (props) => {
+
 
     const jsonData = props.data ? props.data.replace(/'/g, '"') : ""
     const parsedData = jsonData && jsonData.length > 0 ? JSON.parse(jsonData) : {}
@@ -418,7 +419,7 @@ export const Post = (props) => {
             <>
               <div className="flex-shrink-0 mr-4">
                 <img
-                  className="h-14 w-14 object-cover rounded-full shadow-sm"
+                  className="h-14 w-14 object-cover rounded-full shadow-lg"
                   src={props.author.avatar}
                   alt={props.author.name}
                 />

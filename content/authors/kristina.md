@@ -1,6 +1,7 @@
 ---
 name: Kristina
-avatar: bear.png
+avatar: momma.png
 ---
+
 
 
