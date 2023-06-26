@@ -401,7 +401,7 @@ export const Post = (props) => {
       <Container width="small" className={`flex-1 pb-2`} size="large">
         <h1
           data-tinafield="title"
-          className={`w-full relative	mb-8 text-6xl tracking-normal title-font`}
+          className={`w-full relative	mb-8 text-4xl text-teal-600 font-semibold tracking-normal `}
         >
           <span
             className={`bg-clip-text text-transparent bg-gradient-to-r ${

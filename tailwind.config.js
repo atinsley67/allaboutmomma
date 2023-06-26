@@ -142,7 +142,7 @@ module.exports = {
             },
             h1: {
               fontWeight: "bold",
-              color: "teal-600"
+              color: "teal"
             },
             h2: {
               fontWeight: "bold",
