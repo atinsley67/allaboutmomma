@@ -46,7 +46,11 @@ blocks:
         imageBackground: false
     color: tint
     _template: features
+description: >-
+  Details of who All About Momma and my journey to become an outdoor mom to
+  three kids
 ---
+
 
 
 
