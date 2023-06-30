@@ -110,8 +110,11 @@ blocks:
         imageBackground: true
     color: tint
     _template: features
-description: All About Momma
+description: >-
+  All About Momma main page which shows top blogs and main categories I talk
+  about
 ---
+
 
 
 
