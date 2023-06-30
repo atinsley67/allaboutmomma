@@ -1,6 +1,6 @@
 ---
 title: Contact
-description: Contact information
+description: Contact info to get in touch with Allaboutmomma
 blocks:
   - tagline: Contact
     headline: Love To Hear From You
@@ -18,6 +18,7 @@ blocks:
       > [kristina@allaboutmomma.com](mailto:info@example.com)
     _template: content
 ---
+
 
 
 
