@@ -43,14 +43,18 @@ export const getStaticProps = async ({ params }) => {
         if (block.__typename === 'PageBlocksFeaturedPosts') {
           await Promise.all(
             block.items.map(async (item: any) => {
-              const postData = await client.queries.blogPostCardQuery({
-                relativePath: `${item.postLocation}.mdx`,
-              });
+              try {
+                const postData = await client.queries.blogPostCardQuery({
+                  relativePath: `${item.postLocation}.mdx`,
+                });
 
-              const intro = getIntro(postData.data.post._body, 50)
-              delete postData.data.post._body
-              item.postDetails = postData.data.post;
-              item.postDetails.intro = intro
+                const intro = getIntro(postData.data.post._body, 50)
+                delete postData.data.post._body
+                item.postDetails = postData.data.post;
+                item.postDetails.intro = intro
+              } catch {
+                item.error = "No post found. Posts IDs should be underscore_separated_lowercase_words and not include / etc. "
+              }
             })
           );
         }

@@ -200,10 +200,10 @@ const components: Components<{
 
 
     // Extract image URL
-    const imageUrl = props.image || props.affiliateURLs.imageURL
+    const imageUrl = props.image || props.affiliateURLs ? props.affiliateURLs.imageURL : ""
     // Extract link URL
-    const linkUrl = props.affiliateURLs.linkURL
-    const floatLeft = props.floatLeft;
+    const linkUrl = props.affiliateURLs ? props.affiliateURLs.linkURL : ""
+    const floatLeft = props.floatLeft
 
     if (linkUrl && imageUrl) {
       return (
