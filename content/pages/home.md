@@ -25,7 +25,7 @@ blocks:
       - postLocation: best-toddler-swim-vest-for-1-2-3-and-4-year-old
       - postLocation: best-rain-gear-for-toddlers
       - postLocation: best-baby-water-carrier
-      - postLocation: best-toddler-hiking-pants-for-outdoor-toddlers/
+      - postLocation: best-toddler-hiking-pants-for-outdoor-toddlers
     color: tint
     _template: featuredPosts
   - title: Most Recent Posts
@@ -114,6 +114,7 @@ description: >-
   All About Momma main page which shows top blogs and main categories I talk
   about
 ---
+
 
 
 
