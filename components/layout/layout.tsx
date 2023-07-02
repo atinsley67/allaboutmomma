@@ -26,6 +26,15 @@ export const Layout = ({ rawData = {}, data = layoutData, children }) => {
   return (
     <>
       <Head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-8KPLZ7P9KL"></script>
+        <script dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-8KPLZ7P9KL');
+            `,
+          }}/>
         <title>{title}</title>
         <meta name="description" content={`${description}`}/>
         <meta property="og:title" content={`${title}`} />
