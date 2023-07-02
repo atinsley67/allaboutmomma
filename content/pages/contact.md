@@ -17,7 +17,10 @@ blocks:
 
       > [kristina@allaboutmomma.com](mailto:info@example.com)
     _template: content
+heroImg: >-
+  https://res.cloudinary.com/ds8uw7t44/image/upload/v1678385544/Mountains-Momma-cover-with-Lucas_iy5es6.webp
 ---
+
 
 
 

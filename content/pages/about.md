@@ -49,7 +49,10 @@ blocks:
 description: >-
   Details of who All About Momma and my journey to become an outdoor mom to
   three kids
+heroImg: >-
+  https://res.cloudinary.com/ds8uw7t44/image/upload/v1678385544/Mountains-Momma-cover-with-Lucas_iy5es6.webp
 ---
+
 
 
 

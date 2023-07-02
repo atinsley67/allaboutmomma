@@ -113,7 +113,10 @@ blocks:
 description: >-
   All About Momma main page which shows top blogs and main categories I talk
   about
+heroImg: >-
+  https://res.cloudinary.com/ds8uw7t44/image/upload/v1678385544/Mountains-Momma-cover-with-Lucas_iy5es6.webp
 ---
+
 
 
 

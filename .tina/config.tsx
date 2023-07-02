@@ -674,6 +674,11 @@ const config = defineConfig({
             name: "description",
           },
           {
+            type: "image",
+            name: "heroImg",
+            label: "Hero Image",
+          },
+          {
             type: "object",
             list: true,
             name: "blocks",

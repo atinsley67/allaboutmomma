@@ -8,23 +8,29 @@ import { Theme } from "./theme";
 export const Layout = ({ rawData = {}, data = layoutData, children }) => {
   let title = "All About Momma"
   let description = "All About Momma Description"
+  let image = ""
   const headerData = (rawData as any)
   if ( headerData.page ) {
     title = headerData.page.title + " | " + data.header.name
     description = headerData.page.description
+    image = headerData.page.heroImg
   } else if ( headerData.post ) {
     title = headerData.post.title
     description = headerData.post.description
+    image = headerData.post.heroImg
   } else if (headerData.category ) {
     title = headerData.category.title + " | " + data.header.name
     description = headerData.category.description
+    image = headerData.category.heroImg
   }
   return (
     <>
       <Head>
         <title>{title}</title>
-        <meta httpEquiv="content-language" content="en-us"/>
         <meta name="description" content={`${description}`}/>
+        <meta property="og:title" content={`${title}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={`${image}`} />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta charSet="UTF-8"/>
         {data.theme.font === "nunito" && (
