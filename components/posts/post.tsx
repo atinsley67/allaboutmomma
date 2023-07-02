@@ -401,15 +401,9 @@ export const Post = (props) => {
       <Container width="small" className={`flex-1 pb-2`} size="large">
         <h1
           data-tinafield="title"
-          className={`w-full relative	mb-8 text-4xl text-teal-600 font-semibold tracking-normal `}
+          className={`w-full relative	mb-8 text-4xl text-teal-700 font-semibold tracking-normal `}
         >
-          <span
-            className={`bg-clip-text text-transparent bg-gradient-to-r ${
-              titleColorClasses[theme.color]
-            }`}
-          >
-            {props.title}
-          </span>
+          {props.title}
         </h1>
         <div
           data-tinafield="author"

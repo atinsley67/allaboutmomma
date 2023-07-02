@@ -129,15 +129,9 @@ export const Category = (props) => {
       <Container className={`flex-1 pb-2`} size="small">
         <h2
           data-tinafield="title"
-          className={`w-full relative	mb-8 text-5xl tracking-normal title-font`}
+          className={`w-full relative	mb-8 text-4xl text-teal-700 font-semibold tracking-normal `}
         >
-          <span
-            className={`bg-clip-text text-transparent bg-gradient-to-r ${
-              titleColorClasses[theme.color]
-            }`}
-          >
-            {props.category.title}
-          </span>
+          {props.category.title}
         </h2>
 
       {props.category.heroImg && (
