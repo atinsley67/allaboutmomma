@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@headlessui/react": "1.7.5",
+    "@next/bundle-analyzer": "^13.4.8",
     "@tailwindcss/typography": "^0.5.8",
     "@tinacms/auth": "^1.0.3",
     "date-fns": "^2.23.0",
