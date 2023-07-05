@@ -1,9 +1,9 @@
 import { Blocks } from "../components/blocks-renderer";
-import { client } from "../.tina/__generated__/client";
+import { client } from "../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { Layout } from "../components/layout";
 import { useRouter } from 'next/router'
-import schema from '../.tina/__generated__/_graphql.json';
+import schema from '../tina/__generated__/_graphql.json';
 import { getIntro } from "../components/util/propsUtils"
 
 // Use the props returned by get static props

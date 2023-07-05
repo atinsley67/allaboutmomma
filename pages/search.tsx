@@ -3,7 +3,7 @@ import { Container } from "../components/util/container";
 import { Section } from "../components/util/section";
 import { useTheme, Layout } from "../components/layout";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
-import { client } from "../.tina/__generated__/client";
+import { client } from "../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { useRouter } from 'next/router'
 import { extractPosts, searchPosts, getIntro} from '../components/util/propsUtils'

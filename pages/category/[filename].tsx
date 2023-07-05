@@ -1,6 +1,6 @@
 import { Category } from "../../components/category/category";
 import { Blocks } from "../../components/blocks-renderer";
-import { client } from "../../.tina/__generated__/client";
+import { client } from "../../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { Layout } from "../../components/layout";
 import { getIntro } from "../../components/util/propsUtils"
