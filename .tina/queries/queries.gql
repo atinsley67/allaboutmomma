@@ -26,6 +26,9 @@ query contentQuery($relativePath: String!) {
   ...LayoutQueryFragment
   page(relativePath: $relativePath) {
     ...PageParts
+    _sys {
+      filename
+    }
   }
 }
 
@@ -33,6 +36,9 @@ query blogPostQuery($relativePath: String!) {
   ...LayoutQueryFragment
   post(relativePath: $relativePath) {
     ...PostParts
+    _sys {
+      filename
+    }
     author {
       ... on Author {
         name
@@ -63,6 +69,9 @@ query categoryQuery($relativePath: String!) {
   ...LayoutQueryFragment
   category(relativePath: $relativePath) {
     ...CategoryParts
+    _sys {
+      filename
+    }
   }
   postConnection(sort: "date" last: 10000)
   {

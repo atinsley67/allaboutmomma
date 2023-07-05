@@ -9,19 +9,25 @@ export const Layout = ({ rawData = {}, data = layoutData, children }) => {
   let title = "All About Momma"
   let description = "All About Momma Description"
   let image = ""
+  let url = "https://allaboutmomma.com"
   const headerData = (rawData as any)
   if ( headerData.page ) {
     title = headerData.page.title + " | " + data.header.name
     description = headerData.page.description
     image = headerData.page.heroImg
+    if (headerData.page._sys.filename != 'home') {
+      url = url + "/" + headerData.page._sys.filename
+    }
   } else if ( headerData.post ) {
     title = headerData.post.title
     description = headerData.post.description
     image = headerData.post.heroImg
+    url = url + "/" + headerData.post._sys.filename
   } else if (headerData.category ) {
     title = headerData.category.title + " | " + data.header.name
     description = headerData.category.description
     image = headerData.category.heroImg
+    url = url + "/category/" + headerData.category._sys.filename
   }
   return (
     <>
@@ -36,10 +42,12 @@ export const Layout = ({ rawData = {}, data = layoutData, children }) => {
             `,
           }}/>
         <title>{title}</title>
+        <link rel="canonical" href={`${url}`}/>
         <meta name="description" content={`${description}`}/>
         <meta property="og:title" content={`${title}`} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={`${image}`} />
+        <meta property="og:url" content={`${url}`} />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta charSet="UTF-8"/>
         {data.theme.font === "nunito" && (
