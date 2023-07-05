@@ -1,0 +1,98 @@
+query allPostsQuery {
+  ...LayoutQueryFragment
+  postConnection(sort: "date" last: 10000) {
+    edges {
+      node {
+        id
+        _body
+        title
+        heroImg
+        categories
+        date
+        author {
+          ... on Author {
+            ...AuthorParts
+          }
+        }
+        _sys {
+          filename
+        }
+      }
+    }
+  }
+}
+
+query contentQuery($relativePath: String!) {
+  ...LayoutQueryFragment
+  page(relativePath: $relativePath) {
+    ...PageParts
+    _sys {
+      filename
+    }
+  }
+}
+
+query blogPostQuery($relativePath: String!) {
+  ...LayoutQueryFragment
+  post(relativePath: $relativePath) {
+    ...PostParts
+    _sys {
+      filename
+    }
+    author {
+      ... on Author {
+        name
+        avatar
+      }
+    }
+  }
+}
+
+query blogPostCardQuery($relativePath: String!) {
+  post(relativePath: $relativePath) {
+    title
+    categories
+    heroImg
+    _body
+    date
+    author {
+      ... on Author {
+        name
+        avatar
+      }
+    }
+  }
+}
+
+
+query categoryQuery($relativePath: String!) {
+  ...LayoutQueryFragment
+  category(relativePath: $relativePath) {
+    ...CategoryParts
+    _sys {
+      filename
+    }
+  }
+  postConnection(sort: "date" last: 10000)
+  {
+    edges {
+      node {
+        id
+        _body
+        title
+        heroImg
+        categories
+        date
+        author {
+          ... on Author {
+            ...AuthorParts
+          }
+        }
+        _sys {
+          filename
+        }
+      }
+    }
+  }
+}
+
