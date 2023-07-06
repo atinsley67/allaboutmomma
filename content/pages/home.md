@@ -108,6 +108,14 @@ blocks:
           https://res.cloudinary.com/ds8uw7t44/image/upload/v1685975533/3-year-old-on-airplane.jpg
         url: /category/travel
         imageBackground: true
+      - title: Momma
+        text: >-
+          Outdoor Momma Gear and Ideas to Support and Inspire their Adventurous
+          Life with or without the Kids
+        image: >-
+          http://res.cloudinary.com/ds8uw7t44/image/upload/v1688669894/momma_categorie_card_tcyomn.jpg
+        url: /category/momma
+        imageBackground: true
     color: tint
     _template: features
 description: >-
@@ -116,6 +124,7 @@ description: >-
 heroImg: >-
   https://res.cloudinary.com/ds8uw7t44/image/upload/v1678385544/Mountains-Momma-cover-with-Lucas_iy5es6.webp
 ---
+
 
 
 
