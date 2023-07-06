@@ -267,11 +267,11 @@ const components: Components<{
 
     return (
       <p>
-        <table className="border-2 border-gray-200  p-4">
+        <table className="border-2 border-gray-200">
           <thead className="bg-gray-50">
             <tr>
               {props.headers.map((header, index) => (
-                <th key={index} className="border-2 px-4 py-2 text-teal-700 font-s">
+                <th key={index} className="border-2 px-1 md:px-4 py-2 text-xxs sm:text-xs md:text-base text-teal-700">
                   {header}
                 </th>
               ))}
@@ -279,25 +279,28 @@ const components: Components<{
           </thead>
           <tbody>
             {props.rows && props.rows.length > 0 && props.rows.map((row, rowIndex) => (
-              <tr
-                key={rowIndex}
-                className="hover:bg-gray-50 transition-colors"
-              >
+              <tr key={rowIndex} className="hover:bg-gray-50 transition-colors">
                 {row.cells && row.cells.length > 0 && row.cells.map((cell, cellIndex) => (
-                  <td key={cellIndex} className="border-2 p-4 align-top">
+                  <td key={cellIndex} className="border-2 p-1 md:p-2 align-top text-xxs sm:text-xs md:text-sm">
                     <div className="whitespace-pre-wrap align-top">{cell.content && cell.content}</div>
-                    {cell.affiliateSnippet &&
-                      <div className="inline">
-                        <a href={cell.affiliateSnippet.linkURL}
-                            target="_blank"
-                            rel="nofollow noopener"
-                            className="no-underline">
-                            <img decoding="async" className="inline m-2" src={cell.affiliateSnippet.imageURL} alt="Amazon product image"/>
-                            <div>Check Price On Amazon</div>
+                    {cell.affiliateSnippet && (
+                      <div className="flex flex-col items-center justify-center">
+                        <a
+                          href={cell.affiliateSnippet.linkURL}
+                          target="_blank"
+                          rel="nofollow noopener"
+                          className="no-underline"
+                        >
+                          <img
+                            decoding="async"
+                            className="block mx-auto m-2 max-w-xxxs md:max-w-xxs"
+                            src={cell.affiliateSnippet.imageURL}
+                            alt="Amazon product image"
+                          />
+                          <div className="text-center">Check Price On Amazon</div>
                         </a>
-          
                       </div>
-                      }
+                    )}
                   </td>
                 ))}
               </tr>
@@ -305,6 +308,7 @@ const components: Components<{
           </tbody>
         </table>
       </p>
+
     )
   },
   youtube: (props) => {

@@ -63,6 +63,7 @@ module.exports = {
       "2xl": "1800px",
     },
     fontSize: {
+      xxs: ".75rem",
       xs: ".875rem",
       sm: "1rem",
       base: "1.125rem",
@@ -103,6 +104,8 @@ module.exports = {
         15: ".15",
       },
       maxWidth: {
+        "xxxs": "4rem",
+        "xxs": "7rem",
         "8xl": "86rem",
       },
       spacing: {
