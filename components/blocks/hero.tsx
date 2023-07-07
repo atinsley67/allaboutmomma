@@ -46,14 +46,14 @@ export const Hero = ({ data, parentField }) => {
         </div>
         <div className="absolute z-2 top-1/4 m-10 -translate-y-1/2 sm:-translate-y-1/3 justify-center overflow-hidden ">
             {data.headline && (
-              <h3
+              <h1
                 data-tinafield={`${parentField}.headline`}
                 className={`w-full relative	mb-10 text-4xl sm:text-5xl font-semibold tracking-normal leading-tight title-font text-white`}
               >
 
                   {data.headline}
 
-              </h3>
+              </h1>
             )}
             {data.tagline && (
               <h2

@@ -48,12 +48,12 @@ export const Category = (props) => {
   return (
     <Section className="flex-1">
       <Container className={`flex-1 pb-2`} size="small">
-        <h2
+        <h1
           data-tinafield="title"
           className={`w-full relative	mb-8 text-4xl text-teal-700 font-semibold tracking-normal `}
         >
           {props.category.title}
-        </h2>
+        </h1>
 
       {props.category.heroImg && (
           <div className="relative"
