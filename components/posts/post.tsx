@@ -64,15 +64,14 @@ const components: Components<{
     children: TinaMarkdownContent;
   }
   Table: {
-    headers: any;
-    rows: any;
+    data: {
+      headers: any;
+      rows: any;
+    }
   };
   youtube: {
     title: string;
     src: string;
-  },
-  table2: {
-    data: string;
   }
 
   
@@ -261,7 +260,7 @@ const components: Components<{
 
   Table: (props) => {
 
-    if (!props.headers || props.headers.length === 0) {
+    if (!props.data?.headers || props.data?.headers.length === 0) {
       return <p>Table: No table content.</p>;
     } 
 
@@ -270,23 +269,23 @@ const components: Components<{
         <table className="border-2 border-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              {props.headers.map((header, index) => (
+              {props.data.headers.map((header, index) => (
                 <th key={index} className="border-2 px-1 md:px-4 py-2 text-xxs sm:text-xs md:text-base text-teal-700">
-                  {header}
+                  {header.content}
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {props.rows && props.rows.length > 0 && props.rows.map((row, rowIndex) => (
+            {props.data.rows && props.data.rows.length > 0 && props.data.rows.map((row, rowIndex) => (
               <tr key={rowIndex} className="hover:bg-gray-50 transition-colors">
                 {row.cells && row.cells.length > 0 && row.cells.map((cell, cellIndex) => (
                   <td key={cellIndex} className="border-2 p-1 md:p-2 align-top text-xxs sm:text-xs md:text-sm">
                     <div className="whitespace-pre-wrap align-top">{cell.content && cell.content}</div>
-                    {cell.affiliateSnippet && (
+                    {cell.affiliate && (
                       <div className="flex flex-col items-center justify-center">
                         <a
-                          href={cell.affiliateSnippet.linkURL}
+                          href={cell.affiliate.linkUrl}
                           target="_blank"
                           rel="nofollow noopener"
                           className="no-underline"
@@ -294,10 +293,10 @@ const components: Components<{
                           <img
                             decoding="async"
                             className="block mx-auto m-2 max-w-xxxs md:max-w-xxs"
-                            src={cell.affiliateSnippet.imageURL}
-                            alt="Amazon product image"
+                            src={cell.affiliate.imageUrl}
+                            alt="Product image"
                           />
-                          <div className="text-center">Check Price On Amazon</div>
+                          <div className="text-center">{cell.affiliate.caption}</div>
                         </a>
                       </div>
                     )}
@@ -316,62 +315,7 @@ const components: Components<{
     <div className="flex flex-col items-center justify-center">
       <iframe width="768" height="432" src={props.src} title={props.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
     </div>
-    )},
-  table2: (props) => {
-
-
-    const jsonData = props.data ? props.data.replace(/'/g, '"') : ""
-    const parsedData = jsonData && jsonData.length > 0 ? JSON.parse(jsonData) : {}
-
-    const headers = parsedData.headers;
-    const rows = parsedData.rows;
-
-    if (!headers || headers.length === 0) {
-      return <p>Table: No table content.</p>;
-    } 
-
-    return (
-      <div>
-        <table className="border-2 border-gray-200  p-4">
-          <thead className="bg-gray-50">
-            <tr>
-              {headers.map((header, index) => (
-                <th key={index} className="border-2 px-4 py-2 text-teal-600 font-s">
-                  {header}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows && rows.length > 0 && rows.map((row, rowIndex) => (
-              <tr
-                key={rowIndex}
-                className="hover:bg-gray-50 transition-colors"
-              >
-                {row.length > 0 && row.map((cell, cellIndex) => (
-                  <td key={cellIndex} className="border-2 p-4 align-top">
-                    <div className="whitespace-pre-wrap align-top">{cell}</div>
-                    {cell.affiliateSnippet &&
-                      <div className="inline">
-                        <a href={cell.affiliateSnippet.linkURL}
-                            target="_blank"
-                            rel="nofollow noopener"
-                            className="no-underline">
-                            <img decoding="async" className="inline m-2" src={cell.affiliateSnippet.imageURL} />
-                            <div>Check Price On Amazon</div>
-                        </a>
-          
-                      </div>
-                      }
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-    </table>
-      </div>
-    )
-  }
+    )}
 }
 
 
