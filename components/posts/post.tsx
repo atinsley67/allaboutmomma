@@ -32,15 +32,6 @@ const components: Components<{
     children: TinaMarkdownContent;
     authorName: string;
   };
-  DateTime: {
-    format?: string;
-  };
-  NewsletterSignup: {
-    placeholder: string;
-    buttonText: string;
-    children: TinaMarkdownContent;
-    disclaimer?: TinaMarkdownContent;
-  };
   AffiliateLink: {
     altText: string;
     affiliateURLs: {
@@ -87,61 +78,6 @@ const components: Components<{
           <TinaMarkdown content={props.children} />
           {props.authorName}
         </blockquote>
-      </div>
-    );
-  },
-  DateTime: (props) => {
-    const dt = React.useMemo(() => {
-      return new Date();
-    }, []);
-
-    switch (props.format) {
-      case "iso":
-        return <span>{dt.toISOString()}</span>;
-      case "utc":
-        return <span>{dt.toUTCString()}</span>;
-      case "local":
-        return <span>{dt.toLocaleDateString()}</span>;
-      default:
-        return <span>{dt.toLocaleDateString()}</span>;
-    }
-  },
-  NewsletterSignup: (props) => {
-    return (
-      <div className="bg-white">
-        <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-          <div className="">
-            <TinaMarkdown content={props.children} />
-          </div>
-          <div className="mt-8 ">
-            <form className="sm:flex">
-              <label htmlFor="email-address" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email-address"
-                name="email-address"
-                type="email"
-                autoComplete="email"
-                required
-                className="w-full px-5 py-3 border border-gray-300 shadow-sm placeholder-gray-400 focus:ring-1 focus:ring-teal-500 focus:border-teal-500 sm:max-w-xs rounded-md"
-                placeholder={props.placeholder}
-              />
-
-              <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-                <button
-                  type="submit"
-                  className="w-full flex items-center justify-center py-3 px-5 border border-transparent text-base font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
-                >
-                  {props.buttonText}
-                </button>
-              </div>
-            </form>
-            <div className="mt-3 text-sm text-gray-500">
-              {props.disclaimer && <TinaMarkdown content={props.disclaimer} />}
-            </div>
-          </div>
-        </div>
       </div>
     );
   },
@@ -197,7 +133,6 @@ const components: Components<{
         "text-gray-800 bg-yellow-500 hover:bg-yellow-600 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500",
     };
 
-
     // Extract image URL
     const imageUrl = props.image || props.affiliateURLs ? props.affiliateURLs.imageURL : ""
     // Extract link URL
@@ -213,19 +148,23 @@ const components: Components<{
                 target="_blank"
                 rel="nofollow noopener"
                 className="no-underline">
-                <div className="rounded-xl overflow-hidden shadow-lg bg-white justify-center flex flex-col items-center m-0">
-                  <img decoding="async" src={imageUrl} className="border-0 m-0" alt="Amazon product image"/>
+                <div className="rounded-xl overflow-hidden shadow-lg bg-white justify-center flex flex-col items-center m-0  min-w-[11rem] ">
+                  <div className="flex flex-col justify-end min-h-[11rem]">
+                    <img decoding="async" src={imageUrl} className="border-0 m-0 " alt="Amazon product image"/>
+                  </div>
+                  <div className="min-h-[1rem]">
                   {props.caption &&
                     <div className="text-xs font-semibold text-gray-600">{props.caption}</div>
                   }
-                  {props.button &&
-                    <button
-                      className={`mx-auto z-10 relative flex text-center px-7 py-3 font-semibold text-lg transition duration-150 ease-out  rounded-lg transform focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 whitespace-nowrap ${
-                          buttonColorClasses[theme.color]
-                        }`}>
-                      Check Amazon Price
-                    </button>
-                  }
+                    {props.button &&
+                      <button
+                        className={`mx-auto z-10 relative flex text-center px-7 py-3 font-semibold text-lg transition duration-150 ease-out  rounded-lg transform focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 whitespace-nowrap ${
+                            buttonColorClasses[theme.color]
+                          }`}>
+                        Check Amazon Price
+                      </button>
+                    }
+                  </div>
                 </div>
               </a>
         </div>
@@ -321,22 +260,6 @@ const components: Components<{
 
 
 export const Post = (props) => {
-  const theme = useTheme();
-  const titleColorClasses = {
-    blue: "from-blue-400 to-blue-600 dark:from-blue-300 dark:to-blue-500",
-    teal: "from-teal-400 to-teal-600 dark:from-teal-300 dark:to-teal-500",
-    green: "from-green-400 to-green-600",
-    red: "from-red-400 to-red-600",
-    pink: "from-pink-300 to-pink-500",
-    purple:
-      "from-purple-400 to-purple-600 dark:from-purple-300 dark:to-purple-500",
-    orange:
-      "from-orange-300 to-orange-600 dark:from-orange-200 dark:to-orange-500",
-    yellow:
-      "from-yellow-400 to-yellow-500 dark:from-yellow-300 dark:to-yellow-500",
-    gray_400:
-      "from-gray-400 to-gray-500 dark:from-gray-300 dark:to-gray-500",
-  };
 
   const date = new Date(props.date);
   let formattedDate = "";

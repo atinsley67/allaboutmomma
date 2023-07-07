@@ -15,15 +15,6 @@ const components: Components<{
     children: TinaMarkdownContent;
     authorName: string;
   };
-  DateTime: {
-    format?: string;
-  };
-  NewsletterSignup: {
-    placeholder: string;
-    buttonText: string;
-    children: TinaMarkdownContent;
-    disclaimer?: TinaMarkdownContent;
-  };
 }> = {
   code_block: (props) => <Prism {...props} />,
   BlockQuote: (props: {
@@ -39,60 +30,6 @@ const components: Components<{
       </div>
     );
   },
-  DateTime: (props) => {
-    const dt = React.useMemo(() => {
-      return new Date();
-    }, []);
-
-    switch (props.format) {
-      case "iso":
-        return <span>{dt.toISOString()}</span>;
-      case "utc":
-        return <span>{dt.toUTCString()}</span>;
-      case "local":
-        return <span>{dt.toLocaleDateString()}</span>;
-      default:
-        return <span>{dt.toLocaleDateString()}</span>;
-    }
-  },
-  NewsletterSignup: (props) => {
-    return (
-      <div className="bg-white">
-        <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-          <div className="">
-            <TinaMarkdown content={props.children} />
-          </div>
-          <div className="mt-8 ">
-            <form className="sm:flex">
-              <label htmlFor="email-address" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email-address"
-                name="email-address"
-                type="email"
-                autoComplete="email"
-                required
-                className="w-full px-5 py-3 border border-gray-300 shadow-sm placeholder-gray-400 focus:ring-1 focus:ring-teal-500 focus:border-teal-500 sm:max-w-xs rounded-md"
-                placeholder={props.placeholder}
-              />
-              <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-                <button
-                  type="submit"
-                  className="w-full flex items-center justify-center py-3 px-5 border border-transparent text-base font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
-                >
-                  {props.buttonText}
-                </button>
-              </div>
-            </form>
-            <div className="mt-3 text-sm text-gray-500">
-              {props.disclaimer && <TinaMarkdown content={props.disclaimer} />}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  },
   img: (props) => (
     <div className="flex items-center justify-center">
       <img src={props.url} alt={props.alt} />
@@ -101,22 +38,6 @@ const components: Components<{
 };
 
 export const Category = (props) => {
-  const theme = useTheme();
-  const titleColorClasses = {
-    blue: "from-blue-400 to-blue-600 dark:from-blue-300 dark:to-blue-500",
-    teal: "from-teal-400 to-teal-600 dark:from-teal-300 dark:to-teal-500",
-    green: "from-green-400 to-green-600",
-    red: "from-red-400 to-red-600",
-    pink: "from-pink-300 to-pink-500",
-    purple:
-      "from-purple-400 to-purple-600 dark:from-purple-300 dark:to-purple-500",
-    orange:
-      "from-orange-300 to-orange-600 dark:from-orange-200 dark:to-orange-500",
-    yellow:
-      "from-yellow-400 to-yellow-500 dark:from-yellow-300 dark:to-yellow-500",
-    gray_400:
-      "from-gray-400 to-gray-500 dark:from-gray-300 dark:to-gray-500",
-  };
 
   const date = new Date(props.date);
   let formattedDate = "";
@@ -138,12 +59,12 @@ export const Category = (props) => {
           <div className="relative"
           >
             <img
-              className="absolute z-0 w-full rounded-lg max-w-none h-auto blur-xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light max-h-[20rem] object-cover object-center object-top object-position-y-1/3"
+              className="absolute z-0 w-full rounded-lg max-w-none h-auto blur-xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light max-h-[20rem] object-cover object-center"
               src={props.category.heroImg}
               aria-hidden="true"
             />
             <img
-              className="relative z-1 w-full rounded-lg max-w-none h-auto max-h-[20rem] object-cover object-center object-top object-position-y-1/3"
+              className="relative z-1 w-full rounded-lg max-w-none h-auto max-h-[20rem] object-cover object-center"
               alt={props.category.title}
               src={props.category.heroImg}
             />
