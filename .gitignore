@@ -26,3 +26,6 @@ yarn-debug.log*
 yarn-error.log*
 
 node_modules
+
+public/robots.txt
+public/sitemap*

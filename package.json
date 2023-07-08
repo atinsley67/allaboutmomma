@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "tinacms dev -c \"next dev\"",
     "build": "tinacms build && next build",
+    "postbuild": "next-sitemap",
     "start": "tinacms build && next start"
   },
   "devDependencies": {
@@ -19,6 +20,7 @@
     "@typescript-eslint/parser": "^5.20.0",
     "autoprefixer": "^10.4.0",
     "eslint": "^8.13.0",
+    "next-sitemap": "^4.1.8",
     "postcss": "^8.3.11",
     "postcss-import": "^14.0.2",
     "postcss-nesting": "^10.1.0"
