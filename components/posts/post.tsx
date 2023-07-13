@@ -6,6 +6,7 @@ import format from "date-fns/format";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { Prism } from "tinacms/dist/rich-text/prism";
 import type { TinaMarkdownContent, Components } from "tinacms/dist/rich-text";
+import Image from 'next/image'
 
 function getTextContentForId(element) {
   if (element && element.props && element.props.content) {
@@ -83,7 +84,7 @@ const components: Components<{
   },
   img: (props) => (
     <div className="flex flex-col items-center justify-center">
-      <img className="mb-3" src={props.url} alt={props.alt} />
+      <img className="mb-3 h-[36rem]" src={props.url} alt={props.alt}/>
       <div className="text-xs font-semibold text-gray-600">{props.caption}</div>
     </div>
   ), 
@@ -150,7 +151,7 @@ const components: Components<{
                 className="no-underline">
                 <div className="rounded-xl overflow-hidden shadow-lg bg-white justify-center flex flex-col items-center m-0  min-w-[11rem] ">
                   <div className="flex flex-col justify-end min-h-[11rem]">
-                    <img decoding="async" src={imageUrl} className="border-0 m-0 " alt="Amazon product image"/>
+                    <img decoding="async" src={imageUrl} className="border-0" alt="Amazon product image"/>
                   </div>
                   <div className="min-h-[1rem]">
                   {props.caption &&

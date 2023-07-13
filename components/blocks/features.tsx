@@ -26,7 +26,7 @@ export const Feature = ({ featuresColor, data, tinaField }) => {
         <img
           src={data.image}
           alt=""
-          className="w-full max-h-60 auto object-cover rounded-lg"
+          className="w-auto h-60 auto object-contain rounded-lg"
         />
       )}
       <div className="p-6">

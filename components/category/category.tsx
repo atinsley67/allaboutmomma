@@ -59,12 +59,12 @@ export const Category = (props) => {
           <div className="relative"
           >
             <img
-              className="absolute z-0 w-full rounded-lg max-w-none h-auto blur-xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light max-h-[20rem] object-cover object-center"
+              className="absolute z-0 w-full rounded-lg max-w-none h-[18rem]  blur-xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light h-[20rem] object-cover object-center"
               src={props.category.heroImg}
               aria-hidden="true"
             />
             <img
-              className="relative z-1 w-full rounded-lg max-w-none h-auto max-h-[20rem] object-cover object-center"
+              className="relative z-1 w-full rounded-lg max-w-none h-[18rem] object-cover object-center"
               alt={props.category.title}
               src={props.category.heroImg}
             />
@@ -93,11 +93,11 @@ export const Category = (props) => {
                 passHref
               >
                 <a>
-                  <div className="flex justify-center">
+                  <div className="flex justify-center h-64">
                     <div
-                      className="flex flex-col rounded-lg bg-white shadow-lg dark:bg-neutral-700 md:max-w-xxl sm:flex-row">
+                      className="flex flex-col rounded-lg bg-white shadow-lg dark:bg-neutral-700 md:w-xxl sm:flex-row">
                       <img
-                        className="h-64 w-full rounded-t-lg object-cover sm:h-auto sm:w-48 sm:rounded-none sm:rounded-l-lg"
+                        className="w-48 object-cover object-center rounded-t-lg sm:w-48 sm:rounded-none sm:rounded-l-lg"
                         src={post.heroImg}
                         alt={post.title} />
                       <div className="flex flex-col justify-start p-6">

@@ -31,12 +31,12 @@ export const Hero = ({ data, parentField }) => {
           {data.image && (
           <>
             <img
-              className="absolute z-0 w-full rounded-lg max-w-none h-auto blur-xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light max-h-[35rem] object-cover object-center object-top object-position-y-2/3"
+              className="absolute z-0 w-full rounded-lg max-w-none blur-xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light h-[35rem] object-cover object-center object-top object-position-y-2/3"
               src={data.image.src}
               aria-hidden="true"
             />
             <img
-              className="relative z-1 w-full rounded-lg max-w-none h-auto max-h-[35rem] object-cover object-center object-top object-position-y-2/3"
+              className="relative z-1 w-full rounded-lg max-w-none h-[35rem] object-cover object-center object-top object-position-y-2/3"
               alt={data.image.alt}
               src={data.image.src}
             />

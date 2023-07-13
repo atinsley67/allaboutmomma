@@ -11,12 +11,13 @@ export const FeaturedPost = ({ data, tinaField }) => {
   }
 
   return (
+    <div>
     <a href={data.postLocation}>
       <div
         data-tinafield={tinaField}
         className="rounded-xl overflow-hidden shadow-lg"
       >
-        <img className="w-full max-h-80 object-cover" src={data.postDetails.heroImg} alt={data.postDetails.title}/>
+        <img className="w-full h-80 object-cover object-center" src={data.postDetails.heroImg} alt={data.postDetails.title}/>
         <div className="px-6 pt-4 pb-2">
           {data.postDetails.title && (
             <h3
@@ -37,7 +38,7 @@ export const FeaturedPost = ({ data, tinaField }) => {
         </div>
         <div className="px-6 pt-4 pb-2 flex flex-wrap justify-center">
           {data.postDetails.categories && data.postDetails.categories.map((category) => (
-            <div className="px-2 py-1">
+            <div className="px-2 py-1" key={category}>
               <span className="bg-gray-200 rounded-full px-3 py-1 pb-2 text-sm font-semibold text-gray-700 mr-2 mb-2">
                 {category}
               </span>
@@ -46,6 +47,7 @@ export const FeaturedPost = ({ data, tinaField }) => {
         </div>
       </div>
     </a>
+    </div>
   );
 };
 

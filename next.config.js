@@ -6,6 +6,7 @@ module.exports = {
       use: ["@svgr/webpack"],
     });
 
+
     return config;
   },
   async rewrites() {
@@ -19,5 +20,13 @@ module.exports = {
         destination: "/admin/index.html",
       },
     ];
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+    ],
   },
 };
