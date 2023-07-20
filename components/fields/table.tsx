@@ -131,10 +131,11 @@ export const TableInput = wrapFieldsWithMeta(({ input }) => {
         newCaption = caption || "" != "" ? caption : "Check Amazon Price"
       }
 
-      const newAffiliate = (newCaption || "" != "") || (newImgUrl || "" != "") || (newLinkUrl || "" != "") ? {linkUrl: newLinkUrl, imageUrl: newImgUrl , caption: newCaption} : null;
+      const newAffiliate = (newCaption || "" != "") || (newImgUrl || "" != "") || (newLinkUrl || "" != "") ? {affiliate: {linkUrl: newLinkUrl, imageUrl: newImgUrl , caption: newCaption}} : {};
+      const {affiliate, ...newCell} = rows[rowIndex].cells[cellIndex]
 
       const updatedRows = rows.map((row, index) =>
-        index === rowIndex ? {cells: [...row.cells.slice(0, cellIndex), { ...row.cells[cellIndex], affiliate: newAffiliate }, ...row.cells.slice(cellIndex + 1)]} : row
+        index === rowIndex ? {cells: [...row.cells.slice(0, cellIndex), { ...newCell, ...newAffiliate }, ...row.cells.slice(cellIndex + 1)]} : row
       );
       onChange({ headers, rows: updatedRows });
     }
