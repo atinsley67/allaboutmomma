@@ -93,11 +93,11 @@ export const Category = (props) => {
                 passHref
               >
                 <a>
-                  <div className="flex justify-center h-64">
+                  <div className="flex justify-center">
                     <div
                       className="flex flex-col rounded-lg bg-white shadow-lg dark:bg-neutral-700 md:w-xxl sm:flex-row">
                       <img
-                        className="w-48 object-cover object-center rounded-t-lg sm:w-48 sm:rounded-none sm:rounded-l-lg"
+                        className="h-64 w-full rounded-t-lg object-cover sm:h-auto sm:w-48 sm:rounded-none sm:rounded-l-lg"
                         src={post.heroImg}
                         alt={post.title} />
                       <div className="flex flex-col justify-start p-6">

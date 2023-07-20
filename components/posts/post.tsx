@@ -84,7 +84,7 @@ const components: Components<{
   },
   img: (props) => (
     <div className="flex flex-col items-center justify-center">
-      <img className="mb-3 h-[36rem]" src={props.url} alt={props.alt}/>
+      <img className="mb-3 h-96 object-cover" src={props.url} alt={props.alt}/>
       <div className="text-xs font-semibold text-gray-600">{props.caption}</div>
     </div>
   ), 
