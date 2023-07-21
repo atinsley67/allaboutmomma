@@ -65,11 +65,11 @@ export const Footer = ({ data, rawData }) => {
               {data.nav.map((item, i) => {
                 return (
                     <li key={`${item.label}-${i}`} >
-                      <Link href={`${prefix}/${item.href}`} passHref>
+                      <a href={`${prefix}/${item.href}`}>
                         <a className={"relative select-none text-base text-gray-500 inline-block tracking-wide transition duration-150 ease-out hover:text-gray-900 px-2"} >
                           {item.label}
                         </a>
-                      </Link>
+                      </a>
                     </li>
                   );
                 })}

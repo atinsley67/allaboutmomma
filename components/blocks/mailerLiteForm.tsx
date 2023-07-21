@@ -10,7 +10,7 @@ export const MailerLiteForm = ({ data, parentField = "" }) => {
           <span>Email: <strong>{data.email}</strong></span>
         </div>
         <div className="grow min-w-76">
-          <div className="ml-embedded" data-form={data.formId}></div>
+          <div className="ml-embedded" data-form="54PrxH"></div>
         </div>
       </div>
     </Container>
