@@ -5,6 +5,7 @@ import { featuredPostsBlockSchema } from "../components/blocks/featuredPosts";
 import { paginatedPostsBlockSchema } from "../components/blocks/paginatedPosts";
 import { heroBlockSchema } from "../components/blocks/hero";
 import { testimonialBlockSchema } from "../components/blocks/testimonial";
+import { mailerLiteFormBlockSchema } from "../components/blocks/mailerLiteForm";
 import { ColorPickerInput } from "../components/fields/color";
 import { TableInput } from "../components/fields/table";
 import * as React from "react";
@@ -700,6 +701,7 @@ const config = defineConfig({
               paginatedPostsBlockSchema,
               contentBlockSchema,
               testimonialBlockSchema,
+              mailerLiteFormBlockSchema,
             ],
           },
         ],

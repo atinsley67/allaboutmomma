@@ -6,6 +6,7 @@ import { FeaturedPosts } from "./blocks/featuredPosts"
 import { PaginatedPosts } from "./blocks/paginatedPosts"
 import { Hero } from "./blocks/hero";
 import { Testimonial } from "./blocks/testimonial";
+import { MailerLiteForm } from "./blocks/mailerLiteForm";
 
 export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">) => {
   return (
@@ -66,6 +67,15 @@ export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">) => {
                   >
                     <Testimonial data={block} parentField={`blocks.${i}`} />
                   </div>
+                );
+              case "PageBlocksMailerLiteForm":
+                  return (
+                    <div
+                      data-tinafield={`blocks.${i}`}
+                      key={i + block.__typename}
+                    >
+                      <MailerLiteForm data={block} parentField={`blocks.${i}`} />
+                    </div>
                 );
               default:
                 return null;
