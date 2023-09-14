@@ -28,6 +28,33 @@ blocks:
       - postLocation: best-toddler-hiking-pants-for-outdoor-toddlers
     color: tint
     _template: featuredPosts
+  - title: Don't Miss Out On My Momma and Toddler Hiking Journal
+    items:
+      - title: Paperback Version
+        text: >-
+          One of my favorite things to do with my children is hike! Our love for
+          hiking and desire to relive our hikes gave me and my little ones the
+          idea to create a Momma and Toddler Hiking Journal.
+
+
+          A space design for toddler and mom to journal their hikes together as
+          well as spaces for planning, goal setting, scavenger hunts and more.
+        image: >-
+          https://res.cloudinary.com/ds8uw7t44/image/upload/v1694719890/momma_and_toddler_hiking_jounral_zsmmyq.jpg
+        url: >-
+          https://www.amazon.com/dp/B0CHMHKDG6?&linkCode=ll1&tag=allaboutmom06-20&linkId=a894d66ee81d5d7da501d95f95cfbc7c&language=en_US&ref_=as_li_ss_tl
+      - title: Hardcover Version
+        text: >+
+          This is a great unique gift for any active mom with young kids! Or to
+          use for yourself. My kids love looking back on the cool places we went
+          and picture of us hiking together!
+
+        image: >-
+          http://res.cloudinary.com/ds8uw7t44/image/upload/v1694720883/hardover_of_hiking_journal_cjbpfu.jpg
+        url: >-
+          https://www.amazon.com/Momma-Toddler-Hiking-Journal-interactive/dp/B0CHS3V1L7?_encoding=UTF8&qid=&sr=&linkCode=ll1&tag=allaboutmom06-20&linkId=00fd137a4eda2377dad63aafab6bd9c2&language=en_US&ref_=as_li_ss_tl
+    maxCols: '2'
+    _template: features
   - body: >
       One of my favorite things to do with my children is hike! Our love for
       hiking and desire to relive our hikes gave me and my little ones the idea
@@ -142,6 +169,7 @@ description: >-
 heroImg: >-
   https://res.cloudinary.com/ds8uw7t44/image/upload/v1678385544/Mountains-Momma-cover-with-Lucas_iy5es6.webp
 ---
+
 
 
 
