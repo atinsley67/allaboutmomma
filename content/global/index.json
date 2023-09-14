@@ -8,6 +8,10 @@
         "label": "Home"
       },
       {
+        "href": "Product",
+        "label": "Product"
+      },
+      {
         "href": "category/pregnancy",
         "label": "Pregnancy"
       },
