@@ -1,1 +1,1 @@
-# All About Momma - Devevelopment site
+# All About Momma - Development site
