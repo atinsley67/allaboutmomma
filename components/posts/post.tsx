@@ -225,7 +225,7 @@ const components: Components<{
                     {cell.affiliate && (
                       <div className="flex flex-col items-center justify-center">
                         <a
-                          href={cell.affiliate.linkUrl}
+                          href={cell.affiliate.linkURL}
                           target="_blank"
                           rel="nofollow noopener"
                           className="no-underline"
@@ -233,7 +233,7 @@ const components: Components<{
                           <img
                             decoding="async"
                             className="block mx-auto m-2 max-w-xxxs md:max-w-xxs"
-                            src={cell.affiliate.imageUrl}
+                            src={cell.affiliate.imageURL}
                             alt="Product image"
                           />
                           <div className="text-center">{cell.affiliate.caption}</div>
