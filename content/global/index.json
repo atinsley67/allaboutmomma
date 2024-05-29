@@ -4,8 +4,12 @@
     "color": "default",
     "nav": [
       {
-        "href": "",
+        "href": "home",
         "label": "Home"
+      },
+      {
+        "href": "pages/products",
+        "label": "Products"
       },
       {
         "href": "category/pregnancy",
