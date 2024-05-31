@@ -43,10 +43,6 @@ blocks:
           http://res.cloudinary.com/ds8uw7t44/image/upload/v1717114749/hardcover_photo_qd2caa.png
         url: >-
           https://www.amazon.com/Momma-Toddler-Hiking-Journal-interactive/dp/B0CHS3V1L7?_encoding=UTF8&qid=&sr=&linkCode=ll1&tag=allaboutmom06-20&linkId=00fd137a4eda2377dad63aafab6bd9c2&language=en_US&ref_=as_li_ss_tl
-      - title: Here's Another Feature
-        text: >-
-          This is where you might talk about the feature, if this wasn't just
-          filler text.
     _template: features
   - body: >
       Hello and welcome to All About Momma's product page. More to come here
