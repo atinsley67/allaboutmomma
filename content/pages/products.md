@@ -25,10 +25,24 @@ blocks:
           https://res.cloudinary.com/ds8uw7t44/image/upload/v1694719890/momma_and_toddler_hiking_jounral_zsmmyq.jpg
         url: >-
           https://www.amazon.com/dp/B0CHMHKDG6?&linkCode=ll1&tag=allaboutmom06-20&linkId=a894d66ee81d5d7da501d95f95cfbc7c&language=en_US&ref_=as_li_ss_tl
-      - title: Here's Another Feature
-        text: >-
-          This is where you might talk about the feature, if this wasn't just
-          filler text.
+      - title: Hardcover Version
+        text: >+
+          A purely unique journal that your toddler and you create together. A
+          great spot for all your hikes and adventures and a way to reinforce
+          those memories so you can relive them over and over again!
+
+
+          "The next best thing to the enjoyment of a good time is the
+          recollection of it." -James Lendall Basford
+
+
+          The hardcover version is exactly the same as the paperback, either way
+          you cannot go wrong! 
+
+        image: >-
+          http://res.cloudinary.com/ds8uw7t44/image/upload/v1717114749/hardcover_photo_qd2caa.png
+        url: >-
+          https://www.amazon.com/Momma-Toddler-Hiking-Journal-interactive/dp/B0CHS3V1L7?_encoding=UTF8&qid=&sr=&linkCode=ll1&tag=allaboutmom06-20&linkId=00fd137a4eda2377dad63aafab6bd9c2&language=en_US&ref_=as_li_ss_tl
       - title: Here's Another Feature
         text: >-
           This is where you might talk about the feature, if this wasn't just
