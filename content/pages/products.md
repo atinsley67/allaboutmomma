@@ -40,7 +40,7 @@ blocks:
           you cannot go wrong! 
 
         image: >-
-          http://res.cloudinary.com/ds8uw7t44/image/upload/v1717114749/hardcover_photo_qd2caa.png
+          http://res.cloudinary.com/ds8uw7t44/image/upload/v1717287548/hardcover_momma_and_toddler_journal_raw22c.jpg
         url: >-
           https://www.amazon.com/Momma-Toddler-Hiking-Journal-interactive/dp/B0CHS3V1L7?_encoding=UTF8&qid=&sr=&linkCode=ll1&tag=allaboutmom06-20&linkId=00fd137a4eda2377dad63aafab6bd9c2&language=en_US&ref_=as_li_ss_tl
     _template: features
