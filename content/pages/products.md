@@ -45,8 +45,38 @@ blocks:
           https://www.amazon.com/Momma-Toddler-Hiking-Journal-interactive/dp/B0CHS3V1L7?_encoding=UTF8&qid=&sr=&linkCode=ll1&tag=allaboutmom06-20&linkId=00fd137a4eda2377dad63aafab6bd9c2&language=en_US&ref_=as_li_ss_tl
     _template: features
   - body: >
-      Hello and welcome to All About Momma's product page. More to come here
-      soon!
+      Unlock the magic of every moment with our Momma and Toddler Interactive
+      Journal. From the first giggle to the endless adventures, capture the joy
+      of parenthood with a keepsake that grows with your little one. Start
+      creating memories that last a lifetime today!
+
+
+      Includes:
+
+
+      * Trail finding information and planning
+
+      * Snack planning page
+
+      * Ideas for added fun on the trails
+
+      * Goal setting
+
+      * 22 hiking logs
+
+      * 6 scavenger hunts
+
+      * 7 pages of memories
+
+      * 6 hiking summary pages
+
+      * 5 Nature drawing spaces
+
+
+      Journaling allows you and your little one to not forget the amazing
+      adventures you embark on today. A year or twenty years down the line you
+      will have this creative space showcasing how much fun you had together. A
+      place to not forget and to relive whenever you want. 
     _template: content
 ---
 
