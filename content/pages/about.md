@@ -85,38 +85,54 @@ blocks:
     items:
       - title: Adventure
         text: >-
-          You only get one life, make the most of it by doing the things you
-          love! Bring your kids along and find new ways to adventure as a
-          family.
+          Life is a grand adventure, and I firmly believe in seizing every
+          opportunity to make it extraordinary. With each passing moment, we
+          have the chance to embrace new experiences, explore unfamiliar
+          terrain, and create lasting memories. 
 
 
-          I’ll share my family’s adventure and how we make it work through the
-          different stages.
+          I advocate for bringing your children along on the journey,
+          discovering fresh perspectives and forging deeper connections as a
+          family unit. Throughout my own family's adventures, I've learned
+          invaluable lessons about adaptability, resilience, and the profound
+          joy that comes from exploring the world together. 
+
+
+          Join me as I share our adventures with the evolving stages of family
+          life.
         image: >-
           https://res.cloudinary.com/ds8uw7t44/image/upload/v1685975586/hiking-while-pregnant-italy.jpg
         url: about
         imageBackground: false
       - title: Nature
         text: >-
-          Life is better outdoors. The open space, fresh air and sun shining
-          down on you brings happiness, at least to this family.
+          There's a profound sense of peace and joy that envelops us when we
+          immerse ourselves in the embrace of nature. From the vast expanse of
+          open spaces to the gentle caress of fresh air and the warmth of the
+          sun on our faces, every moment spent outdoors is a gift. 
 
 
-          Encourage your little ones love for the outdoors and you will also
-          benefit in more outdoor time and vitamin D.
+          As a family, we've discovered that our happiest moments unfold
+          outdoors. By nurturing our children's love for the outdoors, we not
+          only cultivate a deep appreciation for the natural world but also bask
+          in the countless benefits of increased outdoor time and the
+          replenishing glow of vitamin D.
         image: >-
           https://res.cloudinary.com/ds8uw7t44/image/upload/v1685975585/hiking-while-pregnant-2nd-trimester.jpg
         url: about
         imageBackground: false
       - title: Family
         text: >-
-          Nothing is better than getting to experience life the way you enjoy
-          with your family. Watching as your littles grow, develop and find
-          their place.
+          There's nothing quite like the joy of experiencing life alongside your
+          family, witnessing the growth, development, and unique journey of each
+          cherished member. As a mother, I am filled with an immense sense of
+          pride and gratitude as I watch my children navigate each phase of
+          life. 
 
 
-          As a mom I cannot be more proud of my kids during each phase. There is
-          nothing sweeter than living in the present.
+          There's an undeniable sweetness in living fully in the present moment,
+          cherishing the simple yet profound joys that come with each passing
+          day spent with those we hold dear.
         image: >-
           https://res.cloudinary.com/ds8uw7t44/image/upload/v1685975623/toddler-outdoor-autumn-activity-hayride.jpg
         url: about
