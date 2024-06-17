@@ -84,39 +84,36 @@ blocks:
   - title: My Passions
     items:
       - title: Adventure
-        text: >-
-          Life is a grand adventure, and I firmly believe in seizing every
-          opportunity to make it extraordinary. With each passing moment, we
-          have the chance to embrace new experiences, explore unfamiliar
-          terrain, and create lasting memories. 
+        text: >+
+          Life is a grand adventure, and I believe in seizing every opportunity
+          to make it extraordinary. With each new adventure, we have the chance
+          to have new experiences, explore terrain, and create lasting family
+          memories. 
 
 
-          I advocate for bringing your children along on the journey,
+          I am a firm believer in bringing your children along on the journey,
           discovering fresh perspectives and forging deeper connections as a
-          family unit. Throughout my own family's adventures, I've learned
-          invaluable lessons about adaptability, resilience, and the profound
-          joy that comes from exploring the world together. 
+          family unit. Throughout my own family's adventures, I've learned how
+          adaptable and resilience my children are. I have seen the growing joy
+          that exploring nature and the world brings them which makes me one
+          happy momma! 
 
-
-          Join me as I share our adventures with the evolving stages of family
-          life.
         image: >-
           https://res.cloudinary.com/ds8uw7t44/image/upload/v1685975586/hiking-while-pregnant-italy.jpg
         url: about
         imageBackground: false
       - title: Nature
         text: >-
-          There's a profound sense of peace and joy that envelops us when we
-          immerse ourselves in the embrace of nature. From the vast expanse of
-          open spaces to the gentle caress of fresh air and the warmth of the
-          sun on our faces, every moment spent outdoors is a gift. 
+          There's a sense of peace and joy that surrounds us when we immerse
+          ourselves in nature. From the open spaces to the gentle caress of
+          fresh air and the warmth of the sun on our faces, every moment spent
+          outdoors is a magical. 
 
 
-          As a family, we've discovered that our happiest moments unfold
+          As a family, we've discovered that our happiest moments happen
           outdoors. By nurturing our children's love for the outdoors, we not
-          only cultivate a deep appreciation for the natural world but also bask
-          in the countless benefits of increased outdoor time and the
-          replenishing glow of vitamin D.
+          only cultivate a deep appreciation for the natural world but also get
+          to spend more time outside ourselves. 
         image: >-
           https://res.cloudinary.com/ds8uw7t44/image/upload/v1685975585/hiking-while-pregnant-2nd-trimester.jpg
         url: about
@@ -124,15 +121,13 @@ blocks:
       - title: Family
         text: >-
           There's nothing quite like the joy of experiencing life alongside your
-          family, witnessing the growth, development, and unique journey of each
-          cherished member. As a mother, I am filled with an immense sense of
-          pride and gratitude as I watch my children navigate each phase of
-          life. 
+          family, witnessing the growth, development, and journey of each
+          cherished member. As a mother, I am filled with a sense of pride and
+          gratitude as I watch my children navigate each phase of life. 
 
 
-          There's an undeniable sweetness in living fully in the present moment,
-          cherishing the simple yet profound joys that come with each passing
-          day spent with those we hold dear.
+          There's a sweetness in living fully in the present moment, cherishing
+          the simple life that come with each day around those you love.
         image: >-
           https://res.cloudinary.com/ds8uw7t44/image/upload/v1685975623/toddler-outdoor-autumn-activity-hayride.jpg
         url: about
