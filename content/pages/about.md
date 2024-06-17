@@ -14,46 +14,39 @@ blocks:
       toddlers](https://res.cloudinary.com/ds8uw7t44/image/upload/v1685975469/hiking-with-toddlers-insert.jpg)
 
 
-      Hello there, I'm Kristina, and I'm thrilled to welcome you to my corner of
-      the digital world! Here's a little peek into my journey and how I
-      transitioned from corporate life to becoming the Chief Momma Adventurer.
+      Hello there, I'm Kristina, and I'm thrilled you have made it here! Here's
+      a little peek into my world and journey I have taken to my role as  Chief
+      Momma Adventurer, at least according to my kids.
 
 
-      Before my journey into motherhood, my husband and I led an active
-      lifestyle. I've always had a passion for sports, which seamlessly
-      transitioned into my corporate life. A twist of fate led me to London,
-      where I immersed myself in the finance industry and discovered the
-      exhilarating world of Ultimate Frisbee, where I met my now husband.
+      Before I was a mother, my husband and I lived an active lifestyle. I also
+      craved new experiences which led me to accept a role based out of London,
+      UK. There I joined the local Ultimate Frisbee team, where I met my now
+      husband.
 
 
-      Our thirst for adventure led us to embark on a cycling tour across Asia,
-      pedaling over 3,000 miles with our belongings strapped to our bikes. After
-      settling in the United States, I continued to fuel my passion for running,
-      completing marathons in iconic locations like Rome and Napa Valley.
+      After three years exploring Europe my husband and I's adventurous side led
+      us to quiet out jobs to cycle across Asia, pedaling over 3,000 miles.
+      After our cycle tour we moved to the United States.
 
 
-      When parenthood beckoned, I was determined to maintain an active lifestyle
-      that involved my growing family. My journey into motherhood began with a
-      Bob jogging stroller purchase, and from there, I delved into hiking,
-      camping, and exploring the great outdoors with my little ones in tow. I
-      discovered the joy of cycling with my kids, witnessing their excitement as
-      they experienced the freedom of two wheels for the first time.
+      When I became a mother, I was determined to maintain an active lifestyle
+      that included my children. Upon discovering I was pregnant I immediately
+      researched jogging strollers, hiking backpacks and cycling seats for kids
+      imagining the adventures we would have. 
 
 
-      As the COVID-19 pandemic reshaped our lives, I shifted my focus from
-      corporate endeavors to embracing the role of a stay-at-home mom. My
-      happiest moments are spent outdoors with my kids, and I'm passionate about
-      instilling a love for nature in my children from an early age, rain or
-      shine.
+      Around the time of COVID-19 pandemic, I took the leap and quit my
+      corporate life to fully embrace my role as Chief Momma Adventure and have
+      more time at home with my kids. I have not regretted it for a second. My
+      happiest moments are spent outdoors with my kids, and that is what I get
+      to do now!
 
 
-      Through my website, I aim to empower fellow moms to navigate the beautiful
-      chaos of motherhood while nurturing their love for the great outdoors. I
-      hope to inspire moms to embark on adventures with their children,
-      regardless of their age or the weather outside. Together, let's raise a
-      generation of outdoor-loving kids and share the tidbits of wisdom I've
-      gathered along the way to help maintain balance amidst the chaos of family
-      life.
+      All About Momma was created as a creative outlet for me to share my tips
+      and tricks for other families to adventure more with their own children
+      outside. Through my website, I hope to empower fellow moms to get outside
+      and enjoy nature. 
 
 
       In addition to my passion for outdoor exploration and family adventures,
@@ -64,16 +57,14 @@ blocks:
       Available now on
       [Amazon](https://www.amazon.com/Momma-Toddler-Hiking-Journal-interactive/dp/B0CHMHKDG6/ref=tmm_pap_swatch_0?_encoding=UTF8\&qid=\&sr=),
       these journals are designed to spark creativity, foster curiosity, and
-      document the unforgettable experiences of young adventurers. With prompts
-      and activities inspired by nature, each journal encourages kids to engage
-      with their surroundings, reflect on their adventures, and create lasting
-      memories. From recording their favorite hiking trails to sketching the
-      wildlife they encounter, these journals serve as a treasure trove of
-      memories that will be cherished for years to come. 
+      document the  experiences of young adventurers. With prompts and
+      activities inspired by nature, each journal encourages kids to engage with
+      their surroundings, reflect on their adventures, and create lasting
+      memories. 
 
 
-      I'm genuinely grateful for your presence here, and I can't wait to embark
-      on this journey together!
+      I'm happy you are here and can't wait to hear about your family's
+      adventure. 
 
 
       Sincerley,
