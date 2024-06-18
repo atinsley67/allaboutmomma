@@ -54,29 +54,33 @@ blocks:
       Includes:
 
 
-      * Trail finding information and planning
+      * **Trail finding information and planning**
 
-      * Snack planning page
+      * **Snack planning page**
 
-      * Ideas for added fun on the trails
+      * **Ideas for added fun on the trails**
 
-      * Goal setting
+      * **Goal setting**
 
-      * 22 hiking logs
+      * **22 hiking logs**
 
-      * 6 scavenger hunts
+      * **6 scavenger hunts**
 
-      * 7 pages of memories
+      * **7 pages of memories**
 
-      * 6 hiking summary pages
+      * **6 hiking summary pages**
 
-      * 5 Nature drawing spaces
+      * **5 Nature drawing spaces**
+
+
+      ****![momma and toddler reviewing hiking
+      journal](http://res.cloudinary.com/ds8uw7t44/image/upload/v1718729923/charlie_and_me_hiking_journal_discussion_i1srle.jpg)
 
 
       Journaling allows you and your little one to not forget the amazing
       adventures you embark on today. A year or twenty years down the line you
       will have this creative space showcasing how much fun you had together. A
-      place to not forget and to relive whenever you want. 
+      place to not forget and to relive whenever you want.
     _template: content
 ---
 
