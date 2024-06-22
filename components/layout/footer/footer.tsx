@@ -52,16 +52,16 @@ export const Footer = ({ data, rawData }) => {
   return (
     <footer className={`bg-gradient-to-br ${footerColorCss}`}>
       <Container className="relative" size="small">
-        <div className="flex justify-between items-center gap-6 flex-wrap">
+        <div className="flex flex-row justify-between items-center">
           <div className="flex">
             <Link href="/" passHref>
               <a className="group mx-2 flex items-center font-bold tracking-tight text-gray-400 dark:text-gray-300 opacity-50 hover:opacity-100 transition duration-300 ease-out whitespace-nowrap">
-              <img className="w-56 h-40 flex-shrink-0" src="/momma.svg" alt="All About Momma"/>
+              <img className="w-56 h-40 flex-none" src="/momma.svg" alt="All About Momma"/>
               </a>
             </Link>
             {data.nav &&
             (
-              <ul className="flex flex-col gap-2 p-4">
+              <ul className="flex flex-col gap-2 p-12">
               {data.nav.map((item, i) => {
                 return (
                     <li key={`${item.label}-${i}`} >
@@ -75,6 +75,9 @@ export const Footer = ({ data, rawData }) => {
                 })}
               </ul>
             )}
+          </div>
+          <div className="flex flex-grow w-40 text-xs text-gray-400 md:mx-12">
+            <p>All About Momma is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for us by linking to amazon.com and its partners. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates.</p>
           </div>
           <div className="flex gap-4">
             {data.social && data.social.facebook && (
