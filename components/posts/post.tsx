@@ -135,23 +135,23 @@ const components: Components<{
     };
 
     // Extract image URL
-    const imageUrl = props.image || props.affiliateURLs ? props.affiliateURLs.imageURL : ""
+    const imageURL = props.image || props.affiliateURLs ? props.affiliateURLs.imageURL : ""
     // Extract link URL
-    const linkUrl = props.affiliateURLs ? props.affiliateURLs.linkURL : ""
+    const linkURL = props.affiliateURLs ? props.affiliateURLs.linkURL : ""
     const floatLeft = props.floatLeft
 
-    if (linkUrl && imageUrl) {
+    if (linkURL && imageURL) {
       return (
         <>
           <div className={`flex ml-2 mr-6  mt-0 mb-6 justify-center items-center ${floatLeft ? 'md:float-left' : ''}`}>
             
-              <a href={linkUrl}
+              <a href={linkURL}
                 target="_blank"
                 rel="nofollow noopener"
                 className="no-underline">
                 <div className="rounded-xl overflow-hidden shadow-lg bg-white justify-center flex flex-col items-center m-0  min-w-[11rem] ">
                   <div className="flex flex-col justify-end min-h-[11rem]">
-                    <img decoding="async" src={imageUrl} className="border-0" alt="Amazon product image"/>
+                    <img decoding="async" src={imageURL} className="border-0" alt="Amazon product image"/>
                   </div>
                   <div className="min-h-[1rem]">
                   {props.caption &&

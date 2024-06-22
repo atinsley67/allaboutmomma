@@ -117,10 +117,10 @@ export const TableInput = wrapFieldsWithMeta(({ input }) => {
         onChange({ headers : updatedHeaders, rows }); 
     };
 
-    const handleAffiliateChange = (rowIndex, cellIndex, snippet, imageUrl, linkUrl, caption ) => {
+    const handleAffiliateChange = (rowIndex, cellIndex, snippet, imageURL, linkURL, caption ) => {
 
-      let newImgUrl = imageUrl
-      let newLinkUrl= linkUrl
+      let newImgUrl = imageURL
+      let newLinkUrl= linkURL
       let newCaption = caption
 
       if (snippet) {
@@ -131,7 +131,7 @@ export const TableInput = wrapFieldsWithMeta(({ input }) => {
         newCaption = caption || "" != "" ? caption : "Check Amazon Price"
       }
 
-      const newAffiliate = (newCaption || "" != "") || (newImgUrl || "" != "") || (newLinkUrl || "" != "") ? {affiliate: {linkUrl: newLinkUrl, imageUrl: newImgUrl , caption: newCaption}} : {};
+      const newAffiliate = (newCaption || "" != "") || (newImgUrl || "" != "") || (newLinkUrl || "" != "") ? {affiliate: {linkURL: newLinkUrl, imageURL: newImgUrl , caption: newCaption}} : {};
       const {affiliate, ...newCell} = rows[rowIndex].cells[cellIndex]
 
       const updatedRows = rows.map((row, index) =>
@@ -210,13 +210,13 @@ export const TableInput = wrapFieldsWithMeta(({ input }) => {
                   />
                   <label className="text-xs pt-1">Affiliate Image URL</label>
                   <input
-                      name="ImageURL"
+                      name="imageURL"
                       id="imageURL"
                       type="string"
                       className="text-xs"
-                      value={cell.affiliate?.imageUrl || ''}
+                      value={cell.affiliate?.imageURL || ''}
                       // This will pass along props.input.onChange to set our form values as this input changes.
-                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, null, e.target.value, cell.affiliate?.linkUrl || '', cell.affiliate?.caption || '')}
+                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, null, e.target.value, cell.affiliate?.linkURL || '', cell.affiliate?.caption || '')}
                   />
                   <label className="text-xs pt-1">Affiliate Link URL</label>
                   <input
@@ -224,9 +224,9 @@ export const TableInput = wrapFieldsWithMeta(({ input }) => {
                       id="linkURL"
                       type="string"
                       className="text-xs"
-                      value={cell.affiliate?.linkUrl || ''}
+                      value={cell.affiliate?.linkURL || ''}
                       // This will pass along props.input.onChange to set our form values as this input changes.
-                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, null, cell.affiliate?.imageUrl || '', e.target.value,  cell.affiliate?.caption || '')}
+                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, null, cell.affiliate?.imageURL || '', e.target.value,  cell.affiliate?.caption || '')}
                   />
                   <label className="text-xs pt-1">Caption</label>
                   <input
@@ -236,7 +236,7 @@ export const TableInput = wrapFieldsWithMeta(({ input }) => {
                       className="text-xs"
                       value={cell.affiliate?.caption || ''}
                       // This will pass along props.input.onChange to set our form values as this input changes.
-                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, null, cell.affiliate?.imageUrl || '', cell.affiliate?.linkUrl || '',  e.target.value)}
+                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, null, cell.affiliate?.imageURL || '', cell.affiliate?.linkURL || '',  e.target.value)}
                   />
                   </div>
                 </td>
