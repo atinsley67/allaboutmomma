@@ -65,43 +65,7 @@ blocks:
         url: >-
           https://www.amazon.com/Momma-Toddler-Hiking-Journal-interactive/dp/B0CHS3V1L7?_encoding=UTF8&qid=&sr=&linkCode=ll1&tag=allaboutmom06-20&linkId=00fd137a4eda2377dad63aafab6bd9c2&language=en_US&ref_=as_li_ss_tl
     _template: features
-  - body: >
-      Unlock the magic of every moment with our Momma and Toddler Interactive
-      Journal. From the first giggle to the endless adventures, capture the joy
-      of parenthood with a keepsake that grows with your little one. Start
-      creating memories that last a lifetime today!
-
-
-      Includes:
-
-
-      * **Trail finding information and planning**
-
-      * **Snack planning page**
-
-      * **Ideas for added fun on the trails**
-
-      * **Goal setting**
-
-      * **22 hiking logs**
-
-      * **6 scavenger hunts**
-
-      * **7 pages of memories**
-
-      * **6 hiking summary pages**
-
-      * **5 Nature drawing spaces**
-
-
-      \*\*\*\*![momma and toddler reviewing hiking
-      journal](http://res.cloudinary.com/ds8uw7t44/image/upload/v1718729923/charlie_and_me_hiking_journal_discussion_i1srle.jpg)
-
-
-      Journaling allows you and your little one to not forget the amazing
-      adventures you embark on today. A year or twenty years down the line you
-      will have this creative space showcasing how much fun you had together. A
-      place to not forget and to relive whenever you want.
+  - body: "## My Hiking Journal\n\nDesigned especially for young adventurers to tweens,\_this one of a kind journal is the perfect companion for their outdoor explorations. Packed with easy-to-use hiking logs and ample space for budding artists to sketch the wonders of nature they encounter, it's an ideal first hiking journal.\n\nBut that's not all! This journal goes beyond the ordinary with special features tailored to enhance the hiking experience. Engage in thrilling scavenger hunts, play exciting hiking games, and learn to identify the tracks of fascinating wildlife along the trail.\n\nWith ['A Kid's Hiking Journal,](https://www.amazon.com/My-First-Hiking-Journal-Adventures/dp/B0D7MLZXCN/ref=sr_1_1?crid=14Z8YZRXPA06X\\&dib=eyJ2IjoiMSJ9.WpGE313Te3k04e0JnP2REiBBN5fWzOCuMXg-Uu5Cl5IXagYAQR1W0amu11VXYyo4qd0faTBHBwud-xe2C-iFRtoA_siGOj7-XhKulVcEcmxGWik7lL-t0Plx9AHEQyR2KDnKScosEozRnWyNp79uFKlbStcDULGShGpAJ1pqApNuTwyaO4EekPH_Rcz-t_S7BcSRB67CRipYCPx1KTem2KQclWfK1QemOxc3JXv9EU5aEkWEQx8H07A9CVY_bsS345FWmZHTKtvaObhI2CE5q8uoMe3A-JgyFLcflz0Whdo.b5OucuXrLkvMyGlMRQ6oYvCmLMmIKEY4w8HZkrHUBNI\\&dib_tag=se\\&keywords=my+first+hiking+journal\\&qid=1719165414\\&sprefix=my+first+hiking+journal%2Caps%2C81\\&sr=8-1)' every trek becomes an educational and unforgettable adventure. Get ready to unleash your inner explorer and create lasting memories in the great outdoors!\n\nIncludes:\n\n* 15 Hiking Logs with Space for Nature Drawings\n* Packing Checklist\n* 8 Unique Scavenger Hunts\n* Hiking Game Pages\n* Pages to Attach Hiking Photos\n* Tree Identification Page\n* Animal Identification Page\n* Space for Hiking Goals and Notes\n* Additional Drawing Pages\n\n\n\"My Hiking Journal for Kids\" is a must have and brings excitement to your child's hiking adventures. A space for them to remember their awesome adventures and relive at any time.\n\n## Momma and Toddler Interactive Hiking Journal\n\nUnlock the magic of every moment with our [Momma and Toddler Interactive Journal](https://www.amazon.com/Momma-Toddler-Hiking-Journal-interactive/dp/B0CHMHKDG6/ref=tmm_pap_swatch_0?_encoding=UTF8\\&dib_tag=se\\&dib=eyJ2IjoiMSJ9.ze1mo1w6CWrsE8oTfkTsOnF6x1x05xUPyTZom4s_96M.GMdCPyKM1gCR9cG_0EuUMSygKv6lLn3qCKSwejeOZEw\\&qid=1719166361\\&sr=1-2). From the first giggle to the endless adventures, capture the joy of parenthood with a keepsake that grows with your little one. Start creating memories that last a lifetime today!\n\nIncludes:\n\n* **Trail finding information and planning**\n* **Snack planning page**\n* **Ideas for added fun on the trails**\n* **Goal setting**\n* **22 hiking logs**\n* **6 scavenger hunts**\n* **7 pages of memories**\n* **6 hiking summary pages**\n* **5 Nature drawing spaces**![momma and toddler reviewing hiking journal](http://res.cloudinary.com/ds8uw7t44/image/upload/v1718729923/charlie_and_me_hiking_journal_discussion_i1srle.jpg)\n\nJournaling allows you and your little one to not forget the amazing adventures you embark on today. A year or twenty years down the line you will have this creative space showcasing how much fun you had together. A place to not forget and to relive whenever you want.\n"
     _template: content
 ---
 
