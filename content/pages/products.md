@@ -4,9 +4,30 @@ description: All About Momma unique designs made for the outdoor family and frie
 heroImg: >-
   https://res.cloudinary.com/ds8uw7t44/image/upload/v1694719890/momma_and_toddler_hiking_jounral_zsmmyq.jpg
 blocks:
-  - title: Interactive Momma and Toddler Hiking Journal
+  - title: 'Hiking Journals '
     items:
-      - title: Paperback Version
+      - title: My First Hiking Journal
+        text: >-
+          Encourage your young explorer to take on many outdoor adventures with
+          our "First Hiking Journal" designed for kids 4-12 to complete on their
+          own. Here is a place just for kids to explore, record, and remember
+          while hiking. 
+
+
+          This hiking journal doesn't just allow your child to record their
+          hikes, but includes fun interactive pages. Scavenger hunts, nature
+          drawings, hiking games, tree identification and more can be found in
+          this 80 page book. 
+
+
+          The hiking logs is a 3 page spread per hike that even a younger child
+          can fill out themselves. Many prompts to circle items instead of
+          writing out and spaces for drawings on the hike. This is a unique and
+          fun journal to accompany your little adventurer. 
+        image: >-
+          http://res.cloudinary.com/ds8uw7t44/image/upload/v1719165450/my_first_hiking_journal_ttu9wv.jpg
+        url: 'https://allaboutmomma.com/products'
+      - title: Momma and Toddler Hiking Journal Paperback
         text: >-
           One of my favorite things to do with my children is to hike. Our love
           for hiking gave us the inspiration to create this one of a kind
@@ -25,7 +46,7 @@ blocks:
           https://res.cloudinary.com/ds8uw7t44/image/upload/v1694719890/momma_and_toddler_hiking_jounral_zsmmyq.jpg
         url: >-
           https://www.amazon.com/dp/B0CHMHKDG6?&linkCode=ll1&tag=allaboutmom06-20&linkId=a894d66ee81d5d7da501d95f95cfbc7c&language=en_US&ref_=as_li_ss_tl
-      - title: Hardcover Version
+      - title: 'Momma and Toddler Hiking Journal Hardcover '
         text: >+
           A purely unique journal that your toddler and you create together. A
           great spot for all your hikes and adventures and a way to reinforce
@@ -73,7 +94,7 @@ blocks:
       * **5 Nature drawing spaces**
 
 
-      ****![momma and toddler reviewing hiking
+      \*\*\*\*![momma and toddler reviewing hiking
       journal](http://res.cloudinary.com/ds8uw7t44/image/upload/v1718729923/charlie_and_me_hiking_journal_discussion_i1srle.jpg)
 
 
