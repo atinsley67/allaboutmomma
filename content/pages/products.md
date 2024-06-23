@@ -26,7 +26,8 @@ blocks:
           fun journal to accompany your little adventurer. 
         image: >-
           http://res.cloudinary.com/ds8uw7t44/image/upload/v1719165450/my_first_hiking_journal_ttu9wv.jpg
-        url: 'https://allaboutmomma.com/products'
+        url: >-
+          https://www.amazon.com/My-First-Hiking-Journal-Adventures/dp/B0D7MLZXCN?crid=3FHA3O5SPY8RL&dib=eyJ2IjoiMSJ9.WpGE313Te3k04e0JnP2REqL4JJqpYk74O5H-_0DwMEE9kwMGyaqJu3r4jbaoU5tUVYwAEvAuHXAySKGbqWTpK-fVbtBc1Q7jFNlrnbAzXVYmbYpZ42BQLnWJvh6gNg36JzLfInXKRymTDMRCsQqhIPq-nUfv-LCDTTX_0cQeIAZffQz7qGOAm1UQSFHWbhnYLymbPQFVwYKAe8mCgheH2FiBJNeYGgqdgTBoZKxNNkU.i5svg2s51Uc5VKQJJw5kcR1Ivs6P4tAZny3QQHzBwcw&dib_tag=se&keywords=my+first+hiking+journal&qid=1719166909&s=books&sprefix=my+first+hiking+journal%2Cstripbooks%2C71&sr=1-1&linkCode=ll1&tag=allaboutmom06-20&linkId=6e8e71e2dae5ebf80f2a474c65f2d29d&language=en_US&ref_=as_li_ss_tl
       - title: Momma and Toddler Hiking Journal Paperback
         text: >-
           One of my favorite things to do with my children is to hike. Our love
