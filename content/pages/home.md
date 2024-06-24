@@ -1,5 +1,10 @@
 ---
 title: All About Momma
+description: >-
+  All About Momma main page which shows top blogs and the main categories I talk
+  about
+heroImg: >-
+  https://res.cloudinary.com/ds8uw7t44/image/upload/v1678385544/Mountains-Momma-cover-with-Lucas_iy5es6.webp
 blocks:
   - tagline: The Outdoor Active Momma
     headline: All About Momma
@@ -28,9 +33,23 @@ blocks:
       - postLocation: best-toddler-hiking-pants-for-outdoor-toddlers
     color: tint
     _template: featuredPosts
-  - title: Don't Miss Out On My Momma and Toddler Hiking Journal
+  - title: Don't Miss Out On Our One of A Kind Interactive Hiking Journals
     items:
-      - title: Paperback Version
+      - title: My First Hiking Journal for Kids
+        text: >-
+          A journal designed just for a kid. Designed for young kids as young as
+          4 up to 12 year olds. This hiking journal includes easy to complete
+          logs with extra spaces for nature drawings along the way. 
+
+
+          Extra fun can be had with some hiking game pages, scavenger hunts and
+          more. This journal is sure to keep the excitement up and make sure
+          your child remembers all their hiking adventures.
+        image: >-
+          https://res.cloudinary.com/ds8uw7t44/image/upload/v1719165450/my_first_hiking_journal_ttu9wv.jpg
+        url: >-
+          https://www.amazon.com/My-First-Hiking-Journal-Adventures/dp/B0D7MLZXCN?crid=3FHA3O5SPY8RL&dib=eyJ2IjoiMSJ9.WpGE313Te3k04e0JnP2REqL4JJqpYk74O5H-_0DwMEE9kwMGyaqJu3r4jbaoU5tUVYwAEvAuHXAySKGbqWTpK-fVbtBc1Q7jFNlrnbAzXVYmbYpZ42BQLnWJvh6gNg36JzLfInXKRymTDMRCsQqhIPq-nUfv-LCDTTX_0cQeIAZffQz7qGOAm1UQSFHWbhnYLymbPQFVwYKAe8mCgheH2FiBJNeYGgqdgTBoZKxNNkU.i5svg2s51Uc5VKQJJw5kcR1Ivs6P4tAZny3QQHzBwcw&dib_tag=se&keywords=my+first+hiking+journal&qid=1719166909&s=books&sprefix=my+first+hiking+journal%2Cstripbooks%2C71&sr=1-1&linkCode=ll1&tag=allaboutmom06-20&linkId=3d457ff6a52abe333511b2de346dad21&language=en_US&ref_=as_li_ss_tl
+      - title: 'Momma and Toddler Interactive Hiking Journal: Paperback Version'
         text: >-
           One of my favorite things to do with my children is hike! Our love for
           hiking and desire to relive our hikes gave me and my little ones the
@@ -43,7 +62,7 @@ blocks:
           https://res.cloudinary.com/ds8uw7t44/image/upload/v1694719890/momma_and_toddler_hiking_jounral_zsmmyq.jpg
         url: >-
           https://www.amazon.com/dp/B0CHMHKDG6?&linkCode=ll1&tag=allaboutmom06-20&linkId=a894d66ee81d5d7da501d95f95cfbc7c&language=en_US&ref_=as_li_ss_tl
-      - title: Hardcover Version
+      - title: 'Momma and Toddler Interactive Hiking Journal: Hardcover Version'
         text: >+
           This is a great unique gift for any active mom with young kids! Or to
           use for yourself. My kids love looking back on the cool places we went
@@ -53,7 +72,7 @@ blocks:
           http://res.cloudinary.com/ds8uw7t44/image/upload/v1694720883/hardover_of_hiking_journal_cjbpfu.jpg
         url: >-
           https://www.amazon.com/Momma-Toddler-Hiking-Journal-interactive/dp/B0CHS3V1L7?_encoding=UTF8&qid=&sr=&linkCode=ll1&tag=allaboutmom06-20&linkId=00fd137a4eda2377dad63aafab6bd9c2&language=en_US&ref_=as_li_ss_tl
-    maxCols: '2'
+    maxCols: '3'
     _template: features
   - title: Most Recent Posts
     items:
@@ -145,41 +164,5 @@ blocks:
         imageBackground: true
     color: tint
     _template: features
-description: >-
-  All About Momma main page which shows top blogs and the main categories I talk
-  about
-heroImg: >-
-  https://res.cloudinary.com/ds8uw7t44/image/upload/v1678385544/Mountains-Momma-cover-with-Lucas_iy5es6.webp
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
