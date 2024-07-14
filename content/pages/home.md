@@ -62,16 +62,22 @@ blocks:
           https://res.cloudinary.com/ds8uw7t44/image/upload/v1694719890/momma_and_toddler_hiking_jounral_zsmmyq.jpg
         url: >-
           https://www.amazon.com/dp/B0CHMHKDG6?&linkCode=ll1&tag=allaboutmom06-20&linkId=a894d66ee81d5d7da501d95f95cfbc7c&language=en_US&ref_=as_li_ss_tl
-      - title: 'Momma and Toddler Interactive Hiking Journal: Hardcover Version'
-        text: >+
-          This is a great unique gift for any active mom with young kids! Or to
-          use for yourself. My kids love looking back on the cool places we went
-          and picture of us hiking together!
+      - title: Kids Camping Journal
+        text: >-
+          This creative hiking journal is designed for kids ages 4-12. No matter
+          if your style of camping is RV, tent or cabin this camping journal
+          accounts for all types. From pages dedicated to each hiking trip to
+          fun activities such as camping games and drawing spaces this journal
+          will get your child excited for camping.
 
+
+          Take along on all your camping adventures and let your child fill it
+          up. A perfect spot for them to remember the adventures they embark on
+          and grow their love for the outdoors.
         image: >-
-          http://res.cloudinary.com/ds8uw7t44/image/upload/v1694720883/hardover_of_hiking_journal_cjbpfu.jpg
+          http://res.cloudinary.com/ds8uw7t44/image/upload/v1720957582/my_first_camping_journal_uicgyj.jpg
         url: >-
-          https://www.amazon.com/Momma-Toddler-Hiking-Journal-interactive/dp/B0CHS3V1L7?_encoding=UTF8&qid=&sr=&linkCode=ll1&tag=allaboutmom06-20&linkId=00fd137a4eda2377dad63aafab6bd9c2&language=en_US&ref_=as_li_ss_tl
+          https://www.amazon.com/My-First-Camping-Journal-Adventures/dp/B0D8WLW7P7?crid=190YN0O67CBBB&dib=eyJ2IjoiMSJ9.lIOuk_eRQnrmnnnO63KVEDNo00cuRX5LDwssaSmeV9xB7dkq_cBLLOneYFUL4CneXp-SfbpLER-AzIPEt-_QmCmOU8ZS9Y8HJaNDHbu2BCYPm5p024hc5Djm_oeJHIICqQ9kjFBCl-VQTXfOA_dZwj2S3YLRi-oCcRjRLpIub6_QnPSI-PDyAlutJar-PDzRYcHrCZFDcsBjL_Izyo_fhq9A3hAUkdowpsXRTxDNCZc.paGk7yZYiFrRweOLP-ATKVwKHiY9IJC4vwUEn-JFQNY&dib_tag=se&keywords=my+first+camping+journal&qid=1720957642&sprefix=my+first+camping+journal%2Caps%2C71&sr=8-6&linkCode=ll1&tag=allaboutmom06-20&linkId=d6190da3bed708751c5dcbeed44439c4&language=en_US&ref_=as_li_ss_tl
     maxCols: '3'
     _template: features
   - title: Most Recent Posts
