@@ -6,12 +6,22 @@ description: >-
 heroImg: >-
   https://res.cloudinary.com/ds8uw7t44/image/upload/v1678385544/Mountains-Momma-cover-with-Lucas_iy5es6.webp
 blocks:
+  - items:
+      - title: ''
+        text: ''
+        image: >-
+          https://res.cloudinary.com/ds8uw7t44/image/upload/v1719772882/skiing_at_shawnee_whole_family_z4tyzb.jpg
+      - title: ''
+        text: ''
+        image: >-
+          https://res.cloudinary.com/ds8uw7t44/image/upload/v1685975623/toddler-outdoor-autumn-activity-hayride.jpg
+      - title: ''
+        text: ''
+        image: >-
+          https://res.cloudinary.com/ds8uw7t44/image/upload/v1685975475/hiking-with-a-baby-fall-time.jpg
+    _template: features
   - body: >
       # All About Momma
-
-
-      ![Hiking with baby and
-      toddlers](https://res.cloudinary.com/ds8uw7t44/image/upload/v1685975469/hiking-with-toddlers-insert.jpg)
 
 
       Hello there, I'm Kristina, and I'm thrilled you have made it here! Here's
@@ -33,7 +43,7 @@ blocks:
       When I became a mother, I was determined to maintain an active lifestyle
       that included my children. Upon discovering I was pregnant I immediately
       researched jogging strollers, hiking backpacks and cycling seats for kids
-      imagining the adventures we would have. 
+      imagining the adventures we would have.
 
 
       Around the time of COVID-19 pandemic, I took the leap and quit my
@@ -46,12 +56,12 @@ blocks:
       All About Momma was created as a creative outlet for me to share my tips
       and tricks for other families to adventure more with their own children
       outside. Through my website, I hope to empower fellow moms to get outside
-      and enjoy nature. 
+      and enjoy nature.
 
 
       In addition to my passion for outdoor exploration and family adventures,
       I'm excited to share my latest endeavor: unique interactive journals for
-      kids, tailored specifically for hiking, camping, and outdoor adventures. 
+      kids, tailored specifically for hiking, camping, and outdoor adventures.
 
 
       Available now on
@@ -60,11 +70,11 @@ blocks:
       document the  experiences of young adventurers. With prompts and
       activities inspired by nature, each journal encourages kids to engage with
       their surroundings, reflect on their adventures, and create lasting
-      memories. 
+      memories.
 
 
       I'm happy you are here and can't wait to hear about your family's
-      adventure. 
+      adventure.
 
 
       Sincerley,
