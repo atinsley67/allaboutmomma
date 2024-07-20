@@ -37,6 +37,10 @@
     "color": "default",
     "nav": [
       {
+        "href": "work-with-us",
+        "label": "Work With Us"
+      },
+      {
         "href": "about",
         "label": "About"
       },
