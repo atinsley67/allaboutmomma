@@ -14,7 +14,7 @@ blocks:
       - title: ''
         text: ''
         image: >-
-          https://res.cloudinary.com/ds8uw7t44/image/upload/v1685975623/toddler-outdoor-autumn-activity-hayride.jpg
+          http://res.cloudinary.com/ds8uw7t44/image/upload/v1721501308/allaboutmomma_aboutpage_me_itoy9n.jpg
       - title: ''
         text: ''
         image: >-
