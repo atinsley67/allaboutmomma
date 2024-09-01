@@ -160,6 +160,17 @@ const config = defineConfig({
                 ],
               },
               {
+                name: "OutlineBox",
+                label: "Outline Box",
+                fields: [
+                  {
+                    name: "children",
+                    label: "Quote",
+                    type: "rich-text",
+                  },
+                ],
+              },
+              {
                 name: "NewsletterSignup",
                 label: "Newsletter Sign Up",
                 fields: [

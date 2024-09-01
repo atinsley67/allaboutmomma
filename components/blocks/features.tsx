@@ -19,15 +19,17 @@ export const Feature = ({ featuresColor, data, tinaField }) => {
   const featureCard = (
     <div
       data-tinafield={tinaField}
-      className="flex-1 flex flex-col text-center items-center lg:items-start lg:text-left max-w-xl mx-auto rounded-lg h-full"
+      className="flex h-full flex-col text-center items-center lg:items-start lg:text-left max-w-xl mx-auto rounded-lg min-h-[18rem]"
       style={{ flexBasis: '16rem', ...featureCardStyle }}
     >
       {data.image && !data.imageBackground && (
-        <img
-          src={data.image}
-          alt=""
-          className="w-auto h-60 auto object-contain rounded-lg"
-        />
+        <div className="flex justify-center w-full">
+          <img
+            src={data.image}
+            alt=""
+            className="w-auto object-contain rounded-lg h-64"
+          />
+        </div>
       )}
       <div className="p-6">
         {data.title && (
@@ -54,7 +56,7 @@ export const Feature = ({ featuresColor, data, tinaField }) => {
   if (data.url) {
     return (
       <Link href={data.url} passHref>
-        <a className="h-full">{featureCard}</a>
+        <a>{featureCard}</a>
       </Link>
     );
   }
@@ -86,11 +88,11 @@ export const Features = ({ data, parentField }) => {
             <h2 className="text-xl font-bold">{data.title}</h2>
           </div>
         )}
-        <div className={`mx-auto px-0 py-4 grid ${gridColsClasses} gap-5 gap-5 max-w-[500px] md:max-w-[800px] lg:max-w-[1200px]  `}>
+        <div className={`mx-auto px-0 py-4 grid ${gridColsClasses} gap-5 gap-5 max-w-[500px] md:max-w-[800px] lg:max-w-[1200px]`}>
           {data.items &&
             data.items.map(function (block, i) {
               return (
-                <div key={i} className="flex flex-col ">
+                <div key={i}>
                   <Feature
                     tinaField={`${parentField}.items.${i}`}
                     featuresColor={data.color}

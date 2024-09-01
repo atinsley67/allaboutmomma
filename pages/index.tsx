@@ -48,7 +48,7 @@ export const getStaticProps = async ({ params }) => {
                   relativePath: `${item.postLocation}.mdx`,
                 });
 
-                const intro = getIntro(postData.data.post._body, 50)
+                const intro = getIntro(postData.data.post._body, 25)
                 delete postData.data.post._body
                 item.postDetails = postData.data.post;
                 item.postDetails.intro = intro

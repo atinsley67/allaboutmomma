@@ -17,6 +17,7 @@ module.exports = {
       purple: colors.purple,
       pink: colors.pink,
       yellow: colors.yellow,
+      "blue-gray": '#E8EEF6',
       gray: {
         50: "#F6F6F9",
         100: "#EDECF3",
@@ -164,6 +165,13 @@ module.exports = {
             },
             h6: {
               fontWeight: "semibold",
+            },
+            li: {
+              marginTop: 6,
+              marginBottom: 6,
+              div: {
+                margin: 0,
+              }, 
             },
           },
         },

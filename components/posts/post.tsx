@@ -29,6 +29,9 @@ function getTextContentForId(element) {
 
 
 const components: Components<{
+  OutlineBox: {
+    children: TinaMarkdownContent;
+  },
   BlockQuote: {
     children: TinaMarkdownContent;
     authorName: string;
@@ -69,6 +72,17 @@ const components: Components<{
   
 }> = {
   code_block: (props) => <Prism {...props} />,
+  OutlineBox: (props: {
+    children: TinaMarkdownContent;
+  }) => {
+    return (
+      <p>
+        <div className="px-4 border-[1px] bg-blue-gray">
+          <TinaMarkdown content={props.children} />
+        </div>
+      </p>
+    )
+  },
   BlockQuote: (props: {
     children: TinaMarkdownContent;
     authorName: string;
