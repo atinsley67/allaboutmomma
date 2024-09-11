@@ -78,6 +78,7 @@ export const Layout = ({ rawData = {}, data = layoutData, children }) => {
             (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
             ml('account', '496565');`,
           }}/>
+        <script src="http://classic.avantlink.com/affiliate_app_confirm.php?mode=js&authResponse=bdc767b67917aeb2888499a4458e09fd146869de"/>
       </Head>
       <Theme data={data?.theme}>
         <div
