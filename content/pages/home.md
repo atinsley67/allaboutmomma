@@ -23,6 +23,14 @@ blocks:
       alt: Momma and baby exploring the outdoors
     color: default
     _template: hero
+  - title: Top Bucks County Family Things To Do This Fall
+    items:
+      - postLocation: >-
+          https://allaboutmomma.com/Must-Visit-Fall-Family-Friendly-Farms-in-Bucks-County
+      - postLocation: 'https://allaboutmomma.com/Favorite-Fall-Family-Hikes-in-Bucks-County'
+      - postLocation: >-
+          https://allaboutmomma.com/Best-Fall-Family-Bike-Rides-in-Bucks-County-PA
+    _template: featuredPosts
   - title: Featured Posts
     items:
       - postLocation: best-toddler-bikes-for-a-1-2-and-3-year-old
