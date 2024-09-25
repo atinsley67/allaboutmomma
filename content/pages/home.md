@@ -25,11 +25,9 @@ blocks:
     _template: hero
   - title: Top Bucks County Family Things To Do This Fall
     items:
-      - postLocation: >-
-          https://allaboutmomma.com/Must-Visit-Fall-Family-Friendly-Farms-in-Bucks-County
-      - postLocation: 'https://allaboutmomma.com/Favorite-Fall-Family-Hikes-in-Bucks-County'
-      - postLocation: >-
-          https://allaboutmomma.com/Best-Fall-Family-Bike-Rides-in-Bucks-County-PA
+      - postLocation: Must-Visit-Fall-Family-Friendly-Farms-in-Bucks-County
+      - postLocation: Favorite-Fall-Family-Hikes-in-Bucks-County
+      - postLocation: Best-Fall-Family-Bike-Rides-in-Bucks-County-PA
     _template: featuredPosts
   - title: Featured Posts
     items:
