@@ -88,11 +88,11 @@ blocks:
     _template: features
   - title: Most Recent Posts
     items:
-      - postLocation: Gifford-Pinchot-State-Park-Review-with-Kids
-      - postLocation: Worlds-End-State-Park-Family-Review
+      - postLocation: Best-Family-Friendly-Ski-Mountains-in-Poconos-PA
+      - postLocation: Free-Kids-Camping-Coloring-Pages
       - postLocation: Travel-Review-Shawnee-Mountain-Ski-Area-with-Kids-
-      - postLocation: Ricketts-Glen-State-Park-Review-with-Kids
-      - postLocation: Outdoor-Activities-for-18-Month-Old-Explorers
+      - postLocation: Teach-Your-Kid-to-Ride-Bike-Without-Training-Wheels
+      - postLocation: 14-Ways-to-Motivate-Kids-to-Ride-a-Bike
       - postLocation: Skiing-with-Young-Kids-Beginners-Guide
     _template: featuredPosts
   - body: "## The world is full of adventures waiting for you!\n\nActive lifestyles don’t have to stop once you get pregnant and have kids. Your type of adventures might change a bit, but I am here to help you navigate an active momma lifestyle.\_\n\nI am a momma of two boys and girl, I had 3 kids in 4 years. I am here to inspire you to stay active during the different phases of your mom life, as well as grow the love of the outdoors to your kids.\_\n\nThe best way to keep an outdoor active lifestyle is to incorporate your kids from a young age. Then, as your kids grow you can continue your love of the outdoors together!\n\nSome of my favorite things to do with my kids is to\_Hike\_and\_Cycle\_with my kids. But when stuck at home you can find us all\_outside exploring!\n"
