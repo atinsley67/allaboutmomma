@@ -23,11 +23,11 @@ blocks:
       alt: Momma and baby exploring the outdoors
     color: default
     _template: hero
-  - title: Top Bucks County Family Things To Do This Fall
+  - title: Winter Fun With Kids
     items:
-      - postLocation: Must-Visit-Fall-Family-Friendly-Farms-in-Bucks-County
-      - postLocation: Favorite-Fall-Family-Hikes-in-Bucks-County
-      - postLocation: Best-Fall-Family-Bike-Rides-in-Bucks-County-PA
+      - postLocation: Best-Family-Friendly-Ski-Mountains-in-Poconos-PA
+      - postLocation: Skiing-with-Young-Kids-Beginners-Guide
+      - postLocation: Great-Wolf-Lodge-Poconos-Family-Review
     _template: featuredPosts
   - title: Featured Posts
     items:
