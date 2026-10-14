@@ -3,11 +3,9 @@ import type { Template } from "tinacms";
 import { contentBlockSchema } from "../components/blocks/content";
 import { featureBlockSchema } from "../components/blocks/features";
 import { featuredPostsBlockSchema } from "../components/blocks/featuredPosts";
-import { paginatedPostsBlockSchema } from "../components/blocks/paginatedPosts";
 import { heroBlockSchema } from "../components/blocks/hero";
 import { testimonialBlockSchema } from "../components/blocks/testimonial";
 import { mailerLiteFormBlockSchema } from "../components/blocks/mailerLiteForm";
-import { ColorPickerInput } from "../components/fields/color";
 import { TableInput } from "../components/fields/table";
 import * as React from "react";
 
@@ -442,15 +440,6 @@ const config = defineConfig({
                 name: "name",
               },
               {
-                type: "string",
-                label: "Color",
-                name: "color",
-                options: [
-                  { label: "Default", value: "default" },
-                  { label: "Primary", value: "primary" },
-                ],
-              },
-              {
                 type: "object",
                 label: "Nav Links",
                 name: "nav",
@@ -484,15 +473,6 @@ const config = defineConfig({
             label: "Footer",
             name: "footer",
             fields: [
-              {
-                type: "string",
-                label: "Color",
-                name: "color",
-                options: [
-                  { label: "Default", value: "default" },
-                  { label: "Primary", value: "primary" },
-                ],
-              },
               {
                 type: "object",
                 label: "Nav Links",
@@ -538,70 +518,8 @@ const config = defineConfig({
                   },
                   {
                     type: "string",
-                    label: "Pintreest",
+                    label: "Pinterest",
                     name: "pinterest",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            type: "object",
-            label: "Theme",
-            name: "theme",
-            // @ts-ignore
-            fields: [
-              {
-                type: "string",
-                label: "Primary Color",
-                name: "color",
-                ui: {
-                  component: ColorPickerInput,
-                },
-              },
-              {
-                type: "string",
-                name: "font",
-                label: "Font Family",
-                options: [
-                  {
-                    label: "System Sans",
-                    value: "sans",
-                  },
-                  {
-                    label: "Nunito",
-                    value: "nunito",
-                  },
-                  {
-                    label: "Lato",
-                    value: "lato",
-                  },
-                  {
-                    label: "Montserrat",
-                    value: "montserrat",
-                  },
-                  {
-                    label: "Veranda",
-                    value: "veranda",
-                  },
-                ],
-              },
-              {
-                type: "string",
-                name: "darkMode",
-                label: "Dark Mode",
-                options: [
-                  {
-                    label: "System",
-                    value: "system",
-                  },
-                  {
-                    label: "Light",
-                    value: "light",
-                  },
-                  {
-                    label: "Dark",
-                    value: "dark",
                   },
                 ],
               },
@@ -678,8 +596,6 @@ const config = defineConfig({
               featureBlockSchema,
               // @ts-ignore
               featuredPostsBlockSchema,
-              // @ts-ignore
-              paginatedPostsBlockSchema,
               contentBlockSchema,
               testimonialBlockSchema,
               mailerLiteFormBlockSchema,

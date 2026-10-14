@@ -1,7 +1,6 @@
 {
   "header": {
     "name": "All About Momma",
-    "color": "default",
     "nav": [
       {
         "href": "home",
@@ -34,7 +33,6 @@
     ]
   },
   "footer": {
-    "color": "default",
     "nav": [
       {
         "href": "work-with-us",
@@ -55,10 +53,5 @@
       "instagram": "https://www.instagram.com/all.about.momma/",
       "pinterest": "https://www.pinterest.com/AllAboutMomma/"
     }
-  },
-  "theme": {
-    "color": "gray_400",
-    "font": "montserrat",
-    "darkMode": "light"
   }
 }

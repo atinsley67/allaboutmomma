@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "../components/util/container";
 import { Section } from "../components/util/section";
-import { useTheme, Layout } from "../components/layout";
+import { Layout } from "../components/layout";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { client } from "../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
@@ -12,7 +12,6 @@ import { extractPosts, searchPosts } from '../components/util/propsUtils'
 export default function HomePage(
   props: AsyncReturnType<typeof getStaticProps>["props"]
 ) {
-  const theme = useTheme();
   const router = useRouter()
   const { s } = router.query
   const { data } = useTina({
@@ -42,10 +41,10 @@ export default function HomePage(
         >
         <h2 className="text-3xl font-semibold title-font">Search Results</h2>
         {searchResults &&
-          searchResults.map(function (block, i) {
+          searchResults.map(function (block) {
             return (
               <Result
-                key={i}
+                key={block.filename}
                 data={block}
               />
             );
@@ -58,7 +57,7 @@ export default function HomePage(
 
 const Result = ({ data }) => {
   return (
-    <a href={data.filename}>
+    <a href={`/${data.filename}`}>
       <div className="flex justify-center">
         <div
           className="flex flex-col rounded-lg bg-white shadow-lg dark:bg-neutral-700 md:max-w-xxl sm:flex-row">
@@ -75,7 +74,7 @@ const Result = ({ data }) => {
               {data.description}
             </p>
             {data.categories && data.categories.map((category) => (
-              <div className="px-2 py-1">
+              <div key={category} className="px-2 py-1">
                 <span className="bg-gray-200 rounded-full px-3 py-1 pb-2 text-sm font-semibold text-gray-700 mr-2 mb-2">
                   {category}
                 </span>

@@ -3,7 +3,6 @@ import type { ContentQueryQuery } from "../tina/__generated__/types";
 import { Content } from "./blocks/content";
 import { Features } from "./blocks/features";
 import { FeaturedPosts } from "./blocks/featuredPosts"
-import { PaginatedPosts } from "./blocks/paginatedPosts"
 import { Hero } from "./blocks/hero";
 import { Testimonial } from "./blocks/testimonial";
 import { MailerLiteForm } from "./blocks/mailerLiteForm";
@@ -50,15 +49,6 @@ export const Blocks = (props: ContentQueryQuery["page"]) => {
                     <FeaturedPosts data={block} parentField={`blocks.${i}`} />
                   </div>
                 );
-              case "PageBlocksPaginatedPosts":
-                  return (
-                    <div
-                      data-tinafield={`blocks.${i}`}
-                      key={i + block.__typename}
-                    >
-                      <PaginatedPosts data={block} parentField={`blocks.${i}`} />
-                    </div>
-                  );
               case "PageBlocksTestimonial":
                 return (
                   <div

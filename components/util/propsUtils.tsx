@@ -8,27 +8,25 @@ export function extractPosts(data) {
   return posts;
 }
 
-function extractWords(node) {
-  const words = [];
+// Lowercase and split on anything that isn't a letter, digit or apostrophe,
+// so "stroller," and "stroller" index the same way
+function toWords(text: string): string[] {
+  return text
+    .toLowerCase()
+    .split(/[^a-z0-9']+/)
+    .map((word) => word.replace(/^'+|'+$/g, ""))
+    .filter((word) => word.length > 1);
+}
+
+function extractWords(node, words = new Set<string>()) {
   node.children.forEach((child) => {
     if (child.type === 'text') {
-      const text = child.text.trim().toLowerCase();
-      const textWords = text.split(/\s+/);
-      textWords.forEach((word) => {
-        if (word.length > 1 && !words.includes(word)) {
-          words.push(word);
-        }
-      });
+      toWords(child.text).forEach((word) => words.add(word));
     } else if (child.children) {
-      const childWords = extractWords(child);
-      childWords.forEach((word) => {
-        if (!words.includes(word)) {
-          words.push(word);
-        }
-      });
+      extractWords(child, words);
     }
   });
-  return words;
+  return Array.from(words);
 }
 
 export function searchPosts(posts, searchStr) {
@@ -37,7 +35,7 @@ export function searchPosts(posts, searchStr) {
     return posts;
   }
 
-  const searchWords = searchStr.toLowerCase().split(' ');
+  const searchWords = toWords(String(searchStr));
   const matchingPosts = [];
 
   // Loop over all posts and count number of matching words
