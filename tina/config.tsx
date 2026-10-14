@@ -72,6 +72,10 @@ const config = defineConfig({
         name: "post",
         path: "content/posts",
         format: "mdx",
+        ui: {
+          // Opens posts in the visual editor with a live preview
+          router: ({ document }) => `/${document._sys.filename}`,
+        },
         fields: [
           {
             type: "string",
@@ -551,15 +555,8 @@ const config = defineConfig({
         name: "page",
         path: "content/pages",
         ui: {
-          router: ({ document }) => {
-            if (document._sys.filename === "home") {
-              return `/`;
-            }
-            if (document._sys.filename === "about") {
-              return `/about`;
-            }
-            return undefined;
-          },
+          router: ({ document }) =>
+            document._sys.filename === "home" ? `/` : `/${document._sys.filename}`,
         },
         fields: [
           {
@@ -607,7 +604,10 @@ const config = defineConfig({
         name: "category",
         path: "content/categories",
         format: "mdx",
-                fields: [
+        ui: {
+          router: ({ document }) => `/category/${document._sys.filename}`,
+        },
+        fields: [
           {
             type: "string",
             label: "Title",
