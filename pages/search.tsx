@@ -6,7 +6,7 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { client } from "../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { useRouter } from 'next/router'
-import { extractPosts, searchPosts, getIntro} from '../components/util/propsUtils'
+import { extractPosts, searchPosts } from '../components/util/propsUtils'
 
 // Use the props returned by get static props
 export default function HomePage(
@@ -72,7 +72,7 @@ const Result = ({ data }) => {
               {data.title}
             </h5>
             <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-              {data.intro}
+              {data.description}
             </p>
             {data.categories && data.categories.map((category) => (
               <div className="px-2 py-1">
@@ -93,16 +93,6 @@ export const getStaticProps = async ({ params }) => {
   
     const tinaProps = await client.queries.allPostsQuery();
     const postsWithWords = extractPosts(tinaProps.data.postConnection);
-
-    await Promise.all(
-      postsWithWords.map(async post => {
-
-        const intro = getIntro(post._body, 50)
-        delete post._body
-        post.intro = intro
-        
-      })
-    );
 
 
     return {

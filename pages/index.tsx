@@ -2,9 +2,6 @@ import { Blocks } from "../components/blocks-renderer";
 import { client } from "../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { Layout } from "../components/layout";
-import { useRouter } from 'next/router'
-import schema from '../tina/__generated__/_graphql.json';
-import { getIntro } from "../components/util/propsUtils"
 
 // Use the props returned by get static props
 export default function HomePage(
@@ -47,11 +44,7 @@ export const getStaticProps = async ({ params }) => {
                 const postData = await client.queries.blogPostCardQuery({
                   relativePath: `${item.postLocation}.mdx`,
                 });
-
-                const intro = getIntro(postData.data.post._body, 25)
-                delete postData.data.post._body
                 item.postDetails = postData.data.post;
-                item.postDetails.intro = intro
               } catch {
                 item.error = "No post found. Posts IDs should be underscore_separated_lowercase_words and not include / etc. "
               }

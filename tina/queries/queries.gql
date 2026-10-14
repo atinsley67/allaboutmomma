@@ -6,6 +6,7 @@ query allPostsQuery {
         id
         _body
         title
+        description
         heroImg
         categories
         date
@@ -51,9 +52,9 @@ query blogPostQuery($relativePath: String!) {
 query blogPostCardQuery($relativePath: String!) {
   post(relativePath: $relativePath) {
     title
+    description
     categories
     heroImg
-    _body
     date
     author {
       ... on Author {
@@ -78,8 +79,8 @@ query categoryQuery($relativePath: String!) {
     edges {
       node {
         id
-        _body
         title
+        description
         heroImg
         categories
         date

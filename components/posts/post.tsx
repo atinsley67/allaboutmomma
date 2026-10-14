@@ -76,11 +76,9 @@ const components: Components<{
     children: TinaMarkdownContent;
   }) => {
     return (
-      <p>
-        <div className="px-4 border-[1px] bg-blue-gray">
-          <TinaMarkdown content={props.children} />
-        </div>
-      </p>
+      <div className="my-5 px-4 border-[1px] bg-blue-gray">
+        <TinaMarkdown content={props.children} />
+      </div>
     )
   },
   BlockQuote: (props: {
@@ -98,39 +96,26 @@ const components: Components<{
   },
   img: (props) => (
     <div className="flex flex-col items-center justify-center">
-      <img className="mb-3 h-96 object-cover" src={props.url} alt={props.alt}/>
+      <img className="mb-3 max-h-96 w-auto object-contain" src={props.url} alt={props.alt}/>
       <div className="text-xs font-semibold text-gray-600">{props.caption}</div>
     </div>
-  ), 
-  h1: (props) => (
-    <p>
-      <h1 id={getTextContentForId(props.children)}>{props.children}</h1>
-    </p>
   ),
-  h2: (props) => (
-    <p>
-      <h2 id={getTextContentForId(props.children)}>{props.children}</h2>
-    </p>
-  ),
-  h3: (props) => (
-    <p>
-      <h3 id={getTextContentForId(props.children)}>{props.children}</h3>
-    </p>
-  ),
-  h4: (props) => (
-    <p>
-      <h4 id={getTextContentForId(props.children)}>{props.children}</h4>
-    </p>
-  ),
-  a: (props) =>
-  (
-    <a
-      href={props.url}
-      rel={props.url.includes('amazon.com/') ? 'nofollow noopener' : null}
+  h1: (props) => <h1 id={getTextContentForId(props.children)}>{props.children}</h1>,
+  h2: (props) => <h2 id={getTextContentForId(props.children)}>{props.children}</h2>,
+  h3: (props) => <h3 id={getTextContentForId(props.children)}>{props.children}</h3>,
+  h4: (props) => <h4 id={getTextContentForId(props.children)}>{props.children}</h4>,
+  a: (props) => {
+    const isAffiliate = /amazon\.com\/|amzn\.to\//.test(props.url || "");
+    return (
+      <a
+        href={props.url}
+        className="font-bold"
+        rel={isAffiliate ? "sponsored nofollow noopener" : undefined}
       >
-        <strong>{props.children}</strong>
+        {props.children}
       </a>
-  ),
+    );
+  },
   AffiliateLink: (props) => {
     const theme = useTheme();
     const buttonColorClasses = {
@@ -148,10 +133,10 @@ const components: Components<{
         "text-gray-800 bg-yellow-500 hover:bg-yellow-600 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500",
     };
 
-    // Extract image URL
-    const imageURL = props.image || props.affiliateURLs ? props.affiliateURLs.imageURL : ""
+    // Extract image URL (an uploaded image takes precedence over an Amazon image URL)
+    const imageURL = props.image || props.affiliateURLs?.imageURL || ""
     // Extract link URL
-    const linkURL = props.affiliateURLs ? props.affiliateURLs.linkURL : ""
+    const linkURL = props.affiliateURLs?.linkURL || ""
     const floatLeft = props.floatLeft
 
     if (linkURL && imageURL) {
@@ -161,23 +146,23 @@ const components: Components<{
             
               <a href={linkURL}
                 target="_blank"
-                rel="nofollow noopener"
+                rel="sponsored nofollow noopener"
                 className="no-underline">
                 <div className="rounded-xl overflow-hidden shadow-lg bg-white justify-center flex flex-col items-center m-0  min-w-[11rem] ">
                   <div className="flex flex-col justify-end min-h-[11rem]">
-                    <img decoding="async" src={imageURL} className="border-0" alt="Amazon product image"/>
+                    <img decoding="async" src={imageURL} className="border-0" alt={props.altText || props.caption || "Product image"}/>
                   </div>
                   <div className="min-h-[1rem]">
                   {props.caption &&
                     <div className="text-xs font-semibold text-gray-600">{props.caption}</div>
                   }
                     {props.button &&
-                      <button
-                        className={`mx-auto z-10 relative flex text-center px-7 py-3 font-semibold text-lg transition duration-150 ease-out  rounded-lg transform focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 whitespace-nowrap ${
+                      <span
+                        className={`mx-auto z-10 relative flex text-center px-7 py-3 font-semibold text-lg transition duration-150 ease-out  rounded-lg transform whitespace-nowrap ${
                             buttonColorClasses[theme.color]
                           }`}>
                         Check Amazon Price
-                      </button>
+                      </span>
                     }
                   </div>
                 </div>
@@ -191,35 +176,33 @@ const components: Components<{
     }
   },
   TableOfContents: (props) => (
-    <p>
-      <div className="border-2 border-gray-200 bg-gray-50 p-4">
-        <h2 className="mt-2">{props.title}</h2>
-        <ul>
-          {props.headings instanceof Array &&
-            props.headings.map((headingData) => {
-              const linkId = headingData.text
-                .trim()
-                .toLowerCase()
-                .replace(/[^\w]+/g, '-');
-              return (
-                <li key={headingData.text}>
-                  <a className="text-teal-600" href={`#${linkId}`}>{headingData.text}</a>
-                </li>
-              );
-            })}
-        </ul>
-      </div>
-    </p>
+    <div className="my-5 border-2 border-gray-200 bg-gray-50 p-4">
+      <h2 className="mt-2">{props.title}</h2>
+      <ul>
+        {props.headings instanceof Array &&
+          props.headings.map((headingData) => {
+            const linkId = headingData.text
+              .trim()
+              .toLowerCase()
+              .replace(/[^\w]+/g, '-');
+            return (
+              <li key={headingData.text}>
+                <a className="text-teal-600" href={`#${linkId}`}>{headingData.text}</a>
+              </li>
+            );
+          })}
+      </ul>
+    </div>
   ),
 
   Table: (props) => {
 
     if (!props.data?.headers || props.data?.headers.length === 0) {
       return <p>Table: No table content.</p>;
-    } 
+    }
 
     return (
-      <p>
+      <div className="my-5 overflow-x-auto">
         <table className="border-2 border-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -241,14 +224,14 @@ const components: Components<{
                         <a
                           href={cell.affiliate.linkURL}
                           target="_blank"
-                          rel="nofollow noopener"
+                          rel="sponsored nofollow noopener"
                           className="no-underline"
                         >
                           <img
                             decoding="async"
                             className="block mx-auto m-2 max-w-xxxs md:max-w-xxs"
                             src={cell.affiliate.imageURL}
-                            alt="Product image"
+                            alt={cell.affiliate.caption || "Product image"}
                           />
                           <div className="text-center">{cell.affiliate.caption}</div>
                         </a>
@@ -260,14 +243,13 @@ const components: Components<{
             ))}
           </tbody>
         </table>
-      </p>
-
+      </div>
     )
   },
   youtube: (props) => {
     return (
     <div className="flex flex-col items-center justify-center">
-      <iframe width="768" height="432" src={props.src} title={props.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+      <iframe className="w-full max-w-3xl h-auto aspect-video" loading="lazy" width="768" height="432" src={props.src} title={props.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
     </div>
     )}
 }

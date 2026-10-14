@@ -1,10 +1,9 @@
 export function extractPosts(data) {
   const posts = data.edges.map(({ node }) => {
-    const { title = null, author = null, categories = null, heroImg = null, excerpt = null} = node || {};
-    const _body = node._body
-    const words = extractWords(_body);
+    const { title = null, description = null, author = null, categories = null, heroImg = null } = node || {};
+    const words = extractWords(node._body);
     const filename = node._sys.filename
-    return { title, author, categories, heroImg, _body, words, filename };
+    return { title, description, author, categories, heroImg, words, filename };
   });
   return posts;
 }
@@ -62,30 +61,6 @@ export function searchPosts(posts, searchStr) {
   return matchingPosts;
 }
 
-export function getIntro(body, numWords) {
-
-    let introText = ""
-    let wordCount = 0;
-     body.children.every((child) => {
-       if (child.type === 'p') {
-           child.children.forEach((pchild) => {
-               if (pchild.text) {
-                const textWords = pchild.text.split(/\s+/);
-                 textWords.forEach((word) => {
-                       if (wordCount >= numWords) {
-                        return false
-                       }    
-                       introText = introText + " " + word
-                       wordCount++
-                   });
-             }
-         });
-       } 
-       return true
-     });
-     return introText + "...";
-}
-
 export function addTOCData(props) {
   const { _body } = props.data.post;
 
@@ -97,7 +72,8 @@ export function addTOCData(props) {
       : [];
 
   tocElements.forEach((tocElement) => {
-    const hLimit = tocElement.props.hLevel || 2;
+    // hLevel may be stored as "2" or "H2"; anything unparseable falls back to h2
+    const hLimit = parseInt(String(tocElement.props.hLevel).replace(/\D/g, "")) || 2;
     const regex = new RegExp(`^h[1-${hLimit}]$`);
     const h2Elements = _body.children.filter((child) => regex.test(child.type));
 

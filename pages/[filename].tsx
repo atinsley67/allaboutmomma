@@ -3,7 +3,7 @@ import { Blocks } from "../components/blocks-renderer";
 import { client } from "../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { Layout } from "../components/layout";
-import { getIntro, addTOCData } from "../components/util/propsUtils"
+import { addTOCData } from "../components/util/propsUtils"
 
 
 
@@ -63,11 +63,7 @@ export const getStaticProps = async ({ params }) => {
                 const postData = await client.queries.blogPostCardQuery({
                   relativePath: `${item.postLocation}.mdx`,
                 });
-
-                const intro = getIntro(postData.data.post._body, 50)
-                delete postData.data.post._body
                 item.postDetails = postData.data.post;
-                item.postDetails.intro = intro
               } catch {
                 item.error = "No post found. Posts IDs should be underscore_separated_lowercase_words and not include / etc. "
               }

@@ -7,7 +7,7 @@ import Link from "next/link";
 export const FeaturedPost = ({ data, tinaField }) => {
 
   if (!data || !data.postDetails) {
-    return <div>{JSON.stringify(data)}</div>;
+    return null;
   }
 
   return (
@@ -27,12 +27,12 @@ export const FeaturedPost = ({ data, tinaField }) => {
               {data.postDetails.title}
             </h3>
           )}
-          {data.postDetails.intro && (
+          {data.postDetails.description && (
             <div
               data-tinafield={`${tinaField}.text`}
               className="text-base opacity-80 leading-relaxed"
             >
-              {data.postDetails.intro}
+              {data.postDetails.description}
             </div>
           )}
         </div>

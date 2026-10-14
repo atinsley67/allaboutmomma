@@ -166,7 +166,7 @@ export const Header = ({ data }) => {
               onSubmit={(e) => {
                 e.preventDefault()
                 setIsSearchOpen(false)
-                router.push(`/search?s=${searchQuery}`)
+                router.push(`/search?s=${encodeURIComponent(searchQuery)}`)
               }}
             >
               <div className="flex flex-1 items-center">

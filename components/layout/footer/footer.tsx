@@ -65,10 +65,11 @@ export const Footer = ({ data, rawData }) => {
               {data.nav.map((item, i) => {
                 return (
                     <li key={`${item.label}-${i}`} >
-                      <a href={`${prefix}/${item.href}`}>
-                        <a className={"relative select-none text-base text-gray-500 inline-block tracking-wide transition duration-150 ease-out hover:text-gray-900 px-2"} >
-                          {item.label}
-                        </a>
+                      <a
+                        href={`${prefix}/${item.href}`}
+                        className="relative select-none text-base text-gray-500 inline-block tracking-wide transition duration-150 ease-out hover:text-gray-900 px-2"
+                      >
+                        {item.label}
                       </a>
                     </li>
                   );
@@ -77,7 +78,7 @@ export const Footer = ({ data, rawData }) => {
             )}
           </div>
           <div className="flex flex-grow w-40 text-xs text-gray-400 md:mx-12">
-            <p>All About Momma is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for us by linking to amazon.com and its partners. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates.</p>
+            <p>All About Momma is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com. As an Amazon Associate we earn from qualifying purchases. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates.</p>
           </div>
           <div className="flex gap-4">
             {data.social && data.social.facebook && (
