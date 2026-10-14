@@ -10,11 +10,11 @@ jobs:
     steps:
       # Clone repo
       - name: Check out repo to update
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 24
       # Install deps, update Tina packages, update schema
       - name: Install dependencies
         run: yarn install
