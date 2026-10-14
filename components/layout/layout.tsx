@@ -3,7 +3,7 @@ import Head from "next/head";
 import Script from "next/script";
 import { Header } from "./header";
 import { Footer } from "./footer";
-import { cloudinaryImage } from "../util/cloudinary";
+import { cloudinaryImage } from "../../lib/cloudinary";
 import layoutData from "../../content/global/index.json";
 
 export const Layout = ({ rawData = {}, data = layoutData, children }) => {

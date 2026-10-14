@@ -2,7 +2,7 @@ import { Blocks } from "../components/blocks-renderer";
 import { client } from "../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { Layout } from "../components/layout";
-import { addFeaturedPostIntros } from "../components/util/propsUtils";
+import { addFeaturedPostIntros } from "../lib/intro";
 
 // Use the props returned by get static props
 export default function HomePage(
@@ -23,7 +23,7 @@ export default function HomePage(
     }
     return (
       <Layout>
-        <div>No data</div>;
+        <div>No data</div>
       </Layout>
     );
 

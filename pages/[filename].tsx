@@ -1,16 +1,17 @@
-import { Post } from "../components/posts/post";
+import { PostPage } from "../components/posts/postPage";
 import { Blocks } from "../components/blocks-renderer";
 import { client } from "../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { Layout } from "../components/layout";
-import { addTOCData, addFeaturedPostIntros } from "../components/util/propsUtils"
+import { addFeaturedPostIntros } from "../lib/intro";
+import { addTOCData } from "../lib/toc";
 import fs from "fs";
 import path from "path";
 
 
 
 // Use the props returned by get static props
-export default function BlogPostPage(
+export default function PostOrPageRoute(
   props: AsyncReturnType<typeof getStaticProps>["props"]
 ) {
   const { data } = useTina({
@@ -21,7 +22,7 @@ export default function BlogPostPage(
   if (data && 'post' in data && data.post) {
     return (
       <Layout rawData={data} data={data.global as any}>
-        <Post {...data.post} />
+        <PostPage {...data.post} />
       </Layout>
     );
   }
@@ -34,7 +35,7 @@ export default function BlogPostPage(
   }
   return (
     <Layout>
-      <div>No data</div>;
+      <div>No data</div>
     </Layout>
   );
 }

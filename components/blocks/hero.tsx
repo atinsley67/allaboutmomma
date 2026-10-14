@@ -4,7 +4,7 @@ import { Actions } from "../util/actions";
 import { Container } from "../util/container";
 import { Section } from "../util/section";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
-import { cloudinaryImage } from "../util/cloudinary";
+import { cloudinaryImage } from "../../lib/cloudinary";
 import type { TinaTemplate } from "tinacms";
 
 export const Hero = ({ data }) => {

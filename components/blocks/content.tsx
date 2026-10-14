@@ -2,20 +2,15 @@ import React from "react";
 import { tinaField } from "tinacms/dist/react";
 import { Container } from "../util/container";
 import { Section } from "../util/section";
-import { TinaMarkdown,  Components} from "tinacms/dist/rich-text";
+import { TinaMarkdown } from "tinacms/dist/rich-text";
+import type { Components } from "tinacms/dist/rich-text";
 import type { TinaTemplate } from "tinacms";
-import { cloudinaryImage } from "../util/cloudinary";
+import { ContentBlockImage } from "../rich-text/images";
 
-const components: Components<{
-  img: React.ComponentType<{ url: string; alt: string; caption: string }>;
-}> =  {
-    img: (props) => (
-      <div className="flex flex-col items-center justify-center">
-        <img className="mb-3" loading="lazy" src={cloudinaryImage(props.url, 1200)} alt={props.alt} />
-        <div className="text-xs font-semibold text-gray-600">{props.caption}</div>
-      </div>
-    )
-  }
+// Imported directly rather than via ../rich-text so the home page doesn't load every renderer
+const components: Components<Record<string, never>> = {
+  img: ContentBlockImage,
+};
 
 export const Content = ({ data }) => {
   return (

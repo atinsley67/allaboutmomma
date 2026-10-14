@@ -1,12 +1,11 @@
-import { Category } from "../../components/category/category";
-import { Blocks } from "../../components/blocks-renderer";
+import { CategoryPage } from "../../components/category/categoryPage";
 import { client } from "../../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { Layout } from "../../components/layout";
-import { getIntro } from "../../components/util/propsUtils";
+import { getIntro } from "../../lib/intro";
 
 // Use the props returned by get static props
-export default function BlogPostPage(
+export default function CategoryRoute(
   props: AsyncReturnType<typeof getStaticProps>["props"]
 ) {
   const { data } = useTina({
@@ -17,13 +16,13 @@ export default function BlogPostPage(
   if (data && data.category) {
     return (
       <Layout rawData={data} data={data.global as any}>
-        <Category {...data} />
+        <CategoryPage {...data} />
       </Layout>
     );
   }
   return (
     <Layout>
-      <div>No data</div>;
+      <div>No data</div>
     </Layout>
   );
 }
