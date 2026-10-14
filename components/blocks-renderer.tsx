@@ -1,4 +1,5 @@
 import React from "react";
+import { tinaField } from "tinacms/dist/react";
 import type { ContentQueryQuery } from "../tina/__generated__/types";
 import { Content } from "./blocks/content";
 import { Features } from "./blocks/features";
@@ -16,55 +17,55 @@ export const Blocks = (props: ContentQueryQuery["page"]) => {
               case "PageBlocksContent":
                 return (
                   <div
-                    data-tinafield={`blocks.${i}`}
+                    data-tina-field={tinaField(block)}
                     key={i + block.__typename}
                   >
-                    <Content data={block} parentField={`blocks.${i}`} />
+                    <Content data={block} />
                   </div>
                 );
               case "PageBlocksHero":
                 return (
                   <div
-                    data-tinafield={`blocks.${i}`}
+                    data-tina-field={tinaField(block)}
                     key={i + block.__typename}
                   >
-                    <Hero data={block} parentField={`blocks.${i}`} />
+                    <Hero data={block} />
                   </div>
                 );
               case "PageBlocksFeatures":
                 return (
                   <div
-                    data-tinafield={`blocks.${i}`}
+                    data-tina-field={tinaField(block)}
                     key={i + block.__typename}
                   >
-                    <Features data={block} parentField={`blocks.${i}`} />
+                    <Features data={block} />
                   </div>
                 );
               case "PageBlocksFeaturedPosts":
                 return (
                   <div
-                    data-tinafield={`blocks.${i}`}
+                    data-tina-field={tinaField(block)}
                     key={i + block.__typename}
                   >
-                    <FeaturedPosts data={block} parentField={`blocks.${i}`} />
+                    <FeaturedPosts data={block} />
                   </div>
                 );
               case "PageBlocksTestimonial":
                 return (
                   <div
-                    data-tinafield={`blocks.${i}`}
+                    data-tina-field={tinaField(block)}
                     key={i + block.__typename}
                   >
-                    <Testimonial data={block} parentField={`blocks.${i}`} />
+                    <Testimonial data={block} />
                   </div>
                 );
               case "PageBlocksMailerLiteForm":
                   return (
                     <div
-                      data-tinafield={`blocks.${i}`}
+                      data-tina-field={tinaField(block)}
                       key={i + block.__typename}
                     >
-                      <MailerLiteForm data={block} parentField={`blocks.${i}`} />
+                      <MailerLiteForm data={block} />
                     </div>
                 );
               default:

@@ -17,10 +17,12 @@ export const Footer = ({ data }) => {
       <Container className="relative" size="small">
         <div className="flex flex-row justify-between items-center">
           <div className="flex">
-            <Link href="/" passHref>
-              <a className="group mx-2 flex items-center font-bold tracking-tight text-gray-400 dark:text-gray-300 opacity-50 hover:opacity-100 transition duration-300 ease-out whitespace-nowrap">
+            <Link
+              href="/"
+              className="group mx-2 flex items-center font-bold tracking-tight text-gray-400 dark:text-gray-300 opacity-50 hover:opacity-100 transition duration-300 ease-out whitespace-nowrap">
+
               <img className="w-56 h-40 flex-none" src="/momma.svg" alt="All About Momma"/>
-              </a>
+
             </Link>
             {data.nav &&
             (

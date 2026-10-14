@@ -1,10 +1,11 @@
 import { Actions } from "../util/actions";
+import { tinaField } from "tinacms/dist/react";
 import { Section } from "../util/section";
 import { Container } from "../util/container";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { cloudinaryImage } from "../util/cloudinary";
 
-export const FeaturedPost = ({ data, tinaField }) => {
+export const FeaturedPost = ({ data }) => {
   const post = data?.post;
   if (!post) {
     return null;
@@ -14,7 +15,7 @@ export const FeaturedPost = ({ data, tinaField }) => {
     <div>
     <a href={`/${post._sys.filename}`}>
       <div
-        data-tinafield={tinaField}
+        data-tina-field={tinaField(data)}
         className="rounded-xl overflow-hidden shadow-lg h-full"
       >
         <img className="w-full h-80 object-cover object-center" loading="lazy" src={cloudinaryImage(post.heroImg, 800)} alt={post.title}/>
@@ -45,7 +46,7 @@ export const FeaturedPost = ({ data, tinaField }) => {
   );
 };
 
-export const FeaturedPosts = ({ data, parentField }) => {
+export const FeaturedPosts = ({ data }) => {
 
 
   if (!data.items || data.items.length === 0) {
@@ -64,7 +65,6 @@ export const FeaturedPosts = ({ data, parentField }) => {
         <div className="mx-auto px-0 py-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5 max-w-[500px] md:max-w-[800px] lg:max-w-[1200px] ">
         {data.items.map((item, i) => (
           <FeaturedPost
-            tinaField={`${parentField}.items.${i}`}
             key={i}
             data={item}
           />

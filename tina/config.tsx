@@ -336,10 +336,9 @@ const config = defineConfig({
                     label: "Table",
                     type: "object",
                     ui: {
-                      // @ts-ignore  
-                      component: TableInput,
+                      // wrapFieldsWithMeta's return type doesn't line up with object-field components; TableInput only reads `input`
+                      component: TableInput as any,
                     },
-                    // @ts-ignore  
                     fields: [
                       {
                         name: "headers",

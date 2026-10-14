@@ -1,4 +1,5 @@
 import React from "react";
+import { tinaField } from "tinacms/dist/react";
 import { Container } from "../util/container";
 import { Section } from "../util/section";
 import format from "date-fns/format";
@@ -250,13 +251,13 @@ export const Post = (props) => {
     <Section className="flex-1">
       <Container width="small" className={`flex-1 pb-2`} size="large">
         <h1
-          data-tinafield="title"
+          data-tina-field={tinaField(props, "title")}
           className={`w-full relative	mb-8 text-4xl text-teal-700 font-semibold tracking-normal `}
         >
           {props.title}
         </h1>
         <div
-          data-tinafield="author"
+          data-tina-field={tinaField(props, "author")}
           className="flex items-center justify-center"
         >
           {props.author && (
@@ -277,7 +278,7 @@ export const Post = (props) => {
             </>
           )}
           <p
-            data-tinafield="date"
+            data-tina-field={tinaField(props, "date")}
             className="text-base text-gray-400 group-hover:text-gray-500 dark:text-gray-300 dark:group-hover:text-gray-150"
           >
             {formattedDate}

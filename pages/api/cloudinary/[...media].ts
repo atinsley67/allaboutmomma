@@ -1,27 +1,29 @@
 // pages/api/cloudinary/[...media].ts
 
-import {
-  mediaHandlerConfig,
-  createMediaHandler,
-} from 'next-tinacms-cloudinary/dist/handlers'
+import { createMediaHandler } from 'next-tinacms-cloudinary/dist/handlers'
 
 import { isAuthorized } from '@tinacms/auth'
 
-export const config = mediaHandlerConfig
+// Same as the package's mediaHandlerConfig; Next needs this as a literal it can read statically
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+}
 
 export default createMediaHandler({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
   api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
-  authorized: async (req, _res) => {
+  authorized: async (req) => {
     try {
       if (process.env.NODE_ENV == 'development') {
         return true
       }
 
-      const user = await isAuthorized(req)
+      const user = await isAuthorized(req, process.env.NEXT_PUBLIC_TINA_CLIENT_ID)
 
-      return user && user.verified
+      return !!user?.verified
     } catch (e) {
       console.error(e)
       return false

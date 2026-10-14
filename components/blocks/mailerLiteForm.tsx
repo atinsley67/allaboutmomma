@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "../util/container";import type { TinaTemplate } from "tinacms";
 
-export const MailerLiteForm = ({ data, parentField = "" }) => {
+export const MailerLiteForm = ({ data }) => {
   return (
     <Container size="small">
       <div className="mx-auto px-0 py-4 flex flex-wrap-reverse gap-5 gap-5 max-w-[1000px]">

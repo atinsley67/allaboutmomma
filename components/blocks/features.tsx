@@ -1,10 +1,11 @@
 import { Actions } from "../util/actions";
+import { tinaField } from "tinacms/dist/react";
 import { Section } from "../util/section";
 import { Container } from "../util/container";
 
 import Link from 'next/link';
 
-export const Feature = ({ featuresColor, data, tinaField }) => {
+export const Feature = ({ featuresColor, data }) => {
   const featureCardStyle = data.imageBackground
     ? {
         backgroundImage: `url(${data.image})`,
@@ -18,7 +19,7 @@ export const Feature = ({ featuresColor, data, tinaField }) => {
 
   const featureCard = (
     <div
-      data-tinafield={tinaField}
+      data-tina-field={tinaField(data)}
       className="flex h-full flex-col text-center items-center lg:items-start lg:text-left max-w-xl mx-auto rounded-lg min-h-[18rem]"
       style={{ flexBasis: '16rem', ...featureCardStyle }}
     >
@@ -34,7 +35,7 @@ export const Feature = ({ featuresColor, data, tinaField }) => {
       <div className="p-6">
         {data.title && (
           <h3
-            data-tinafield={`${tinaField}.title`}
+            data-tina-field={tinaField(data, "title")}
             className="text-2xl font-semibold title-font"
           >
             {data.title}
@@ -42,7 +43,7 @@ export const Feature = ({ featuresColor, data, tinaField }) => {
         )}
         {data.text && (
           <p
-            data-tinafield={`${tinaField}.text`}
+            data-tina-field={tinaField(data, "text")}
             className="whitespace-pre-wrap text-base leading-relaxed"
           >
             {data.text}
@@ -55,8 +56,8 @@ export const Feature = ({ featuresColor, data, tinaField }) => {
 
   if (data.url) {
     return (
-      <Link href={data.url} passHref>
-        <a>{featureCard}</a>
+      <Link href={data.url}>
+        {featureCard}
       </Link>
     );
   }
@@ -65,7 +66,7 @@ export const Feature = ({ featuresColor, data, tinaField }) => {
 };
 
 
-export const Features = ({ data, parentField }) => {
+export const Features = ({ data }) => {
 
   let gridColsClasses = "grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"
   if (data.maxCols === "1") {
@@ -94,7 +95,6 @@ export const Features = ({ data, parentField }) => {
               return (
                 <div key={i}>
                   <Feature
-                    tinaField={`${parentField}.items.${i}`}
                     featuresColor={data.color}
                     data={block}
                   />

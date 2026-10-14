@@ -1,4 +1,5 @@
 import * as React from "react";
+import { tinaField } from "tinacms/dist/react";
 import { Actions } from "../util/actions";
 import { Container } from "../util/container";
 import { Section } from "../util/section";
@@ -6,14 +7,14 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { cloudinaryImage } from "../util/cloudinary";
 import type { TinaTemplate } from "tinacms";
 
-export const Hero = ({ data, parentField }) => {
+export const Hero = ({ data }) => {
   return (
     <Section color={data.color}>
       <Container
         size="medium"
       >
         <div
-          data-tinafield={`${parentField}.image`}
+          data-tina-field={tinaField(data, "image")}
           className="relative"
         >
           {data.image && (
@@ -35,7 +36,7 @@ export const Hero = ({ data, parentField }) => {
         <div className="absolute z-2 top-1/4 m-10 -translate-y-1/2 sm:-translate-y-1/3 justify-center overflow-hidden ">
             {data.headline && (
               <h1
-                data-tinafield={`${parentField}.headline`}
+                data-tina-field={tinaField(data, "headline")}
                 className={`w-full relative	mb-10 text-4xl sm:text-5xl font-semibold tracking-normal leading-tight title-font text-white`}
               >
 
@@ -45,7 +46,7 @@ export const Hero = ({ data, parentField }) => {
             )}
             {data.tagline && (
               <h2
-                data-tinafield={`${parentField}.tagline`}
+                data-tina-field={tinaField(data, "tagline")}
                 className="hidden sm:block w-full relative mb-10 text-xl font-normal sm:text-2xl tracking-normal leading-tight title-font text-white"
               >
                 {data.tagline}
@@ -55,7 +56,7 @@ export const Hero = ({ data, parentField }) => {
           <div className="relative md:absolute z-2 m-10 top-1/2 mdtranslate-y-1/2 justify-center md:overflow-hidden ">
             {data.text && (
               <div
-                data-tinafield={`${parentField}.text`}
+                data-tina-field={tinaField(data, "text")}
                 className={`prose prose-lg mx-auto lg:mx-0 mb-10 md:text-white ${
                   data.color === "primary" ? `prose-primary` : `dark:prose-dark`
                 }`}
@@ -65,7 +66,7 @@ export const Hero = ({ data, parentField }) => {
             )}
             {data.actions && (
               <Actions
-                parentField={`${parentField}.actions`}
+               
                 className="lg:justify-start py-2 text-white "
                 parentColor="primary"
                 actions={data.actions}

@@ -18,13 +18,14 @@ export const Header = ({ data }) => {
       <Container size="custom" className="py-0 z-10 relative  max-w-8xl">
         <div className="flex items-center justify-between gap-6">
           <h4 className="select-none text-lg font-medium tracking-tight mt-4 transition duration-150 ease-out transform">
-            <Link href="/" passHref>
-              <a className="flex gap-5 items-center whitespace-nowrap tracking-[.002em]">
+            <Link
+              href="/"
+              className="flex gap-5 items-center whitespace-nowrap tracking-[.002em]">
+
               <img className="w-28 h-20 flex-shrink-0" src="/momma.svg" alt="All About Momma" />
 
-                
-                <div className="hidden sm:flex md:hidden lg:flex">{data.name}</div>
-              </a>
+              <div className="hidden sm:flex md:hidden lg:flex">{data.name}</div>
+
             </Link>
           </h4>
           <div className="relative flex  flex-row md:flex-col items-center gap-6 sm:gap-8 lg:gap-10 tracking-[.002em] -mx-4">
@@ -46,14 +47,14 @@ export const Header = ({ data }) => {
                       : router.asPath.includes(item.href);
                   return (
                     <li key={`${item.label}-${i}`}>
-                      <Link href={`/${item.href}`} passHref>
-                        <a
-                          className={`relative select-none  text-base inline-block tracking-wide transition duration-150 ease-out hover:opacity-100 pt-10 pb-6 px-2 ${
-                            activeItem ? `` : `opacity-70`
-                          }`}
-                        >
-                          {item.label}
-                        </a>
+                      <Link
+                        href={`/${item.href}`}
+                        className={`relative select-none  text-base inline-block tracking-wide transition duration-150 ease-out hover:opacity-100 pt-10 pb-6 px-2 ${
+                          activeItem ? `` : `opacity-70`
+                        }`}>
+
+                        {item.label}
+
                       </Link>
                     </li>
                   );
@@ -73,12 +74,12 @@ export const Header = ({ data }) => {
                   data.nav.map((item, i) => {
                     return (
                       <li key={`${item.label}-${i}`}>
-                        <Link href={`/${item.href}`} passHref>
-                          <a 
-                            className={`relative select-none  text-base block text-gray-900 text-l tracking-wide transition duration-150 ease-out hover:opacity-100 py-2`}
-                          >
-                            {item.label}
-                          </a>
+                        <Link
+                          href={`/${item.href}`}
+                          className={`relative select-none  text-base block text-gray-900 text-l tracking-wide transition duration-150 ease-out hover:opacity-100 py-2`}>
+
+                          {item.label}
+
                         </Link>
                       </li>
                     );

@@ -1,4 +1,5 @@
 import React from "react";
+import { tinaField } from "tinacms/dist/react";
 import { Container } from "../util/container";
 import { Section } from "../util/section";
 import { TinaMarkdown,  Components} from "tinacms/dist/rich-text";
@@ -16,14 +17,14 @@ const components: Components<{
     )
   }
 
-export const Content = ({ data, parentField = "" }) => {
+export const Content = ({ data }) => {
   return (
     <Section color={data.color}>
       <Container
         className={`prose prose-lg ${
           data.color === "primary" ? `prose-primary` : `dark:prose-dark`
         }`}
-        data-tinafield={`${parentField}.body`}
+        data-tina-field={tinaField(data, "body")}
         size="large"
         width="medium"
       >

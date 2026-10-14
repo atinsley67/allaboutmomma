@@ -1,4 +1,5 @@
 import React from "react";
+import { tinaField } from "tinacms/dist/react";
 import { Container } from "../util/container";
 import { Section } from "../util/section";
 import Link from "next/link";
@@ -48,7 +49,7 @@ export const Category = (props) => {
     <Section className="flex-1">
       <Container className={`flex-1 pb-2`} size="small">
         <h1
-          data-tinafield="title"
+          data-tina-field={tinaField(props.category, "title")}
           className={`w-full relative	mb-8 text-4xl text-teal-700 font-semibold tracking-normal `}
         >
           {props.category.title}
@@ -89,38 +90,37 @@ export const Category = (props) => {
               <Link
                 key={post._sys.filename}
                 href={`/` + post._sys.filename}
-                passHref
               >
-                <a>
-                  <div className="flex justify-center">
-                    <div
-                      className="flex flex-col rounded-lg bg-white shadow-lg dark:bg-neutral-700 md:w-xxl sm:flex-row">
-                      <img
-                        className="h-64 w-full rounded-t-lg object-cover sm:h-auto sm:w-48 sm:rounded-none sm:rounded-l-lg"
-                        loading="lazy"
-                        src={cloudinaryImage(post.heroImg, 600)}
-                        alt={post.title} />
-                      <div className="flex flex-col justify-start p-6">
-                        <h5
-                          className="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
-                          {post.title}
-                        </h5>
-                        <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                          {post.description}
-                        </p>
-                        <div className="px-6 pt-4 pb-2 flex flex-wrap justify-left">
-                          {post.categories && post.categories.map((category, i) => (
-                            <div key={i} className="px-2 py-1">
-                              <span className="bg-gray-200 rounded-full px-3 py-1 pb-2 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                                {category}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
+
+                <div className="flex justify-center">
+                  <div
+                    className="flex flex-col rounded-lg bg-white shadow-lg dark:bg-neutral-700 md:w-xxl sm:flex-row">
+                    <img
+                      className="h-64 w-full rounded-t-lg object-cover sm:h-auto sm:w-48 sm:rounded-none sm:rounded-l-lg"
+                      loading="lazy"
+                      src={cloudinaryImage(post.heroImg, 600)}
+                      alt={post.title} />
+                    <div className="flex flex-col justify-start p-6">
+                      <h5
+                        className="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
+                        {post.title}
+                      </h5>
+                      <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                        {post.description}
+                      </p>
+                      <div className="px-6 pt-4 pb-2 flex flex-wrap justify-left">
+                        {post.categories && post.categories.map((category, i) => (
+                          <div key={i} className="px-2 py-1">
+                            <span className="bg-gray-200 rounded-full px-3 py-1 pb-2 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                              {category}
+                            </span>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
-                </a>
+                </div>
+
               </Link>
             );
           })}
