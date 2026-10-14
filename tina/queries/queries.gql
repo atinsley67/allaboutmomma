@@ -49,23 +49,6 @@ query blogPostQuery($relativePath: String!) {
   }
 }
 
-query blogPostCardQuery($relativePath: String!) {
-  post(relativePath: $relativePath) {
-    title
-    description
-    categories
-    heroImg
-    date
-    author {
-      ... on Author {
-        name
-        avatar
-      }
-    }
-  }
-}
-
-
 query categoryQuery($relativePath: String!) {
   ...LayoutQueryFragment
   category(relativePath: $relativePath) {

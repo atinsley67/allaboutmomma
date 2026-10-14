@@ -5,39 +5,33 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 import Link from "next/link";
 
 export const FeaturedPost = ({ data, tinaField }) => {
-
-  if (!data || !data.postDetails) {
+  const post = data?.post;
+  if (!post) {
     return null;
   }
 
   return (
     <div>
-    <a href={data.postLocation}>
+    <a href={`/${post._sys.filename}`}>
       <div
         data-tinafield={tinaField}
         className="rounded-xl overflow-hidden shadow-lg h-full"
       >
-        <img className="w-full h-80 object-cover object-center" src={data.postDetails.heroImg} alt={data.postDetails.title}/>
+        <img className="w-full h-80 object-cover object-center" src={post.heroImg} alt={post.title}/>
         <div className="px-6 pt-4 pb-2">
-          {data.postDetails.title && (
-            <h3
-              data-tinafield={`${tinaField}.title`}
-              className="text-2xl font-semibold title-font"
-            >
-              {data.postDetails.title}
+          {post.title && (
+            <h3 className="text-2xl font-semibold title-font">
+              {post.title}
             </h3>
           )}
-          {data.postDetails.description && (
-            <div
-              data-tinafield={`${tinaField}.text`}
-              className="text-base opacity-80 leading-relaxed"
-            >
-              {data.postDetails.description}
+          {post.description && (
+            <div className="text-base opacity-80 leading-relaxed">
+              {post.description}
             </div>
           )}
         </div>
         <div className="px-6 pt-4 pb-2 flex flex-wrap justify-center">
-          {data.postDetails.categories && data.postDetails.categories.map((category) => (
+          {post.categories && post.categories.map((category) => (
             <div className="px-2 py-1" key={category}>
               <span className="bg-gray-200 rounded-full px-3 py-1 pb-2 text-sm font-semibold text-gray-700 mr-2 mb-2">
                 {category}
@@ -100,16 +94,18 @@ export const featuredPostsBlockSchema = {
       list: true,
       ui: {
         itemProps: (item) => {
+          // item.post is a path like "content/posts/my-post.mdx"
           return {
-            label: item?.postLocation,
+            label: item?.post?.split("/").pop()?.replace(/\.mdx$/, ""),
           };
         },
       },
       fields: [
         {
-          type: "string",
-          label: "Post Location",
-          name: "postLocation",
+          type: "reference",
+          label: "Post",
+          name: "post",
+          collections: ["post"],
         },
       ],
     },

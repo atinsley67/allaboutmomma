@@ -3,7 +3,9 @@ import { Blocks } from "../components/blocks-renderer";
 import { client } from "../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { Layout } from "../components/layout";
-import { addTOCData } from "../components/util/propsUtils"
+import { addTOCData, stripFeaturedPostBodies } from "../components/util/propsUtils"
+import fs from "fs";
+import path from "path";
 
 
 
@@ -38,49 +40,28 @@ export default function BlogPostPage(
 }
 
 export const getStaticProps = async ({ params }) => {
-  try {
-    const tinaProps = await client.queries.blogPostQuery({
-      relativePath: `${params.filename}.mdx`,
-    });
-    const propsWithHeadings = addTOCData(tinaProps)
-    return {
-      props: {
-        ...propsWithHeadings,
-      },
-    };
-  } catch (error) {
-    console.log(error)
+  // Posts and pages share this route; content/pages/<filename>.md means it's a page
+  const isPage = fs.existsSync(path.join(process.cwd(), "content/pages", `${params.filename}.md`));
+
+  if (isPage) {
     const tinaProps = await client.queries.contentQuery({
       relativePath: `${params.filename}.md`,
     });
-
-    await Promise.all(
-      tinaProps.data.page.blocks.map(async block => {
-        if (block.__typename === 'PageBlocksFeaturedPosts') {
-          await Promise.all(
-            block.items.map(async (item: any) => {
-              try {
-                const postData = await client.queries.blogPostCardQuery({
-                  relativePath: `${item.postLocation}.mdx`,
-                });
-                item.postDetails = postData.data.post;
-              } catch {
-                item.error = "No post found. Posts IDs should be underscore_separated_lowercase_words and not include / etc. "
-              }
-            })
-          );
-        }
-      })
-    );
     return {
       props: {
-        data: tinaProps.data,
+        data: stripFeaturedPostBodies(tinaProps.data),
         query: tinaProps.query,
         variables: tinaProps.variables,
       },
     };
   }
-  return
+
+  const tinaProps = await client.queries.blogPostQuery({
+    relativePath: `${params.filename}.mdx`,
+  });
+  return {
+    props: addTOCData(tinaProps),
+  };
 };
 
 

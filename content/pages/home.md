@@ -25,18 +25,18 @@ blocks:
     _template: hero
   - title: Winter Fun With Kids
     items:
-      - postLocation: Best-Family-Friendly-Ski-Mountains-in-Poconos-PA
-      - postLocation: Skiing-with-Young-Kids-Beginners-Guide
-      - postLocation: Great-Wolf-Lodge-Poconos-Family-Review
+      - post: content/posts/Best-Family-Friendly-Ski-Mountains-in-Poconos-PA.mdx
+      - post: content/posts/Skiing-with-Young-Kids-Beginners-Guide.mdx
+      - post: content/posts/Great-Wolf-Lodge-Poconos-Family-Review.mdx
     _template: featuredPosts
   - title: Featured Posts
     items:
-      - postLocation: best-toddler-bikes-for-a-1-2-and-3-year-old
-      - postLocation: best-scooter-for-3-year-old
-      - postLocation: best-toddler-swim-vest-for-1-2-3-and-4-year-old
-      - postLocation: best-rain-gear-for-toddlers
-      - postLocation: best-baby-water-carrier
-      - postLocation: best-toddler-hiking-pants-for-outdoor-toddlers
+      - post: content/posts/best-toddler-bikes-for-a-1-2-and-3-year-old.mdx
+      - post: content/posts/best-scooter-for-3-year-old.mdx
+      - post: content/posts/best-toddler-swim-vest-for-1-2-3-and-4-year-old.mdx
+      - post: content/posts/best-rain-gear-for-toddlers.mdx
+      - post: content/posts/best-baby-water-carrier.mdx
+      - post: content/posts/best-toddler-hiking-pants-for-outdoor-toddlers.mdx
     color: tint
     _template: featuredPosts
   - title: Don't Miss Out On Our One of A Kind Interactive Hiking Journals
@@ -88,12 +88,12 @@ blocks:
     _template: features
   - title: Most Recent Posts
     items:
-      - postLocation: Best-Family-Friendly-Ski-Mountains-in-Poconos-PA
-      - postLocation: Free-Kids-Camping-Coloring-Pages
-      - postLocation: Travel-Review-Shawnee-Mountain-Ski-Area-with-Kids-
-      - postLocation: Teach-Your-Kid-to-Ride-Bike-Without-Training-Wheels
-      - postLocation: 14-Ways-to-Motivate-Kids-to-Ride-a-Bike
-      - postLocation: Skiing-with-Young-Kids-Beginners-Guide
+      - post: content/posts/Best-Family-Friendly-Ski-Mountains-in-Poconos-PA.mdx
+      - post: content/posts/Free-Kids-Camping-Coloring-Pages.mdx
+      - post: content/posts/Travel-Review-Shawnee-Mountain-Ski-Area-with-Kids-.mdx
+      - post: content/posts/Teach-Your-Kid-to-Ride-Bike-Without-Training-Wheels.mdx
+      - post: content/posts/14-Ways-to-Motivate-Kids-to-Ride-a-Bike.mdx
+      - post: content/posts/Skiing-with-Young-Kids-Beginners-Guide.mdx
     _template: featuredPosts
   - body: "## The world is full of adventures waiting for you!\n\nActive lifestyles don’t have to stop once you get pregnant and have kids. Your type of adventures might change a bit, but I am here to help you navigate an active momma lifestyle.\_\n\nI am a momma of two boys and girl, I had 3 kids in 4 years. I am here to inspire you to stay active during the different phases of your mom life, as well as grow the love of the outdoors to your kids.\_\n\nThe best way to keep an outdoor active lifestyle is to incorporate your kids from a young age. Then, as your kids grow you can continue your love of the outdoors together!\n\nSome of my favorite things to do with my kids is to\_Hike\_and\_Cycle\_with my kids. But when stuck at home you can find us all\_outside exploring!\n"
     _template: content
@@ -128,9 +128,9 @@ blocks:
     _template: features
   - title: Top How-To Articles
     items:
-      - postLocation: road-cycling-with-your-toddler
-      - postLocation: hiking-with-toddlers-ultimate-guide
-      - postLocation: hiking-with-you-baby-0-6-months
+      - post: content/posts/road-cycling-with-your-toddler.mdx
+      - post: content/posts/hiking-with-toddlers-ultimate-guide.mdx
+      - post: content/posts/hiking-with-you-baby-0-6-months.mdx
     _template: featuredPosts
   - title: Categories To Explore
     items:

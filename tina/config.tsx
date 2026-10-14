@@ -1,4 +1,5 @@
 import { defineConfig } from "tinacms";
+import type { Template } from "tinacms";
 import { contentBlockSchema } from "../components/blocks/content";
 import { featureBlockSchema } from "../components/blocks/features";
 import { featuredPostsBlockSchema } from "../components/blocks/featuredPosts";
@@ -9,6 +10,29 @@ import { mailerLiteFormBlockSchema } from "../components/blocks/mailerLiteForm";
 import { ColorPickerInput } from "../components/fields/color";
 import { TableInput } from "../components/fields/table";
 import * as React from "react";
+
+// Must match the filenames in content/categories
+const CATEGORIES = ["baby", "momma", "pregnancy", "toddler", "travel"];
+
+const blockQuoteTemplate: Template = {
+  name: "BlockQuote",
+  label: "Block Quote",
+  fields: [
+    {
+      name: "children",
+      label: "Quote",
+      type: "rich-text",
+    },
+    {
+      name: "authorName",
+      label: "Author",
+      type: "string",
+    },
+  ],
+};
+
+// Autosave: localStorage writes are debounced so typing doesn't serialise the whole post per keystroke
+let autosaveTimer: ReturnType<typeof setTimeout> | undefined;
 
 const config = defineConfig({
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID!,
@@ -68,6 +92,7 @@ const config = defineConfig({
             name: "categories",
             label: "Categories",
             list: true,
+            options: CATEGORIES,
           },
           {
             type: "image",
@@ -106,18 +131,15 @@ const config = defineConfig({
                 const storageKey = `tinaEditBlogBody_${urlIdentifier}`;
 
                 const savedDataWithSession = localStorage.getItem(storageKey);
-                const valString = JSON.stringify(val)
 
                 if (savedDataWithSession) {
-                  
-
                   const { session, data } = JSON.parse(savedDataWithSession);
 
-                  if (session !== sessionIdentifier && data.length !== valString.length) {
+                  if (session !== sessionIdentifier && data !== JSON.stringify(val)) {
                     const restoreAutoSaved = confirm('Auto-saved data found. Do you want to restore it?');
 
                     if (restoreAutoSaved) {
-                      localStorage.setItem(storageKey, JSON.stringify({ session: sessionIdentifier, data: valString }));
+                      localStorage.setItem(storageKey, JSON.stringify({ session: sessionIdentifier, data }));
                       return (JSON.parse(data));
                     } else {
                       localStorage.removeItem(storageKey);
@@ -125,82 +147,25 @@ const config = defineConfig({
                   }
                 }
 
-                localStorage.setItem(storageKey, JSON.stringify({ session: sessionIdentifier, data: valString }));
+                clearTimeout(autosaveTimer);
+                autosaveTimer = setTimeout(() => {
+                  localStorage.setItem(storageKey, JSON.stringify({ session: sessionIdentifier, data: JSON.stringify(val) }));
+                }, 1000);
                 return (val)
               },
             },
             templates: [
-              {
-                name: "DateTime",
-                label: "Date & Time",
-                inline: true,
-                fields: [
-                  {
-                    name: "format",
-                    label: "Format",
-                    type: "string",
-                    options: ["utc", "iso", "local"],
-                  },
-                ],
-              },
-              {
-                name: "BlockQuote",
-                label: "Block Quote",
-                fields: [
-                  {
-                    name: "children",
-                    label: "Quote",
-                    type: "rich-text",
-                  },
-                  {
-                    name: "authorName",
-                    label: "Author",
-                    type: "string",
-                  },
-                ],
-              },
+              blockQuoteTemplate,
               {
                 name: "OutlineBox",
                 label: "Outline Box",
                 fields: [
                   {
                     name: "children",
-                    label: "Quote",
+                    label: "Content",
                     type: "rich-text",
                   },
                 ],
-              },
-              {
-                name: "NewsletterSignup",
-                label: "Newsletter Sign Up",
-                fields: [
-                  {
-                    name: "children",
-                    label: "CTA",
-                    type: "rich-text",
-                  },
-                  {
-                    name: "placeholder",
-                    label: "Placeholder",
-                    type: "string",
-                  },
-                  {
-                    name: "buttonText",
-                    label: "Button Text",
-                    type: "string",
-                  },
-                  {
-                    name: "disclaimer",
-                    label: "Disclaimer",
-                    type: "rich-text",
-                  },
-                ],
-                ui: {
-                  defaultItem: {
-                    placeholder: "Enter your email",
-                    buttonText: "Notify Me",
-                  },
-                },
               },
               {
                 name: "AffiliateLink",
@@ -278,12 +243,12 @@ const config = defineConfig({
                         };
                         return (
                           <div>
-                            <label className="block font-sans text-xs font-semibold text-gray-700 whitespace-normal mb-2 undefined">
+                            <label className="block font-sans text-xs font-semibold text-gray-700 whitespace-normal mb-2">
                               {field.label}
                             </label>
                             <label className="text-xs">Affiliate Snippet</label>
                             <input
-                              className="shadow-inner focus:shadow-outline focus:border-blue-500 focus:outline-none block text-base placeholder:text-gray-300 px-3 py-2 text-gray-600 w-full bg-white border border-gray-200 transition-all ease-out duration-150 focus:text-gray-900 rounded-md  undefined"
+                              className="shadow-inner focus:shadow-outline focus:border-blue-500 focus:outline-none block text-base placeholder:text-gray-300 px-3 py-2 text-gray-600 w-full bg-white border border-gray-200 transition-all ease-out duration-150 focus:text-gray-900 rounded-md"
                               name="Snippet"
                               id="snippet"
                               type="string"
@@ -292,7 +257,7 @@ const config = defineConfig({
                             />
                             <label className="text-xs">Affiliate Image URL</label>
                             <input
-                              className="shadow-inner focus:shadow-outline focus:border-blue-500 focus:outline-none block text-base placeholder:text-gray-300 px-3 py-2 text-gray-600 w-full bg-white border border-gray-200 transition-all ease-out duration-150 focus:text-gray-900 rounded-md  undefined"
+                              className="shadow-inner focus:shadow-outline focus:border-blue-500 focus:outline-none block text-base placeholder:text-gray-300 px-3 py-2 text-gray-600 w-full bg-white border border-gray-200 transition-all ease-out duration-150 focus:text-gray-900 rounded-md"
                               name="ImageURL"
                               id="imageURL"
                               type="string"
@@ -302,7 +267,7 @@ const config = defineConfig({
                             />
                             <label className="text-xs">Affiliate Link URL</label>
                             <input
-                              className="shadow-inner focus:shadow-outline focus:border-blue-500 focus:outline-none block text-base placeholder:text-gray-300 px-3 py-2 text-gray-600 w-full bg-white border border-gray-200 transition-all ease-out duration-150 focus:text-gray-900 rounded-md  undefined"
+                              className="shadow-inner focus:shadow-outline focus:border-blue-500 focus:outline-none block text-base placeholder:text-gray-300 px-3 py-2 text-gray-600 w-full bg-white border border-gray-200 transition-all ease-out duration-150 focus:text-gray-900 rounded-md"
                               name="LinkURL"
                               id="linkURL"
                               type="string"
@@ -348,14 +313,19 @@ const config = defineConfig({
                   },
                   {
                     name: "hLevel",
-                    label: "Heading Level",
+                    label: "Include headings down to",
                     type: "string",
+                    options: [
+                      { label: "H2", value: "2" },
+                      { label: "H3", value: "3" },
+                      { label: "H4", value: "4" },
+                    ],
                   },
                 ],
                 ui: {
                   defaultItem: {
                       title: "In this Article:",
-                      hLevel: "H1",
+                      hLevel: "2",
                   },
                 },
               },
@@ -750,69 +720,7 @@ const config = defineConfig({
             type: "rich-text",
             label: "Body",
             name: "_body",
-            templates: [
-              {
-                name: "DateTime",
-                label: "Date & Time",
-                inline: true,
-                fields: [
-                  {
-                    name: "format",
-                    label: "Format",
-                    type: "string",
-                    options: ["utc", "iso", "local"],
-                  },
-                ],
-              },
-              {
-                name: "BlockQuote",
-                label: "Block Quote",
-                fields: [
-                  {
-                    name: "children",
-                    label: "Quote",
-                    type: "rich-text",
-                  },
-                  {
-                    name: "authorName",
-                    label: "Author",
-                    type: "string",
-                  },
-                ],
-              },
-              {
-                name: "NewsletterSignup",
-                label: "Newsletter Sign Up",
-                fields: [
-                  {
-                    name: "children",
-                    label: "CTA",
-                    type: "rich-text",
-                  },
-                  {
-                    name: "placeholder",
-                    label: "Placeholder",
-                    type: "string",
-                  },
-                  {
-                    name: "buttonText",
-                    label: "Button Text",
-                    type: "string",
-                  },
-                  {
-                    name: "disclaimer",
-                    label: "Disclaimer",
-                    type: "rich-text",
-                  },
-                ],
-                ui: {
-                  defaultItem: {
-                    placeholder: "Enter your email",
-                    buttonText: "Notify Me",
-                  },
-                },
-              },
-            ],
+            templates: [blockQuoteTemplate],
             isBody: true,
           },
         ],

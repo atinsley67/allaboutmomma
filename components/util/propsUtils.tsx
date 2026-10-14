@@ -61,6 +61,21 @@ export function searchPosts(posts, searchStr) {
   return matchingPosts;
 }
 
+// The generated page fragment pulls each featured post's full body; cards only need the summary fields
+export function stripFeaturedPostBodies(data) {
+  data.page?.blocks?.forEach((block) => {
+    if (block?.__typename === "PageBlocksFeaturedPosts") {
+      block.items?.forEach((item) => {
+        if (item?.post) {
+          delete item.post._body;
+          delete item.post.excerpt;
+        }
+      });
+    }
+  });
+  return data;
+}
+
 export function addTOCData(props) {
   const { _body } = props.data.post;
 

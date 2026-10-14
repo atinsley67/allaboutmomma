@@ -1,5 +1,5 @@
 import React from "react";
-import type { Page } from "../tina/__generated__/types";
+import type { ContentQueryQuery } from "../tina/__generated__/types";
 import { Content } from "./blocks/content";
 import { Features } from "./blocks/features";
 import { FeaturedPosts } from "./blocks/featuredPosts"
@@ -8,7 +8,7 @@ import { Hero } from "./blocks/hero";
 import { Testimonial } from "./blocks/testimonial";
 import { MailerLiteForm } from "./blocks/mailerLiteForm";
 
-export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">) => {
+export const Blocks = (props: ContentQueryQuery["page"]) => {
   return (
     <>
       {props.blocks
