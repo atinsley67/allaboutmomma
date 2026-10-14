@@ -106,7 +106,7 @@ export const Category = (props) => {
                         {post.title}
                       </h5>
                       <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                        {post.description}
+                        {post.intro}
                       </p>
                       <div className="px-6 pt-4 pb-2 flex flex-wrap justify-left">
                         {post.categories && post.categories.map((category, i) => (

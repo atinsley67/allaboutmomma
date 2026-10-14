@@ -3,6 +3,7 @@ import { Blocks } from "../../components/blocks-renderer";
 import { client } from "../../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { Layout } from "../../components/layout";
+import { getIntro } from "../../components/util/propsUtils";
 
 // Use the props returned by get static props
 export default function BlogPostPage(
@@ -37,6 +38,11 @@ export const getStaticProps = async ({ params }) => {
   tinaProps.data.postConnection.edges = tinaProps.data.postConnection.edges.filter(
     (post) => post.node.categories?.some((c) => c.toLowerCase() === category)
   );
+
+  tinaProps.data.postConnection.edges.forEach((post: any) => {
+    post.node.intro = getIntro(post.node._body, 50);
+    delete post.node._body;
+  });
 
   return {
     props: {

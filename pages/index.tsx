@@ -2,7 +2,7 @@ import { Blocks } from "../components/blocks-renderer";
 import { client } from "../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { Layout } from "../components/layout";
-import { stripFeaturedPostBodies } from "../components/util/propsUtils";
+import { addFeaturedPostIntros } from "../components/util/propsUtils";
 
 // Use the props returned by get static props
 export default function HomePage(
@@ -37,7 +37,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      data: stripFeaturedPostBodies(tinaProps.data),
+      data: addFeaturedPostIntros(tinaProps.data, 25),
       query: tinaProps.query,
       variables: tinaProps.variables,
     },

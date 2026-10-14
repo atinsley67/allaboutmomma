@@ -3,7 +3,7 @@ import { Blocks } from "../components/blocks-renderer";
 import { client } from "../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { Layout } from "../components/layout";
-import { addTOCData, stripFeaturedPostBodies } from "../components/util/propsUtils"
+import { addTOCData, addFeaturedPostIntros } from "../components/util/propsUtils"
 import fs from "fs";
 import path from "path";
 
@@ -49,7 +49,7 @@ export const getStaticProps = async ({ params }) => {
     });
     return {
       props: {
-        data: stripFeaturedPostBodies(tinaProps.data),
+        data: addFeaturedPostIntros(tinaProps.data, 50),
         query: tinaProps.query,
         variables: tinaProps.variables,
       },

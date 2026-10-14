@@ -6,7 +6,6 @@ query allPostsQuery {
         id
         _body
         title
-        description
         heroImg
         categories
         date
@@ -62,8 +61,8 @@ query categoryQuery($relativePath: String!) {
     edges {
       node {
         id
+        _body
         title
-        description
         heroImg
         categories
         date

@@ -72,7 +72,7 @@ const Result = ({ data }) => {
               {data.title}
             </h5>
             <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-              {data.description}
+              {data.intro}
             </p>
             {data.categories && data.categories.map((category) => (
               <div key={category} className="px-2 py-1">

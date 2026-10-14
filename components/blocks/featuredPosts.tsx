@@ -4,12 +4,15 @@ import { Section } from "../util/section";
 import { Container } from "../util/container";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { cloudinaryImage } from "../util/cloudinary";
+import { getIntro } from "../util/propsUtils";
 
 export const FeaturedPost = ({ data }) => {
   const post = data?.post;
   if (!post) {
     return null;
   }
+  // Precomputed at build time; in Tina's visual editor the live query returns the body instead
+  const intro = post.intro ?? (post._body ? getIntro(post._body, 50) : null);
 
   return (
     <div>
@@ -25,9 +28,9 @@ export const FeaturedPost = ({ data }) => {
               {post.title}
             </h3>
           )}
-          {post.description && (
+          {intro && (
             <div className="text-base opacity-80 leading-relaxed">
-              {post.description}
+              {intro}
             </div>
           )}
         </div>
