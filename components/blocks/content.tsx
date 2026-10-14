@@ -3,13 +3,14 @@ import { Container } from "../util/container";
 import { Section } from "../util/section";
 import { TinaMarkdown,  Components} from "tinacms/dist/rich-text";
 import type { TinaTemplate } from "tinacms";
+import { cloudinaryImage } from "../util/cloudinary";
 
 const components: Components<{
   img: React.ComponentType<{ url: string; alt: string; caption: string }>;
 }> =  {
     img: (props) => (
       <div className="flex flex-col items-center justify-center">
-        <img className="mb-3" src={props.url} alt={props.alt} />
+        <img className="mb-3" loading="lazy" src={cloudinaryImage(props.url, 1200)} alt={props.alt} />
         <div className="text-xs font-semibold text-gray-600">{props.caption}</div>
       </div>
     )

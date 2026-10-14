@@ -5,7 +5,7 @@ import format from "date-fns/format";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { Prism } from "tinacms/dist/rich-text/prism";
 import type { TinaMarkdownContent, Components } from "tinacms/dist/rich-text";
-import Image from 'next/image'
+import { cloudinaryImage } from "../util/cloudinary";
 
 function getTextContentForId(element) {
   if (element && element.props && element.props.content) {
@@ -95,7 +95,7 @@ const components: Components<{
   },
   img: (props) => (
     <div className="flex flex-col items-center justify-center">
-      <img className="mb-3 max-h-96 w-auto object-contain" src={props.url} alt={props.alt}/>
+      <img className="mb-3 max-h-96 w-auto object-contain" loading="lazy" src={cloudinaryImage(props.url, 1200)} alt={props.alt}/>
       <div className="text-xs font-semibold text-gray-600">{props.caption}</div>
     </div>
   ),
@@ -133,7 +133,7 @@ const components: Components<{
                 className="no-underline">
                 <div className="rounded-xl overflow-hidden shadow-lg bg-white justify-center flex flex-col items-center m-0  min-w-[11rem] ">
                   <div className="flex flex-col justify-end min-h-[11rem]">
-                    <img decoding="async" src={imageURL} className="border-0" alt={props.altText || props.caption || "Product image"}/>
+                    <img decoding="async" loading="lazy" src={cloudinaryImage(imageURL, 600)} className="border-0" alt={props.altText || props.caption || "Product image"}/>
                   </div>
                   <div className="min-h-[1rem]">
                   {props.caption &&
@@ -211,7 +211,8 @@ const components: Components<{
                           <img
                             decoding="async"
                             className="block mx-auto m-2 max-w-xxxs md:max-w-xxs"
-                            src={cell.affiliate.imageURL}
+                            loading="lazy"
+                            src={cloudinaryImage(cell.affiliate.imageURL, 400)}
                             alt={cell.affiliate.caption || "Product image"}
                           />
                           <div className="text-center">{cell.affiliate.caption}</div>
@@ -283,25 +284,6 @@ export const Post = (props) => {
           </p>
         </div>
       </Container>
-      {false && (
-        <div className="px-4 w-full">
-          <div
-            data-tinafield="heroImg"
-            className="relative max-w-4xl lg:max-w-5xl mx-auto"
-          >
-            <img
-              src={props.heroImg}
-              className="absolute z-0 block rounded-lg w-full h-auto blur-2xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light"
-              aria-hidden="true"
-            />
-            <img
-              src={props.heroImg}
-              alt={props.title}
-              className="relative z-1 mb-14 block rounded-lg w-full h-auto opacity-100"
-            />
-          </div>
-        </div>
-      )}
       <Container className={`flex-1 pt-4`} width="small" size="large">
         <div className="prose dark:prose-dark w-full max-w-none">
           <TinaMarkdown components={components} content={props._body} />

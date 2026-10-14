@@ -6,7 +6,7 @@ import format from "date-fns/format";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { Prism } from "tinacms/dist/rich-text/prism";
 import type { TinaMarkdownContent, Components } from "tinacms/dist/rich-text";
-import { BsArrowRight } from "react-icons/bs";
+import { cloudinaryImage } from "../util/cloudinary";
 
 
 const components: Components<{
@@ -31,7 +31,7 @@ const components: Components<{
   },
   img: (props) => (
     <div className="flex items-center justify-center">
-      <img src={props.url} alt={props.alt} />
+      <img loading="lazy" src={cloudinaryImage(props.url, 1200)} alt={props.alt} />
     </div>
   ),
 };
@@ -59,13 +59,13 @@ export const Category = (props) => {
           >
             <img
               className="absolute z-0 w-full rounded-lg max-w-none h-[18rem]  blur-xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light h-[20rem] object-cover object-center"
-              src={props.category.heroImg}
+              src={cloudinaryImage(props.category.heroImg, 1600)}
               aria-hidden="true"
             />
             <img
               className="relative z-1 w-full rounded-lg max-w-none h-[18rem] object-cover object-center"
               alt={props.category.title}
-              src={props.category.heroImg}
+              src={cloudinaryImage(props.category.heroImg, 1600)}
             />
             <div className="absolute inset-0 bg-gray-600 bg-opacity-30 w-full h-full rounded-lg"></div>
           </div>
@@ -97,7 +97,8 @@ export const Category = (props) => {
                       className="flex flex-col rounded-lg bg-white shadow-lg dark:bg-neutral-700 md:w-xxl sm:flex-row">
                       <img
                         className="h-64 w-full rounded-t-lg object-cover sm:h-auto sm:w-48 sm:rounded-none sm:rounded-l-lg"
-                        src={post.heroImg}
+                        loading="lazy"
+                        src={cloudinaryImage(post.heroImg, 600)}
                         alt={post.title} />
                       <div className="flex flex-col justify-start p-6">
                         <h5

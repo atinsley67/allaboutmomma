@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "../components/util/container";
 import { Section } from "../components/util/section";
 import { Layout } from "../components/layout";
-import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { cloudinaryImage } from "../components/util/cloudinary";
 import { client } from "../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { useRouter } from 'next/router'
@@ -63,7 +63,8 @@ const Result = ({ data }) => {
           className="flex flex-col rounded-lg bg-white shadow-lg dark:bg-neutral-700 md:max-w-xxl sm:flex-row">
           <img
             className="h-64 w-full rounded-t-lg object-cover sm:h-auto sm:w-48 sm:rounded-none sm:rounded-l-lg"
-            src={data.heroImg}
+            loading="lazy"
+            src={cloudinaryImage(data.heroImg, 600)}
             alt={data.title} />
           <div className="flex flex-col justify-start p-6">
             <h5

@@ -2,7 +2,7 @@ import { Actions } from "../util/actions";
 import { Section } from "../util/section";
 import { Container } from "../util/container";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
-import Link from "next/link";
+import { cloudinaryImage } from "../util/cloudinary";
 
 export const FeaturedPost = ({ data, tinaField }) => {
   const post = data?.post;
@@ -17,7 +17,7 @@ export const FeaturedPost = ({ data, tinaField }) => {
         data-tinafield={tinaField}
         className="rounded-xl overflow-hidden shadow-lg h-full"
       >
-        <img className="w-full h-80 object-cover object-center" src={post.heroImg} alt={post.title}/>
+        <img className="w-full h-80 object-cover object-center" loading="lazy" src={cloudinaryImage(post.heroImg, 800)} alt={post.title}/>
         <div className="px-6 pt-4 pb-2">
           {post.title && (
             <h3 className="text-2xl font-semibold title-font">

@@ -3,6 +3,7 @@ import { Actions } from "../util/actions";
 import { Container } from "../util/container";
 import { Section } from "../util/section";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { cloudinaryImage } from "../util/cloudinary";
 import type { TinaTemplate } from "tinacms";
 
 export const Hero = ({ data, parentField }) => {
@@ -19,13 +20,13 @@ export const Hero = ({ data, parentField }) => {
           <>
             <img
               className="absolute z-0 w-full rounded-lg max-w-none blur-xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light h-[35rem] object-cover object-center object-top object-position-y-2/3"
-              src={data.image.src}
+              src={cloudinaryImage(data.image.src, 1600)}
               aria-hidden="true"
             />
             <img
               className="relative z-1 w-full rounded-lg max-w-none h-[35rem] object-cover object-center object-top object-position-y-2/3"
               alt={data.image.alt}
-              src={data.image.src}
+              src={cloudinaryImage(data.image.src, 1600)}
             />
             <div className="absolute inset-0 bg-gray-600 bg-opacity-30 w-full h-full rounded-lg"></div>
           </>
