@@ -11,6 +11,8 @@ import { editorModeSwitch } from "../components/fields/editorModeSwitch";
 // Must match the filenames in content/categories
 const CATEGORIES = ["baby", "momma", "pregnancy", "toddler", "travel"];
 
+const POSTS_PATH = "content/posts";
+
 // Where a post is shown on the site (used for the visual editor's preview)
 const postPath = (filename: string) => `/${filename}`;
 
@@ -55,7 +57,7 @@ const config = defineConfig({
       {
         label: "Blog Posts",
         name: "post",
-        path: "content/posts",
+        path: POSTS_PATH,
         format: "mdx",
         ui: {
           // Opens posts in the visual editor with a live preview
@@ -69,7 +71,7 @@ const config = defineConfig({
             label: "Editor",
             name: "editorMode",
             ui: {
-              component: editorModeSwitch("post", postPath),
+              component: editorModeSwitch("post", POSTS_PATH, postPath),
             },
           },
           {

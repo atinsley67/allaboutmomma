@@ -3,9 +3,16 @@ import * as React from "react";
 // A link at the top of a document's form that switches between Tina's two editors:
 // the full-screen form ("author mode", best for long posts) and the visual editor with live
 // preview ("tweaks mode"). It's a field that never calls onChange, so nothing is ever saved.
-export const editorModeSwitch = (collection: string, previewPath: (filename: string) => string) =>
+export const editorModeSwitch = (
+  collection: string,
+  collectionPath: string,
+  previewPath: (filename: string) => string
+) =>
   ({ tinaForm, form }) => {
-    const filename = String(tinaForm?.relativePath || "").replace(/\.mdx?$/, "");
+    // tinaForm.relativePath includes the collection folder, e.g. "content/posts/my-post.mdx"
+    const filename = String(tinaForm?.relativePath || "")
+      .replace(`${collectionPath}/`, "")
+      .replace(/\.mdx?$/, "");
     if (!filename) return null;
 
     const inVisualEditor = window.location.hash.startsWith("#/~");
