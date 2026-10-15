@@ -1,10 +1,20 @@
 import * as React from "react";
 
+// A rich-text document with no content: only empty paragraphs. The editor turns an empty
+// field into one of these as it loads.
+function isEmptyRichText(node) {
+  if (typeof node?.text === "string") return node.text.trim() === "";
+  if (node?.type !== "root" && node?.type !== "p") return false;
+  return (node.children || []).every(isEmptyRichText);
+}
+
 // Reduce a form value to its content, so values that only differ in representation compare
-// equal: empty/null/missing, key order, and the same date written two ways. Tina's own dirty
-// flag compares by reference, so fields that re-emit an equivalent value on load look changed.
+// equal: empty/null/missing, empty rich text, key order, and the same date written two ways.
+// Tina's own dirty flag compares by reference, so fields that re-emit an equivalent value on
+// load look changed.
 function normalise(value) {
   if (value === null || value === undefined || value === "") return undefined;
+  if (value?.type === "root" && isEmptyRichText(value)) return undefined;
   if (typeof value === "string" && /^\d{4}-\d{2}-\d{2}/.test(value) && !isNaN(Date.parse(value))) {
     return new Date(value).toISOString();
   }
