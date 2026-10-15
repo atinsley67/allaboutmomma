@@ -6,9 +6,13 @@ import { heroBlockSchema } from "../components/blocks/hero";
 import { testimonialBlockSchema } from "../components/blocks/testimonial";
 import { mailerLiteFormBlockSchema } from "../components/blocks/mailerLiteForm";
 import { postTemplates, categoryTemplates } from "../components/rich-text/templates";
+import { editorModeSwitch } from "../components/fields/editorModeSwitch";
 
 // Must match the filenames in content/categories
 const CATEGORIES = ["baby", "momma", "pregnancy", "toddler", "travel"];
+
+// Where a post is shown on the site (used for the visual editor's preview)
+const postPath = (filename: string) => `/${filename}`;
 
 // Autosave: localStorage writes are debounced so typing doesn't serialise the whole post per keystroke
 let autosaveTimer: ReturnType<typeof setTimeout> | undefined;
@@ -55,9 +59,19 @@ const config = defineConfig({
         format: "mdx",
         ui: {
           // Opens posts in the visual editor with a live preview
-          router: ({ document }) => `/${document._sys.filename}`,
+          router: ({ document }) => postPath(document._sys.filename),
         },
         fields: [
+          {
+            // Not content: a link to switch between the full-screen and visual editors.
+            // displayOnly fields are never saved to the post.
+            type: "displayOnly",
+            label: "Editor",
+            name: "editorMode",
+            ui: {
+              component: editorModeSwitch("post", postPath),
+            },
+          },
           {
             type: "string",
             label: "Title",
