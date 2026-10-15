@@ -23,7 +23,7 @@ export const FeaturedPostCard = ({ data }) => {
         <img className="w-full h-80 object-cover object-center" loading="lazy" src={cloudinaryImage(post.heroImg, 800)} alt={post.title}/>
         <div className="px-6 pt-4 pb-2">
           {post.title && (
-            <h3 className="text-2xl font-semibold title-font">
+            <h3 className="text-2xl font-semibold">
               {post.title}
             </h3>
           )}

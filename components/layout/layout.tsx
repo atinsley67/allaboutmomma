@@ -86,7 +86,7 @@ export const Layout = ({ rawData = {}, data = layoutData, children }) => {
       />
       <div className="min-h-screen flex flex-col font-montserrat">
         <Header data={data?.header} />
-        <div className="flex-1 text-gray-800 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-1000 flex flex-col">
+        <div className="flex-1 text-gray-800 bg-gradient-to-br from-white to-gray-50 flex flex-col">
           {children}
         </div>
         <Footer data={data?.footer} />

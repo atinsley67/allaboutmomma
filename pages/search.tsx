@@ -22,7 +22,7 @@ export default function SearchPage(
         className={`flex flex-wrap gap-x-10 gap-y-8 text-left`}
         size="small"
         >
-        <h2 className="text-3xl font-semibold title-font">Search Results</h2>
+        <h2 className="text-3xl font-semibold">Search Results</h2>
         {searchResults &&
           searchResults.map((post) => (
             <PostListCard

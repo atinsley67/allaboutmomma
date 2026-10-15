@@ -13,7 +13,7 @@ export const Header = ({ data }) => {
 
   return (
     <div
-      className="relative bg-gradient-to-b text-black dark:text-white from-gray-50 to-white dark:from-gray-800 dark:to-gray-900"
+      className="relative bg-gradient-to-b text-black from-gray-50 to-white"
     >
       <Container size="custom" className="py-0 z-10 relative  max-w-8xl">
         <div className="flex items-center justify-between gap-6">
@@ -124,7 +124,7 @@ export const Header = ({ data }) => {
           )}
         </div>
         <div
-          className="absolute h-1 bg-gradient-to-r from-transparent via-black dark:via-white to-transparent bottom-0 left-4 right-4 -z-1 opacity-5"
+          className="absolute h-1 bg-gradient-to-r from-transparent via-black to-transparent bottom-0 left-4 right-4 -z-1 opacity-5"
         />
       </Container>
     </div>

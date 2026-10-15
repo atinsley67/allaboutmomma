@@ -2,15 +2,17 @@ const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  mode: "jit",
-  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  // Nothing adds a "dark" class to the page, so dark mode never activates
   darkMode: "class",
   theme: {
+    // Replaces Tailwind's palette entirely: only these colours exist (no "neutral", for example)
     colors: {
       transparent: "transparent",
       current: "currentColor",
       black: colors.black,
       white: colors.white,
+      // Note: "teal" classes are actually Tailwind's cyan
       teal: colors.cyan,
       green: colors.emerald,
       red: colors.rose,
@@ -63,6 +65,7 @@ module.exports = {
       xl: "1500px",
       "2xl": "1800px",
     },
+    // Shifted up one step from Tailwind's defaults: text-sm is 1rem, text-base is 1.125rem
     fontSize: {
       xxs: ".75rem",
       xs: ".875rem",
@@ -269,9 +272,6 @@ module.exports = {
         },
       }),
     },
-  },
-  variants: {
-    extend: { typography: ["tint", "dark", "primary"] },
   },
   plugins: [require("@tailwindcss/typography")],
 };

@@ -4,12 +4,12 @@ import { Container } from "../util/container";import type { TinaTemplate } from 
 export const MailerLiteForm = ({ data }) => {
   return (
     <Container size="small">
-      <div className="mx-auto px-0 py-4 flex flex-wrap-reverse gap-5 gap-5 max-w-[1000px]">
-        <div className="grow min-w-76">
+      <div className="mx-auto px-0 py-4 flex flex-wrap-reverse gap-5 max-w-[1000px]">
+        <div className="grow">
           <h1 className="text-3xl text-teal-700 font-semibold pt-10">{data.title}</h1>
           <span>Email: <strong>{data.email}</strong></span>
         </div>
-        <div className="grow min-w-76">
+        <div className="grow">
           <div className="ml-embedded" data-form="54PrxH"></div>
         </div>
       </div>

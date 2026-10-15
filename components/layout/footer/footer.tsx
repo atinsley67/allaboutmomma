@@ -13,13 +13,13 @@ const socialLinks = [
 
 export const Footer = ({ data }) => {
   return (
-    <footer className="bg-gradient-to-br text-gray-800 from-white to-gray-50 dark:from-gray-900 dark:to-gray-1000">
+    <footer className="bg-gradient-to-br text-gray-800 from-white to-gray-50">
       <Container className="relative" size="small">
         <div className="flex flex-row justify-between items-center">
           <div className="flex">
             <Link
               href="/"
-              className="group mx-2 flex items-center font-bold tracking-tight text-gray-400 dark:text-gray-300 opacity-50 hover:opacity-100 transition duration-300 ease-out whitespace-nowrap">
+              className="group mx-2 flex items-center font-bold tracking-tight text-gray-400 opacity-50 hover:opacity-100 transition duration-300 ease-out whitespace-nowrap">
 
               <img className="w-56 h-40 flex-none" src="/momma.svg" alt="All About Momma"/>
 
@@ -61,7 +61,7 @@ export const Footer = ({ data }) => {
             )}
           </div>
         </div>
-        <div className="absolute h-1 bg-gradient-to-r from-transparent via-black dark:via-white to-transparent top-0 left-4 right-4 opacity-5"></div>
+        <div className="absolute h-1 bg-gradient-to-r from-transparent via-black to-transparent top-0 left-4 right-4 opacity-5"></div>
       </Container>
     </footer>
   );

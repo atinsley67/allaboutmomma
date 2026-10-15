@@ -22,12 +22,12 @@ export const CategoryPage = (props) => {
           <div className="relative"
           >
             <img
-              className="absolute z-0 w-full rounded-lg max-w-none h-[18rem]  blur-xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light h-[20rem] object-cover object-center"
+              className="absolute z-0 w-full rounded-lg max-w-none blur-xl brightness-150 contrast-[0.9] saturate-200 opacity-50 mix-blend-multiply h-[20rem] object-cover object-center"
               src={cloudinaryImage(props.category.heroImg, 1600)}
               aria-hidden="true"
             />
             <img
-              className="relative z-1 w-full rounded-lg max-w-none h-[18rem] object-cover object-center"
+              className="relative w-full rounded-lg max-w-none h-[18rem] object-cover object-center"
               alt={props.category.title}
               src={cloudinaryImage(props.category.heroImg, 1600)}
             />
@@ -36,7 +36,7 @@ export const CategoryPage = (props) => {
       )}
       </Container>
       <Container className={`flex-1 pt-4`} width="medium" size="small">
-        <div className="prose dark:prose-dark w-full max-w-none pt-6">
+        <div className="prose w-full max-w-none pt-6">
           <TinaMarkdown components={categoryComponents} content={props.category._body} />
         </div>
       </Container>

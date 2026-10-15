@@ -20,12 +20,12 @@ export const Hero = ({ data }) => {
           {data.image && (
           <>
             <img
-              className="absolute z-0 w-full rounded-lg max-w-none blur-xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light h-[35rem] object-cover object-center object-top object-position-y-2/3"
+              className="absolute z-0 w-full rounded-lg max-w-none blur-xl brightness-150 contrast-[0.9] saturate-200 opacity-50 mix-blend-multiply h-[35rem] object-cover object-top"
               src={cloudinaryImage(data.image.src, 1600)}
               aria-hidden="true"
             />
             <img
-              className="relative z-1 w-full rounded-lg max-w-none h-[35rem] object-cover object-center object-top object-position-y-2/3"
+              className="relative w-full rounded-lg max-w-none h-[35rem] object-cover object-top"
               alt={data.image.alt}
               src={cloudinaryImage(data.image.src, 1600)}
             />
@@ -33,11 +33,11 @@ export const Hero = ({ data }) => {
           </>
           )}
         </div>
-        <div className="absolute z-2 top-1/4 m-10 -translate-y-1/2 sm:-translate-y-1/3 justify-center overflow-hidden ">
+        <div className="absolute top-1/4 m-10 -translate-y-1/2 sm:-translate-y-1/3 justify-center overflow-hidden ">
             {data.headline && (
               <h1
                 data-tina-field={tinaField(data, "headline")}
-                className={`w-full relative	mb-10 text-4xl sm:text-5xl font-semibold tracking-normal leading-tight title-font text-white`}
+                className={`w-full relative	mb-10 text-4xl sm:text-5xl font-semibold tracking-normal leading-tight text-white`}
               >
 
                   {data.headline}
@@ -47,18 +47,18 @@ export const Hero = ({ data }) => {
             {data.tagline && (
               <h2
                 data-tina-field={tinaField(data, "tagline")}
-                className="hidden sm:block w-full relative mb-10 text-xl font-normal sm:text-2xl tracking-normal leading-tight title-font text-white"
+                className="hidden sm:block w-full relative mb-10 text-xl font-normal sm:text-2xl tracking-normal leading-tight text-white"
               >
                 {data.tagline}
               </h2>
             )}
           </div>
-          <div className="relative md:absolute z-2 m-10 top-1/2 mdtranslate-y-1/2 justify-center md:overflow-hidden ">
+          <div className="relative md:absolute m-10 top-1/2 justify-center md:overflow-hidden ">
             {data.text && (
               <div
                 data-tina-field={tinaField(data, "text")}
                 className={`prose prose-lg mx-auto lg:mx-0 mb-10 md:text-white ${
-                  data.color === "primary" ? `prose-primary` : `dark:prose-dark`
+                  data.color === "primary" ? `prose-primary` : ``
                 }`}
               >
                 <TinaMarkdown content={data.text} />

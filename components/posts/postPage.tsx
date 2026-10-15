@@ -36,24 +36,24 @@ export const PostPage = (props) => {
                   alt={props.author.name}
                 />
               </div>
-              <p className="text-base font-medium text-gray-600 group-hover:text-gray-800 dark:text-gray-200 dark:group-hover:text-white">
+              <p className="text-base font-medium text-gray-600 group-hover:text-gray-800">
                 {props.author.name}
               </p>
-              <span className="font-bold text-gray-200 dark:text-gray-500 mx-2">
+              <span className="font-bold text-gray-200 mx-2">
                 —
               </span>
             </>
           )}
           <p
             data-tina-field={tinaField(props, "date")}
-            className="text-base text-gray-400 group-hover:text-gray-500 dark:text-gray-300 dark:group-hover:text-gray-150"
+            className="text-base text-gray-400 group-hover:text-gray-500"
           >
             {formattedDate}
           </p>
         </div>
       </Container>
       <Container className={`flex-1 pt-4`} width="small" size="large">
-        <div className="prose dark:prose-dark w-full max-w-none">
+        <div className="prose w-full max-w-none">
           <TinaMarkdown components={postComponents} content={props._body} />
         </div>
       </Container>

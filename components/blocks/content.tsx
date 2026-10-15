@@ -17,7 +17,7 @@ export const Content = ({ data }) => {
     <Section color={data.color}>
       <Container
         className={`prose prose-lg ${
-          data.color === "primary" ? `prose-primary` : `dark:prose-dark`
+          data.color === "primary" ? `prose-primary` : ``
         }`}
         data-tina-field={tinaField(data, "body")}
         size="large"
