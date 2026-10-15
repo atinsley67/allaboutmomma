@@ -6,8 +6,16 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { cloudinaryImage } from "../../lib/cloudinary";
 import { categoryComponents } from "../rich-text";
 import { PostListCard } from "../cards/postListCard";
+import { getIntro } from "../../lib/intro";
+import { isInCategory } from "../../lib/category";
 
 export const CategoryPage = (props) => {
+  // Published pages arrive pre-filtered with intros (see getStaticProps); the visual editor
+  // re-queries live and gets every post with its body, so filter and build intros here too
+  const posts = props.postConnection.edges
+    .map(({ node }) => node)
+    .filter((post) => isInCategory(post, props.category._sys.filename));
+
   return (
     <Section className="flex-1">
       <Container className={`flex-1 pb-2`} size="small">
@@ -41,14 +49,14 @@ export const CategoryPage = (props) => {
         </div>
       </Container>
       <Container size="small" className={`flex flex-wrap gap-x-10 gap-y-8 text-left`}>
-        {props.postConnection.edges.map(({ node: post }) => (
+        {posts.map((post) => (
           <PostListCard
             key={post._sys.filename}
             variant="category"
             filename={post._sys.filename}
             title={post.title}
             heroImg={post.heroImg}
-            intro={post.intro}
+            intro={post.intro ?? getIntro(post._body, 50)}
             categories={post.categories}
           />
         ))}

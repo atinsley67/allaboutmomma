@@ -3,6 +3,7 @@ import { client } from "../../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { Layout } from "../../components/layout";
 import { getIntro } from "../../lib/intro";
+import { isInCategory } from "../../lib/category";
 
 // Use the props returned by get static props
 export default function CategoryRoute(
@@ -33,9 +34,10 @@ export const getStaticProps = async ({ params }) => {
   });
 
 
-  const category = params.filename.toLowerCase();
+  // Trim the published page's data to this category's posts and their intros.
+  // CategoryPage repeats both steps for the visual editor, which re-queries everything live.
   tinaProps.data.postConnection.edges = tinaProps.data.postConnection.edges.filter(
-    (post) => post.node.categories?.some((c) => c.toLowerCase() === category)
+    (post) => isInCategory(post.node, params.filename)
   );
 
   tinaProps.data.postConnection.edges.forEach((post: any) => {
