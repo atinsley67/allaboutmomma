@@ -3,6 +3,7 @@ import { client } from "../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { Layout } from "../components/layout";
 import { addFeaturedPostIntros } from "../lib/intro";
+import { addAmazonData } from "../lib/amazon";
 
 // Use the props returned by get static props
 export default function HomePage(
@@ -37,7 +38,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      data: addFeaturedPostIntros(tinaProps.data, 25),
+      data: addAmazonData(addFeaturedPostIntros(tinaProps.data, 25)),
       query: tinaProps.query,
       variables: tinaProps.variables,
     },

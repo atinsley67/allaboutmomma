@@ -1,14 +1,19 @@
 import React from "react";
 import type { Template } from "tinacms";
 import { cloudinaryImage } from "../../lib/cloudinary";
+import { amazonProductUrl } from "../../lib/asin.mjs";
+import type { AmazonProduct } from "../../lib/amazon";
 import { AffiliateURLsInput } from "../fields/affiliateUrls";
 
 export type AffiliateLinkProps = {
   altText: string;
+  asin?: string;
   affiliateURLs: {
     imageURL: string;
     linkURL: string;
   }
+  // Fetched product, set at build time by lib/amazon: null if there's none, missing in the visual editor
+  amazon?: AmazonProduct | null;
   imageURL: string;
   linkURL: string;
   image: string;
@@ -18,13 +23,22 @@ export type AffiliateLinkProps = {
 };
 
 export const AffiliateLink = (props: AffiliateLinkProps) => {
-  // Extract image URL (an uploaded image takes precedence over an Amazon image URL)
-  const imageURL = props.image || props.affiliateURLs?.imageURL || ""
-  // Extract link URL
-  const linkURL = props.affiliateURLs?.linkURL || ""
+  // An uploaded image takes precedence; fetched Amazon data over the URLs stored in the post
+  const imageURL = props.image || props.amazon?.imageURL || props.affiliateURLs?.imageURL || ""
+  const linkURL = props.amazon?.url || props.affiliateURLs?.linkURL || (props.asin ? amazonProductUrl(props.asin) : "")
   const floatLeft = props.floatLeft
 
-  if (linkURL && imageURL) {
+  if (linkURL && !imageURL && props.amazon === undefined) {
+    return (
+      <div className={`flex ml-2 mr-6 mt-0 mb-6 justify-center items-center ${floatLeft ? 'md:float-left' : ''}`}>
+        <div className="flex min-h-[11rem] min-w-[11rem] items-center justify-center rounded-xl border-2 border-dashed border-gray-300 p-4 text-center text-xs italic text-gray-500">
+          Product image and link are filled in when published
+        </div>
+      </div>
+    )
+  }
+
+  if (linkURL) {
     return (
       <>
         <div className={`flex ml-2 mr-6  mt-0 mb-6 justify-center items-center ${floatLeft ? 'md:float-left' : ''}`}>
@@ -34,14 +48,17 @@ export const AffiliateLink = (props: AffiliateLinkProps) => {
               rel="sponsored nofollow noopener"
               className="no-underline">
               <div className="rounded-xl overflow-hidden shadow-lg bg-white justify-center flex flex-col items-center m-0  min-w-[11rem] ">
-                <div className="flex flex-col justify-end min-h-[11rem]">
-                  <img decoding="async" loading="lazy" src={cloudinaryImage(imageURL, 600)} className="border-0" alt={props.altText || props.caption || "Product image"}/>
-                </div>
+                {imageURL &&
+                  <div className="flex flex-col justify-end min-h-[11rem]">
+                    <img decoding="async" loading="lazy" src={cloudinaryImage(imageURL, 600)} className="border-0" alt={props.altText || props.caption || props.amazon?.title || "Product image"}/>
+                  </div>
+                }
                 <div className="min-h-[1rem]">
                 {props.caption &&
                   <div className="text-xs font-semibold text-gray-600">{props.caption}</div>
                 }
-                  {props.button &&
+                  {/* Without an image the button is all there is to click */}
+                  {(props.button || !imageURL) &&
                     <span
                       className="mx-auto z-10 relative flex text-center px-7 py-3 font-semibold text-lg transition duration-150 ease-out rounded-lg transform whitespace-nowrap">
                       Check Amazon Price

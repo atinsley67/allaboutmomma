@@ -30,3 +30,6 @@ node_modules
 public/robots.txt
 public/sitemap*
 tsconfig.tsbuildinfo
+
+# Amazon product data, refreshed by scripts/fetch-amazon-products.mjs
+.amazon-cache/

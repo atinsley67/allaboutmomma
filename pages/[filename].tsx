@@ -5,6 +5,7 @@ import { useTina } from "tinacms/dist/react";
 import { Layout } from "../components/layout";
 import { addFeaturedPostIntros } from "../lib/intro";
 import { addTOCData } from "../lib/toc";
+import { addAmazonData } from "../lib/amazon";
 import fs from "fs";
 import path from "path";
 
@@ -50,7 +51,7 @@ export const getStaticProps = async ({ params }) => {
     });
     return {
       props: {
-        data: addFeaturedPostIntros(tinaProps.data, 50),
+        data: addAmazonData(addFeaturedPostIntros(tinaProps.data, 50)),
         query: tinaProps.query,
         variables: tinaProps.variables,
       },
@@ -60,6 +61,7 @@ export const getStaticProps = async ({ params }) => {
   const tinaProps = await client.queries.blogPostQuery({
     relativePath: `${params.filename}.mdx`,
   });
+  addAmazonData(tinaProps.data);
   return {
     props: addTOCData(tinaProps),
   };
