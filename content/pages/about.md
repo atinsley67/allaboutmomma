@@ -65,7 +65,7 @@ blocks:
 
 
       Available now on
-      [Amazon](https://www.amazon.com/Momma-Toddler-Hiking-Journal-interactive/dp/B0CHMHKDG6/ref=tmm_pap_swatch_0?_encoding=UTF8\&qid=\&sr=),
+      [Amazon](https://www.amazon.com/Momma-Toddler-Hiking-Journal-interactive/dp/B0CHMHKDG6?tag=allaboutmom06-20),
       these journals are designed to spark creativity, foster curiosity, and
       document the  experiences of young adventurers. With prompts and
       activities inspired by nature, each journal encourages kids to engage with
