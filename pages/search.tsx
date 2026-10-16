@@ -6,6 +6,7 @@ import { PostListCard } from "../components/cards/postListCard";
 import { client } from "../tina/__generated__/client";
 import { useRouter } from 'next/router'
 import { extractPosts, searchPosts } from '../lib/search'
+import { isHidden, showHidden } from '../lib/hidden'
 
 // Searches a word index of every post, built at build time and matched in the browser
 export default function SearchPage(
@@ -41,11 +42,14 @@ export default function SearchPage(
   );
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps = async ({ draftMode = false }) => {
   const tinaProps = await client.queries.allPostsQuery();
+  const { edges } = tinaProps.data.postConnection;
+  const includeHidden = showHidden(draftMode);
   return {
     props: {
-      data: extractPosts(tinaProps.data.postConnection),
+      data: extractPosts({ edges: edges.filter((edge) => includeHidden || !isHidden(edge.node)) }),
+      draftMode,
     },
   };
 };

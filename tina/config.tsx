@@ -19,6 +19,28 @@ const postPath = (filename: string) => `/${filename}`;
 // Autosave: localStorage writes are debounced so typing doesn't serialise the whole post per keystroke
 let autosaveTimer: ReturnType<typeof setTimeout> | undefined;
 
+// The visual editor previews pages in Next.js draft mode, so hidden posts and posts written since
+// the last build render (see pages/api/draft.ts). It's switched on once per visit, by showing the
+// site the editor's Tina login.
+let editorCms;
+let draftMode: Promise<void> | undefined;
+function enableDraftMode() {
+  draftMode ??= (async () => {
+    try {
+      const token = await editorCms?.api?.tina?.authProvider?.getAccessToken();
+      const res = await fetch("/api/draft", {
+        method: "POST",
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
+      if (!res.ok) throw new Error(`draft mode refused (${res.status})`);
+    } catch (error) {
+      console.warn(`Draft mode: ${error.message}; hidden and new posts won't preview`);
+      draftMode = undefined; // try again with the next document
+    }
+  })();
+  return draftMode;
+}
+
 const config = defineConfig({
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID!,
   branch:
@@ -39,6 +61,7 @@ const config = defineConfig({
     },
   },
   cmsCallback: (cms) => {
+    editorCms = cms;
 
     cms.events.subscribe('plugin:add:screen', (payload) => {
       // Perform actions when the form is saved
@@ -59,9 +82,15 @@ const config = defineConfig({
         name: "post",
         path: POSTS_PATH,
         format: "mdx",
+        // New posts stay off the live site until they're unhidden, so a half-written post isn't
+        // published by the next build
+        defaultItem: () => ({ hidden: true }),
         ui: {
           // Opens posts in the visual editor with a live preview
-          router: ({ document }) => postPath(document._sys.filename),
+          router: async ({ document }) => {
+            await enableDraftMode();
+            return postPath(document._sys.filename);
+          },
         },
         fields: [
           {
@@ -80,6 +109,13 @@ const config = defineConfig({
             name: "title",
             isTitle: true,
             required: true,
+          },
+          {
+            type: "boolean",
+            label: "Hidden from site",
+            name: "hidden",
+            description:
+              "Hidden posts aren't on the live site, in post lists or in search, but show in previews. Turning this on for a post that's already live takes it off the site at the next build, including the nightly one.",
           },
           {
             type: "string",
@@ -290,8 +326,10 @@ const config = defineConfig({
         name: "page",
         path: "content/pages",
         ui: {
-          router: ({ document }) =>
-            document._sys.filename === "home" ? `/` : `/${document._sys.filename}`,
+          router: async ({ document }) => {
+            await enableDraftMode();
+            return document._sys.filename === "home" ? `/` : `/${document._sys.filename}`;
+          },
         },
         fields: [
           {
@@ -340,7 +378,10 @@ const config = defineConfig({
         path: "content/categories",
         format: "mdx",
         ui: {
-          router: ({ document }) => `/category/${document._sys.filename}`,
+          router: async ({ document }) => {
+            await enableDraftMode();
+            return `/category/${document._sys.filename}`;
+          },
         },
         fields: [
           {

@@ -19,17 +19,13 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { AMAZON_URL, extractAsin, PARTNER_TAG } from "../lib/asin.mjs";
+import { AMAZON_URL, extractAsin } from "../lib/asin.mjs";
+import { BATCH_SIZE, INVALID, getItems, getToken, hasCredentials, toProduct } from "../lib/creatorsApi.mjs";
 
 const CONTENT_DIR = "content";
 const CACHE_FILE = path.join(".next", "cache", "amazon-products.json");
 const PUBLISHED_FILE = path.join("public", "amazon-products.json");
-const TOKEN_URL = "https://api.amazon.com/auth/o2/token"; // North America region, covers amazon.com
-const GET_ITEMS_URL = "https://creatorsapi.amazon/catalog/v1/getItems";
-const MARKETPLACE = "www.amazon.com";
-const BATCH_SIZE = 10; // GetItems maximum
 const REQUEST_GAP_MS = Number(process.env.AMAZON_REQUEST_GAP_MS ?? 1100); // stay under one request per second
-const RESOURCES = ["images.primary.large", "itemInfo.title", "offersV2.listings.availability"];
 
 const GRACE_HOURS = 20;
 const FALLBACK_HOURS = 72;
@@ -38,12 +34,10 @@ const OUTAGE_MIN = 5; // so a handful of genuine removals on a small site isn't 
 const HOUR = 3600 * 1000;
 
 const ASIN_FIELD = /\basin\s*[=:]\s*["']([A-Z0-9]{10})["']/g;
-const INVALID = "invalid";
 
 for (const file of [".env.local", ".env"]) {
   if (fs.existsSync(file)) process.loadEnvFile(file);
 }
-const { AMAZON_CREATORS_CREDENTIAL_ID, AMAZON_CREATORS_CREDENTIAL_SECRET } = process.env;
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -75,66 +69,19 @@ function readCache() {
   }
 }
 
-async function getToken() {
-  const res = await fetch(TOKEN_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      grant_type: "client_credentials",
-      client_id: AMAZON_CREATORS_CREDENTIAL_ID,
-      client_secret: AMAZON_CREATORS_CREDENTIAL_SECRET,
-      scope: "creatorsapi::default",
-    }),
-  });
-  const body = await res.json().catch(() => ({}));
-  if (!res.ok || !body.access_token) {
-    throw new Error(`token request failed (${res.status}): ${body.error_description || body.error || "no token"}`);
-  }
-  return body.access_token;
-}
-
-/** GetItems for up to 10 ASINs, retrying with backoff when throttled. */
-async function getItems(token, asins) {
-  for (let attempt = 0; ; attempt++) {
-    const res = await fetch(GET_ITEMS_URL, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json", "x-marketplace": MARKETPLACE },
-      body: JSON.stringify({
-        itemIds: asins,
-        itemIdType: "ASIN",
-        marketplace: MARKETPLACE,
-        partnerTag: PARTNER_TAG,
-        resources: RESOURCES,
-      }),
-    });
-    if ((res.status === 429 || res.status >= 500) && attempt < 4) {
-      await sleep(2000 * 2 ** attempt);
-      continue;
-    }
-    const body = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(`GetItems failed (${res.status}): ${JSON.stringify(body.errors ?? body).slice(0, 300)}`);
-    return body;
-  }
-}
-
 /**
  * Asks Amazon about every ASIN. Returns a map of ASIN to the item, or INVALID when Amazon says
  * it doesn't exist; ASINs it never got an answer for are left out, along with the error.
  */
 async function fetchAll(asins) {
   const results = new Map();
-  if (!(AMAZON_CREATORS_CREDENTIAL_ID && AMAZON_CREATORS_CREDENTIAL_SECRET)) {
-    return { results, error: "credentials not set" };
-  }
+  if (!hasCredentials()) return { results, error: "credentials not set" };
   try {
     const token = await getToken();
     for (let i = 0; i < asins.length; i += BATCH_SIZE) {
       if (i > 0) await sleep(REQUEST_GAP_MS);
-      const batch = asins.slice(i, i + BATCH_SIZE);
-      const body = await getItems(token, batch);
-      for (const item of body.itemsResult?.items ?? []) results.set(item.asin, item);
-      // Amazon reports unknown or withdrawn ASINs as errors and leaves them out of the items
-      for (const asin of batch) if (!results.has(asin)) results.set(asin, INVALID);
+      const batch = await getItems(token, asins.slice(i, i + BATCH_SIZE));
+      for (const [asin, result] of batch) results.set(asin, result);
     }
     return { results, error: null };
   } catch (error) {
@@ -168,14 +115,7 @@ function update(references, cache, { results, error }, now) {
     const result = results.get(asin);
 
     if (result && result !== INVALID) {
-      products[asin] = {
-        status: "ok",
-        url: result.detailPageURL,
-        imageURL: result.images?.primary?.large?.url ?? null,
-        title: result.itemInfo?.title?.displayValue ?? null,
-        availability: result.offersV2?.listings?.[0]?.availability?.type ?? null,
-        fetchedAt: nowISO,
-      };
+      products[asin] = { status: "ok", ...toProduct(result), fetchedAt: nowISO };
       if (previous?.status === "notFound") events.push({ type: "back", asin, files: files(asin) });
     } else if (result === INVALID && !outage && hadData(previous)) {
       const missingSince = previous.missingSince ?? nowISO;

@@ -6,6 +6,7 @@ query allPostsQuery {
         id
         _body
         title
+        hidden
         heroImg
         categories
         date
@@ -63,6 +64,7 @@ query categoryQuery($relativePath: String!) {
         id
         _body
         title
+        hidden
         heroImg
         categories
         date

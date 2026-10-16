@@ -41,8 +41,8 @@ const AffiliateCell = ({ affiliate }) => {
             alt={affiliate.caption || affiliate.amazon?.title || "Product image"}
           />
         ) : amazon === undefined && (
-          // Only in the visual editor, for a product added since the last build
-          <div className="m-2 italic text-gray-500">Product image is filled in when published</div>
+          // Only in the visual editor: while a product added since the last build is looked up, or if Amazon doesn't know it
+          <div className="m-2 italic text-gray-500">Looking up the product on Amazon. If this stays, check the Amazon Product field.</div>
         )}
         <div className="text-center">{affiliate.caption || (!imageURL && "Check Amazon Price")}</div>
       </a>

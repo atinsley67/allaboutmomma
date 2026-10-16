@@ -4,6 +4,7 @@ import { useTina } from "tinacms/dist/react";
 import { Layout } from "../../components/layout";
 import { getIntro } from "../../lib/intro";
 import { isInCategory } from "../../lib/category";
+import { isHidden, showHidden } from "../../lib/hidden";
 
 // Use the props returned by get static props
 export default function CategoryRoute(
@@ -17,7 +18,7 @@ export default function CategoryRoute(
   if (data && data.category) {
     return (
       <Layout rawData={data} data={data.global as any}>
-        <CategoryPage {...data} />
+        <CategoryPage {...data} includeHidden={props.includeHidden} />
       </Layout>
     );
   }
@@ -28,16 +29,16 @@ export default function CategoryRoute(
   );
 }
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params, draftMode = false }) => {
   const tinaProps = await client.queries.categoryQuery({
     relativePath: `${params.filename}.mdx`,
   });
-
+  const includeHidden = showHidden(draftMode);
 
   // Trim the published page's data to this category's posts and their intros.
   // CategoryPage repeats both steps for the visual editor, which re-queries everything live.
   tinaProps.data.postConnection.edges = tinaProps.data.postConnection.edges.filter(
-    (post) => isInCategory(post.node, params.filename)
+    (post) => isInCategory(post.node, params.filename) && (includeHidden || !isHidden(post.node))
   );
 
   tinaProps.data.postConnection.edges.forEach((post: any) => {
@@ -48,6 +49,8 @@ export const getStaticProps = async ({ params }) => {
   return {
     props: {
       ...tinaProps,
+      includeHidden,
+      draftMode,
     },
   };
 };

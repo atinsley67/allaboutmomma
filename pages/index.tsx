@@ -3,7 +3,8 @@ import { client } from "../tina/__generated__/client";
 import { useTina } from "tinacms/dist/react";
 import { Layout } from "../components/layout";
 import { addFeaturedPostIntros } from "../lib/intro";
-import { addAmazonData } from "../lib/amazon";
+import { addAmazonData, amazonAsins, lookUpNewProducts } from "../lib/amazon";
+import { removeHiddenFeaturedPosts, showHidden } from "../lib/hidden";
 
 // Use the props returned by get static props
 export default function HomePage(
@@ -31,16 +32,19 @@ export default function HomePage(
 
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps = async ({ draftMode = false }) => {
   const tinaProps = await client.queries.contentQuery({
     relativePath: `home.md`,
   });
 
+  const data = removeHiddenFeaturedPosts(addFeaturedPostIntros(tinaProps.data, 25), showHidden(draftMode));
+  if (draftMode) await lookUpNewProducts(amazonAsins(data));
   return {
     props: {
-      data: addAmazonData(addFeaturedPostIntros(tinaProps.data, 25)),
+      data: addAmazonData(data),
       query: tinaProps.query,
       variables: tinaProps.variables,
+      draftMode,
     },
   };
 };

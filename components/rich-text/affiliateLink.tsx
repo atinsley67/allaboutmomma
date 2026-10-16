@@ -32,12 +32,12 @@ export const AffiliateLink = (props: AffiliateLinkProps) => {
   const linkURL = amazon?.url || stored?.linkURL || (asin ? amazonProductUrl(asin) : "")
   const floatLeft = props.floatLeft
 
-  // Only in the visual editor, for a product added since the last build
+  // Only in the visual editor: while a product added since the last build is looked up, or if Amazon doesn't know it
   if (linkURL && !imageURL && amazon === undefined) {
     return (
       <div className={`flex ml-2 mr-6 mt-0 mb-6 justify-center items-center ${floatLeft ? 'md:float-left' : ''}`}>
         <div className="flex min-h-[11rem] min-w-[11rem] items-center justify-center rounded-xl border-2 border-dashed border-gray-300 p-4 text-center text-xs italic text-gray-500">
-          Product image and link are filled in when published
+          Looking up the product on Amazon. If this stays, check the Amazon Product field.
         </div>
       </div>
     )

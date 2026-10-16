@@ -8,13 +8,14 @@ import { categoryComponents } from "../rich-text";
 import { PostListCard } from "../cards/postListCard";
 import { getIntro } from "../../lib/intro";
 import { isInCategory } from "../../lib/category";
+import { isHidden } from "../../lib/hidden";
 
 export const CategoryPage = (props) => {
   // Published pages arrive pre-filtered with intros (see getStaticProps); the visual editor
   // re-queries live and gets every post with its body, so filter and build intros here too
   const posts = props.postConnection.edges
     .map(({ node }) => node)
-    .filter((post) => isInCategory(post, props.category._sys.filename));
+    .filter((post) => isInCategory(post, props.category._sys.filename) && (props.includeHidden || !isHidden(post)));
 
   return (
     <Section className="flex-1">

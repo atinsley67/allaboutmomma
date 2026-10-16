@@ -5,16 +5,20 @@ import { useTina } from "tinacms/dist/react";
 import { Layout } from "../components/layout";
 import { addFeaturedPostIntros } from "../lib/intro";
 import { addTOCData } from "../lib/toc";
-import { addAmazonData } from "../lib/amazon";
+import { addAmazonData, amazonAsins, lookUpNewProducts } from "../lib/amazon";
+import { isHidden, mayRenderOnRequest, removeHiddenFeaturedPosts, showHidden } from "../lib/hidden";
 import fs from "fs";
 import path from "path";
 
-
+type RouteProps = {
+  data: any;
+  query: string;
+  variables: any;
+  draftMode: boolean;
+};
 
 // Use the props returned by get static props
-export default function PostOrPageRoute(
-  props: AsyncReturnType<typeof getStaticProps>["props"]
-) {
+export default function PostOrPageRoute(props: RouteProps) {
   const { data } = useTina({
     query: props.query,
     variables: props.variables,
@@ -41,7 +45,15 @@ export default function PostOrPageRoute(
   );
 }
 
-export const getStaticProps = async ({ params }) => {
+// In draft mode, products added since the last build are looked up on Amazon before rendering
+async function withAmazonData(data, draftMode: boolean) {
+  if (draftMode) await lookUpNewProducts(amazonAsins(data));
+  return addAmazonData(data);
+}
+
+export const getStaticProps = async ({ params, draftMode = false }) => {
+  if (!mayRenderOnRequest(draftMode)) return { notFound: true };
+
   // Posts and pages share this route; content/pages/<filename>.md means it's a page
   const isPage = fs.existsSync(path.join(process.cwd(), "content/pages", `${params.filename}.md`));
 
@@ -49,21 +61,26 @@ export const getStaticProps = async ({ params }) => {
     const tinaProps = await client.queries.contentQuery({
       relativePath: `${params.filename}.md`,
     });
+    const data = removeHiddenFeaturedPosts(addFeaturedPostIntros(tinaProps.data, 50), showHidden(draftMode));
     return {
       props: {
-        data: addAmazonData(addFeaturedPostIntros(tinaProps.data, 50)),
+        data: await withAmazonData(data, draftMode),
         query: tinaProps.query,
         variables: tinaProps.variables,
+        draftMode,
       },
     };
   }
 
-  const tinaProps = await client.queries.blogPostQuery({
-    relativePath: `${params.filename}.mdx`,
-  });
-  addAmazonData(tinaProps.data);
+  // Requested addresses that aren't posts end up here when rendering on request
+  const tinaProps = await client.queries
+    .blogPostQuery({ relativePath: `${params.filename}.mdx` })
+    .catch(() => null);
+  if (!tinaProps || (isHidden(tinaProps.data.post) && !showHidden(draftMode))) return { notFound: true };
+
+  await withAmazonData(tinaProps.data, draftMode);
   return {
-    props: addTOCData(tinaProps),
+    props: { ...addTOCData(tinaProps), draftMode },
   };
 };
 
@@ -71,14 +88,14 @@ export const getStaticProps = async ({ params }) => {
 export const getStaticPaths = async () => {
   const postsListData = await client.queries.allPostsQuery();
   const pagesListData = await client.queries.pageConnection();
-  const listData = [...postsListData.data.postConnection.edges, ...pagesListData.data.pageConnection.edges];
+  const posts = postsListData.data.postConnection.edges.filter((item) => showHidden() || !isHidden(item.node));
+  const listData = [...posts, ...pagesListData.data.pageConnection.edges];
   return {
     paths: listData.map((item) => ({
       params: { filename: item.node._sys.filename },
     })),
-    fallback: false,
+    // Anything not built (hidden posts, posts written since the last build) can still render on
+    // request, but only in draft mode (see getStaticProps)
+    fallback: "blocking",
   };
 };
-
-export type AsyncReturnType<T extends (...args: any) => Promise<any>> =
-  T extends (...args: any) => Promise<infer R> ? R : any;
