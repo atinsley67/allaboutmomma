@@ -3,6 +3,7 @@ import type { Template } from "tinacms";
 import { cloudinaryImage } from "../../lib/cloudinary";
 import { ASIN, amazonProductUrl, extractAsin, findAsin } from "../../lib/asin.mjs";
 import type { AmazonProduct } from "../../lib/amazon";
+import { useAmazonProduct } from "../../lib/useAmazonProduct";
 
 export type AffiliateLinkProps = {
   altText: string;
@@ -22,14 +23,17 @@ export type AffiliateLinkProps = {
 };
 
 export const AffiliateLink = (props: AffiliateLinkProps) => {
+  const asin = props.asin || extractAsin(props.affiliateURLs?.linkURL)
+  const amazon = useAmazonProduct(asin, props.amazon)
   // Stored URLs for a different product than the ASIN are left over from before it was changed
   const stored = !props.asin || extractAsin(props.affiliateURLs?.linkURL) === props.asin ? props.affiliateURLs : undefined
   // An uploaded image takes precedence; fetched Amazon data over the URLs stored in the post
-  const imageURL = props.image || props.amazon?.imageURL || stored?.imageURL || ""
-  const linkURL = props.amazon?.url || stored?.linkURL || (props.asin ? amazonProductUrl(props.asin) : "")
+  const imageURL = props.image || amazon?.imageURL || stored?.imageURL || ""
+  const linkURL = amazon?.url || stored?.linkURL || (asin ? amazonProductUrl(asin) : "")
   const floatLeft = props.floatLeft
 
-  if (linkURL && !imageURL && props.amazon === undefined) {
+  // Only in the visual editor, for a product added since the last build
+  if (linkURL && !imageURL && amazon === undefined) {
     return (
       <div className={`flex ml-2 mr-6 mt-0 mb-6 justify-center items-center ${floatLeft ? 'md:float-left' : ''}`}>
         <div className="flex min-h-[11rem] min-w-[11rem] items-center justify-center rounded-xl border-2 border-dashed border-gray-300 p-4 text-center text-xs italic text-gray-500">

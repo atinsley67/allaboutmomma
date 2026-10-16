@@ -1,6 +1,7 @@
 // Refreshes Amazon product data (link, image, title, availability) for every ASIN in content/,
 // via the Amazon Creators API, into .amazon-cache/products.json. Runs before each build;
-// lib/amazon.ts reads the cache while pages are generated.
+// lib/amazon.ts reads the cache while pages are generated, and the visual editor reads the
+// links and images from public/amazon-products.json.
 //
 // Only ASINs that are new or older than --max-age-hours (default 23) are fetched, so a nightly
 // build refreshes everything and a daytime publish fetches just the new products.
@@ -15,6 +16,7 @@ import { AMAZON_URL, extractAsin, PARTNER_TAG } from "../lib/asin.mjs";
 
 const CONTENT_DIR = "content";
 const CACHE_FILE = path.join(".amazon-cache", "products.json");
+const EDITOR_FILE = path.join("public", "amazon-products.json");
 const TOKEN_URL = "https://api.amazon.com/auth/o2/token"; // North America region, covers amazon.com
 const GET_ITEMS_URL = "https://creatorsapi.amazon/catalog/v1/getItems";
 const MARKETPLACE = "www.amazon.com";
@@ -66,6 +68,14 @@ function readCache() {
 function writeCache(products) {
   fs.mkdirSync(path.dirname(CACHE_FILE), { recursive: true });
   fs.writeFileSync(CACHE_FILE, JSON.stringify({ products }, null, 1));
+
+  // The visual editor can't see build-time data, so it loads the links and images from here
+  const forEditor = Object.fromEntries(
+    Object.entries(products)
+      .filter(([, product]) => product.status === "ok")
+      .map(([asin, { url, imageURL }]) => [asin, { url, imageURL }])
+  );
+  fs.writeFileSync(EDITOR_FILE, JSON.stringify(forEditor));
 }
 
 async function getToken() {
