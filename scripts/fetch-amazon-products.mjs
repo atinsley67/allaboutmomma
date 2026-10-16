@@ -289,8 +289,15 @@ function report(references, cache, events, error) {
 async function main() {
   const now = Date.now();
   const references = scanContent();
+  const previous = readCache();
+  console.log(
+    previous.lastRunAt
+      ? `Amazon: using the last good data from the run at ${previous.lastRunAt}`
+      : "Amazon: no data from a previous run (first build, or the build cache was cleared)"
+  );
   const fetched = await fetchAll([...references.keys()]);
-  const { cache, events } = update(references, readCache(), fetched, now);
+  const { cache, events } = update(references, previous, fetched, now);
+  cache.lastRunAt = new Date(now).toISOString();
 
   fs.mkdirSync(path.dirname(CACHE_FILE), { recursive: true });
   fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 1));
