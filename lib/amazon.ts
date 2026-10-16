@@ -1,6 +1,6 @@
-// Attaches fresh Amazon product data to a page's content at build time, from the cache that
-// scripts/fetch-amazon-products.mjs writes. The visual editor re-queries content live and never
-// sees this data, so components fall back to the stored URLs (or a placeholder) there.
+// Attaches Amazon product data to a page's content at build time, from public/amazon-products.json,
+// which scripts/fetch-amazon-products.mjs writes with only the products fit to show. The visual
+// editor re-queries content live and never sees this data; it loads the same file in the browser.
 import fs from "fs";
 import path from "path";
 import { extractAsin, ASIN } from "./asin.mjs";
@@ -11,15 +11,13 @@ export type AmazonProduct = {
   title: string | null;
 };
 
-type CachedProduct = AmazonProduct & { status: "ok" | "notFound" };
-
-let products: Record<string, CachedProduct> | undefined;
+let products: Record<string, AmazonProduct> | undefined;
 
 function loadProducts() {
   if (!products) {
     try {
-      const file = path.join(process.cwd(), ".amazon-cache", "products.json");
-      products = JSON.parse(fs.readFileSync(file, "utf8")).products ?? {};
+      const file = path.join(process.cwd(), "public", "amazon-products.json");
+      products = JSON.parse(fs.readFileSync(file, "utf8"));
     } catch {
       products = {};
     }
@@ -28,16 +26,14 @@ function loadProducts() {
 }
 
 function lookup(asin: string | null | undefined): AmazonProduct | null {
-  const product = asin && ASIN.test(asin) ? loadProducts()[asin] : undefined;
-  if (product?.status !== "ok" || !product.url) return null;
-  return { url: product.url, imageURL: product.imageURL, title: product.title };
+  return (asin && ASIN.test(asin) && loadProducts()[asin]) || null;
 }
 
 /**
  * Walks the Tina data and sets `amazon` on each AffiliateLink and affiliate table cell: the
- * fetched product, or null if there isn't one. It's never undefined on published pages, which
+ * product, or null if there isn't one to show. It's never undefined on published pages, which
  * is how components tell them apart from the visual editor. Inline Amazon text links are pointed
- * at the fetched product URL. Mutates and returns `data`.
+ * at the product URL. Mutates and returns `data`.
  */
 export function addAmazonData<T>(data: T): T {
   const visit = (node: any) => {

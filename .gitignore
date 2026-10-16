@@ -32,5 +32,4 @@ public/sitemap*
 tsconfig.tsbuildinfo
 
 # Amazon product data, refreshed by scripts/fetch-amazon-products.mjs
-.amazon-cache/
 public/amazon-products.json
