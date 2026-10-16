@@ -1,4 +1,5 @@
 import * as React from "react";
+import { enableDraftMode } from "../../tina/draftMode";
 
 // A rich-text document with no content: only empty paragraphs. The editor turns an empty
 // field into one of these as it loads.
@@ -47,9 +48,10 @@ function changedFieldLabels(form, tinaForm): string[] {
   return Array.from(new Set(labels));
 }
 
-// A link at the top of a document's form that switches between Tina's two editors:
-// the full-screen form ("author mode", best for long posts) and the visual editor with live
-// preview ("tweaks mode"). It's a field that never calls onChange, so nothing is ever saved.
+// Links at the top of a document's form: one switches between Tina's two editors, the
+// full-screen form ("author mode", best for long posts) and the visual editor with live preview
+// ("tweaks mode"); the other opens the page in a new tab. It's a field that never calls
+// onChange, so nothing is ever saved.
 export const editorModeSwitch = (
   collection: string,
   collectionPath: string,
@@ -76,12 +78,28 @@ export const editorModeSwitch = (
       }
     };
 
+    // The page as the site renders it, hidden or not, in a new tab. Draft mode has to be on
+    // first, which it isn't yet if the visual editor hasn't been opened this visit. The tab is
+    // opened straight away so the browser doesn't block it as a pop-up.
+    const onViewPage = async (e: React.MouseEvent) => {
+      e.preventDefault();
+      const tab = window.open("about:blank", "_blank");
+      await enableDraftMode();
+      if (tab) tab.location.href = previewPath(filename);
+      else window.open(previewPath(filename), "_blank");
+    };
+
+    const linkStyle = { color: "#2563eb", textDecoration: "underline" };
     return (
       <div style={{ marginBottom: "1rem", fontSize: "0.85rem", color: "#4b5563" }}>
         {inVisualEditor ? "Visual editor" : "Full-screen editor"}
         {" · "}
-        <a href={target} onClick={onClick} style={{ color: "#2563eb", textDecoration: "underline" }}>
+        <a href={target} onClick={onClick} style={linkStyle}>
           {inVisualEditor ? "Switch to full-screen editor" : "Switch to visual editor (live preview)"}
+        </a>
+        {" · "}
+        <a href={previewPath(filename)} onClick={onViewPage} style={linkStyle} title="Opens the last saved version">
+          Preview page in new tab
         </a>
       </div>
     );

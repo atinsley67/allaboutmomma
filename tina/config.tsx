@@ -7,6 +7,7 @@ import { testimonialBlockSchema } from "../components/blocks/testimonial";
 import { mailerLiteFormBlockSchema } from "../components/blocks/mailerLiteForm";
 import { postTemplates, categoryTemplates } from "../components/rich-text/templates";
 import { editorModeSwitch } from "../components/fields/editorModeSwitch";
+import { enableDraftMode, setEditorCms } from "./draftMode";
 
 // Must match the filenames in content/categories
 const CATEGORIES = ["baby", "momma", "pregnancy", "toddler", "travel"];
@@ -18,28 +19,6 @@ const postPath = (filename: string) => `/${filename}`;
 
 // Autosave: localStorage writes are debounced so typing doesn't serialise the whole post per keystroke
 let autosaveTimer: ReturnType<typeof setTimeout> | undefined;
-
-// The visual editor previews pages in Next.js draft mode, so hidden posts and posts written since
-// the last build render (see pages/api/draft.ts). It's switched on once per visit, by showing the
-// site the editor's Tina login.
-let editorCms;
-let draftMode: Promise<void> | undefined;
-function enableDraftMode() {
-  draftMode ??= (async () => {
-    try {
-      const token = await editorCms?.api?.tina?.authProvider?.getAccessToken();
-      const res = await fetch("/api/draft", {
-        method: "POST",
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
-      });
-      if (!res.ok) throw new Error(`draft mode refused (${res.status})`);
-    } catch (error) {
-      console.warn(`Draft mode: ${error.message}; hidden and new posts won't preview`);
-      draftMode = undefined; // try again with the next document
-    }
-  })();
-  return draftMode;
-}
 
 const config = defineConfig({
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID!,
@@ -61,7 +40,7 @@ const config = defineConfig({
     },
   },
   cmsCallback: (cms) => {
-    editorCms = cms;
+    setEditorCms(cms);
 
     cms.events.subscribe('plugin:add:screen', (payload) => {
       // Perform actions when the form is saved
