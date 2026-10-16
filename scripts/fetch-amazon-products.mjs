@@ -1,6 +1,7 @@
 // Refreshes Amazon product data (link, image, title, availability) for every ASIN in content/,
-// via the Amazon Creators API. Runs before every build and always refetches everything, since
-// Amazon expects product data to be kept fresh.
+// via the Amazon Creators API. Runs before every build and refetches everything, since Amazon
+// expects product data to be kept fresh. The exception is a build within RECENT_HOURS of a full
+// refresh (say, promoting a preview just built): that only fetches products added since.
 //
 // The last good data for each product is kept in .next/cache/amazon-products.json (Vercel keeps
 // .next/cache between builds) and is what pages fall back to when Amazon misbehaves:
@@ -31,6 +32,7 @@ const GRACE_HOURS = 20;
 const FALLBACK_HOURS = 72;
 const OUTAGE_SHARE = 0.1;
 const OUTAGE_MIN = 5; // so a handful of genuine removals on a small site isn't an outage
+const RECENT_HOURS = 1;
 const HOUR = 3600 * 1000;
 
 const ASIN_FIELD = /\basin\s*[=:]\s*["']([A-Z0-9]{10})["']/g;
@@ -94,9 +96,10 @@ const hadData = (product) => product?.status === "ok" || product?.status === "mi
 
 /**
  * Works out each product's new state from the last run's and this run's answers, and the
- * changes worth telling someone about.
+ * changes worth telling someone about. A `partial` run only asked about new products, so it
+ * says nothing about whether Amazon is failing or misbehaving overall.
  */
-function update(references, cache, { results, error }, now) {
+function update(references, cache, { results, error }, now, { partial = false } = {}) {
   const nowISO = new Date(now).toISOString();
   const before = cache.products ?? {};
   // Without a previous run (first build, or the build cache was cleared) there's nothing to
@@ -137,14 +140,18 @@ function update(references, cache, { results, error }, now) {
 
   // Problems that last are reported when they start and when they end, not every run
   const state = { failingSince: cache.failingSince ?? null, outageSince: cache.outageSince ?? null, expired: cache.expired ?? 0 };
-  if (error) {
+  if (partial) {
+    // Left as they were
+  } else if (error) {
     if (!state.failingSince) events.push({ type: "failing", message: error });
     state.failingSince ??= nowISO;
   } else if (state.failingSince) {
     events.push({ type: "recovered", since: state.failingSince });
     state.failingSince = null;
   }
-  if (outage) {
+  if (partial) {
+    // Left as they were
+  } else if (outage) {
     if (!state.outageSince) events.push({ type: "outage", count: newlyInvalid.length, of: hadDataBefore.length });
     state.outageSince ??= nowISO;
   } else if (state.outageSince && !error) {
@@ -191,7 +198,7 @@ function describe(event) {
   }
 }
 
-function report(references, cache, events, error) {
+function report(references, cache, events, summary) {
   const products = cache.products;
   const used = [...references.entries()].map(([asin, files]) => ({ asin, files, product: products[asin] }));
   const gone = used.filter(({ product }) => product?.status === "notFound");
@@ -200,7 +207,7 @@ function report(references, cache, events, error) {
   const outOfStock = used.filter(({ product }) => ["OUT_OF_STOCK", "UNAVAILABLE"].includes(product?.availability));
   const rows = (items) => items.map(({ asin, files }) => `| [${asin}](https://www.amazon.com/dp/${asin}) | ${files.join(", ")} |`);
 
-  console.log(`Amazon products: ${references.size} in content${error ? `, refresh incomplete: ${error}` : ", all refreshed"}`);
+  console.log(`Amazon products: ${references.size} in content, ${summary}`);
   if (events.length) console.log(["### Changes since the last run", "", ...events.map(describe), ""].join("\n"));
   if (missing.length) {
     console.log(`${missing.length} products reported invalid but within the ${GRACE_HOURS}-hour grace period: ${missing.map((m) => m.asin).join(", ")}`);
@@ -230,20 +237,37 @@ async function main() {
   const now = Date.now();
   const references = scanContent();
   const previous = readCache();
-  console.log(
-    previous.lastRunAt
-      ? `Amazon: using the last good data from the run at ${previous.lastRunAt}`
-      : "Amazon: no data from a previous run (first build, or the build cache was cleared)"
-  );
-  const fetched = await fetchAll([...references.keys()]);
-  const { cache, events } = update(references, previous, fetched, now);
-  cache.lastRunAt = new Date(now).toISOString();
+  const all = [...references.keys()];
+
+  // A full refresh that worked under RECENT_HOURS ago is fresh enough; just fetch what's new
+  const recent = hoursSince(previous.lastRefreshAt, now) < RECENT_HOURS;
+  const toFetch = recent ? all.filter((asin) => !previous.products?.[asin]) : all;
+  if (recent) {
+    console.log(`Amazon: products were refreshed at ${previous.lastRefreshAt}, under ${RECENT_HOURS} hour ago; fetching only the ${toFetch.length} added since`);
+  } else if (previous.products) {
+    console.log(`Amazon: last run's data found (from ${previous.lastRunAt ?? "an earlier build"}), kept as a fallback; refreshing all ${all.length} products`);
+  } else {
+    console.log(`Amazon: no data from a previous run (first build, or the build cache was cleared); fetching all ${all.length} products`);
+  }
+
+  const fetched = await fetchAll(toFetch);
+  const { cache, events } = update(references, previous, fetched, now, { partial: recent });
+  const nowISO = new Date(now).toISOString();
+  cache.lastRunAt = nowISO;
+  // Only a complete, normal refresh counts as recent for the next build
+  cache.lastRefreshAt = !recent && !fetched.error && !cache.outageSince ? nowISO : previous.lastRefreshAt ?? null;
+
+  const summary = fetched.error
+    ? `refresh incomplete: ${fetched.error}`
+    : recent
+      ? `${toFetch.length} new fetched, the rest refreshed at ${previous.lastRefreshAt}`
+      : "all refreshed";
 
   fs.mkdirSync(path.dirname(CACHE_FILE), { recursive: true });
   fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 1));
   fs.writeFileSync(PUBLISHED_FILE, JSON.stringify(publishable(cache.products, now)));
 
-  report(references, cache, events, fetched.error);
+  report(references, cache, events, summary);
 }
 
 main().catch((error) => {
