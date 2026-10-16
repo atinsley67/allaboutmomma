@@ -1,6 +1,7 @@
 import * as React from "react";
 import { FaPlusCircle, FaTrashAlt, FaChevronLeft, FaChevronRight, FaChevronUp, FaChevronDown } from 'react-icons/fa';
 import { wrapFieldsWithMeta } from "tinacms";
+import { ASIN, findAsin } from "../../lib/asin.mjs";
 
 
 export const TableInput = wrapFieldsWithMeta(({ input }) => {
@@ -117,27 +118,27 @@ export const TableInput = wrapFieldsWithMeta(({ input }) => {
         onChange({ headers : updatedHeaders, rows }); 
     };
 
-    const handleAffiliateChange = (rowIndex, cellIndex, snippet, imageURL, linkURL, caption ) => {
-
-      let newImgUrl = imageURL
-      let newLinkUrl= linkURL
-      let newCaption = caption
-
-      if (snippet) {
-        const imageMatch = snippet.match(/<img.*?src="(.*?)"/);
-        newImgUrl = imageMatch ? imageMatch[1].replace(/&amp;/g, '&') : null;
-        const linkMatch = snippet.match(/<a.*?href="(.*?)"/);
-        newLinkUrl = linkMatch ? linkMatch[1].replace(/&amp;/g, '&') : null;
-        newCaption = caption || "" != "" ? caption : "Check Amazon Price"
-      }
-
-      const newAffiliate = (newCaption || "" != "") || (newImgUrl || "" != "") || (newLinkUrl || "" != "") ? {affiliate: {linkURL: newLinkUrl, imageURL: newImgUrl , caption: newCaption}} : {};
+    // Merges changes into a cell's affiliate product, dropping it once every field is empty
+    const handleAffiliateChange = (rowIndex, cellIndex, changes) => {
       const {affiliate, ...newCell} = rows[rowIndex].cells[cellIndex]
+      const updated = { ...affiliate, ...changes }
+      const hasContent = ["asin", "linkURL", "imageURL", "caption"].some((key) => updated[key])
 
       const updatedRows = rows.map((row, index) =>
-        index === rowIndex ? {cells: [...row.cells.slice(0, cellIndex), { ...newCell, ...newAffiliate }, ...row.cells.slice(cellIndex + 1)]} : row
+        index === rowIndex ? {cells: [...row.cells.slice(0, cellIndex), hasContent ? { ...newCell, affiliate: updated } : newCell, ...row.cells.slice(cellIndex + 1)]} : row
       );
       onChange({ headers, rows: updatedRows });
+    }
+
+    const handleSnippetChange = (rowIndex, cellIndex, snippet, caption) => {
+      const imageMatch = snippet.match(/<img.*?src="(.*?)"/);
+      const linkMatch = snippet.match(/<a.*?href="(.*?)"/);
+      handleAffiliateChange(rowIndex, cellIndex, {
+        asin: findAsin(snippet) || '',
+        imageURL: imageMatch ? imageMatch[1].replace(/&amp;/g, '&') : null,
+        linkURL: linkMatch ? linkMatch[1].replace(/&amp;/g, '&') : null,
+        caption: caption || "Check Amazon Price",
+      });
     }
   
     return (
@@ -198,15 +199,26 @@ export const TableInput = wrapFieldsWithMeta(({ input }) => {
                     onChange={(e) => handleCellValueChange(rowIndex, columnIndex, e.target.value)}
                     className="w-full text-sm"
                   />
-                  <label className="text-xs pt-2">Affiliate Snippet</label>
+                  <label className="text-xs pt-2">Amazon Product (link, snippet or ASIN)</label>
+                  <input
+                      name="asin"
+                      type="string"
+                      className="text-xs"
+                      value={cell.affiliate?.asin || ''}
+                      // Keeps just the ASIN when one is pasted; the image and link are filled in when published
+                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, { asin: findAsin(e.target.value) ?? e.target.value })}
+                  />
+                  {cell.affiliate?.asin && !ASIN.test(cell.affiliate.asin) && (
+                    <span className="text-xs text-red-500">No Amazon product found in that</span>
+                  )}
+                  <label className="text-xs pt-1">Affiliate Snippet</label>
                   <input
                          name="Snippet"
                          id="snippet"
                          type="string"
                          className="text-xs"
                          value=""
-                         // This will pass along props.input.onChange to set our form values as this input changes.
-                         onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, e.target.value, '','', cell.affiliate?.caption || '')}
+                         onChange={(e) => handleSnippetChange(rowIndex, columnIndex, e.target.value, cell.affiliate?.caption || '')}
                   />
                   <label className="text-xs pt-1">Affiliate Image URL</label>
                   <input
@@ -215,8 +227,7 @@ export const TableInput = wrapFieldsWithMeta(({ input }) => {
                       type="string"
                       className="text-xs"
                       value={cell.affiliate?.imageURL || ''}
-                      // This will pass along props.input.onChange to set our form values as this input changes.
-                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, null, e.target.value, cell.affiliate?.linkURL || '', cell.affiliate?.caption || '')}
+                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, { imageURL: e.target.value })}
                   />
                   <label className="text-xs pt-1">Affiliate Link URL</label>
                   <input
@@ -225,8 +236,7 @@ export const TableInput = wrapFieldsWithMeta(({ input }) => {
                       type="string"
                       className="text-xs"
                       value={cell.affiliate?.linkURL || ''}
-                      // This will pass along props.input.onChange to set our form values as this input changes.
-                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, null, cell.affiliate?.imageURL || '', e.target.value,  cell.affiliate?.caption || '')}
+                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, { linkURL: e.target.value })}
                   />
                   <label className="text-xs pt-1">Caption</label>
                   <input
@@ -235,8 +245,7 @@ export const TableInput = wrapFieldsWithMeta(({ input }) => {
                       type="string"
                       className="text-xs"
                       value={cell.affiliate?.caption || ''}
-                      // This will pass along props.input.onChange to set our form values as this input changes.
-                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, null, cell.affiliate?.imageURL || '', cell.affiliate?.linkURL || '',  e.target.value)}
+                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, { caption: e.target.value })}
                   />
                   </div>
                 </td>

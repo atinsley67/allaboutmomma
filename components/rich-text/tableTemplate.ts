@@ -53,6 +53,10 @@ export const tableTemplate: Template = {
                   type: "object",
                   fields: [
                     {
+                      name: "asin",
+                      type: "string",
+                    },
+                    {
                       name: "linkURL",
                       type: "string",
                     },

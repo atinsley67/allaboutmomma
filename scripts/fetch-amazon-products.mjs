@@ -11,7 +11,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { extractAsin, PARTNER_TAG } from "../lib/asin.mjs";
+import { AMAZON_URL, extractAsin, PARTNER_TAG } from "../lib/asin.mjs";
 
 const CONTENT_DIR = "content";
 const CACHE_FILE = path.join(".amazon-cache", "products.json");
@@ -22,7 +22,6 @@ const BATCH_SIZE = 10; // GetItems maximum
 const REQUEST_GAP_MS = 1100; // stay under one request per second
 const RESOURCES = ["images.primary.large", "itemInfo.title", "offersV2.listings.availability"];
 
-const AMAZON_URL = /https?:\/\/(?:www\.|smile\.)?amazon\.com\/[^\s"'()<>\]\\]+/gi;
 const ASIN_FIELD = /\basin\s*[=:]\s*["']([A-Z0-9]{10})["']/g;
 
 const args = process.argv.slice(2);

@@ -1,7 +1,7 @@
 import React from "react";
 import type { Template } from "tinacms";
 import { cloudinaryImage } from "../../lib/cloudinary";
-import { amazonProductUrl } from "../../lib/asin.mjs";
+import { ASIN, amazonProductUrl, extractAsin, findAsin } from "../../lib/asin.mjs";
 import type { AmazonProduct } from "../../lib/amazon";
 import { AffiliateURLsInput } from "../fields/affiliateUrls";
 
@@ -23,9 +23,11 @@ export type AffiliateLinkProps = {
 };
 
 export const AffiliateLink = (props: AffiliateLinkProps) => {
+  // Stored URLs for a different product than the ASIN are left over from before it was changed
+  const stored = !props.asin || extractAsin(props.affiliateURLs?.linkURL) === props.asin ? props.affiliateURLs : undefined
   // An uploaded image takes precedence; fetched Amazon data over the URLs stored in the post
-  const imageURL = props.image || props.amazon?.imageURL || props.affiliateURLs?.imageURL || ""
-  const linkURL = props.amazon?.url || props.affiliateURLs?.linkURL || (props.asin ? amazonProductUrl(props.asin) : "")
+  const imageURL = props.image || props.amazon?.imageURL || stored?.imageURL || ""
+  const linkURL = props.amazon?.url || stored?.linkURL || (props.asin ? amazonProductUrl(props.asin) : "")
   const floatLeft = props.floatLeft
 
   if (linkURL && !imageURL && props.amazon === undefined) {
@@ -81,13 +83,28 @@ export const affiliateLinkTemplate: Template = {
   label: "Affiliate Link",
   fields: [
     {
+      name: "asin",
+      label: "Amazon Product",
+      description:
+        "Paste the product's Amazon link, a SiteStripe snippet or its ASIN. The image and link are filled in when the site is published.",
+      type: "string",
+      ui: {
+        // Keep just the ASIN from whatever was pasted
+        parse: (value) => findAsin(value) ?? value,
+        validate: (value) =>
+          value && !ASIN.test(value)
+            ? "No Amazon product found. Paste the full amazon.com product link (short amzn.to links won't work) or the 10-character ASIN."
+            : undefined,
+      },
+    },
+    {
       name: "altText",
       label: "Alt Text",
       type: "string",
     },
     {
       name: "affiliateURLs",
-      label: "Affiliate URLs",
+      label: "Affiliate URLs (optional, used when Amazon data isn't available)",
       type: "object",
       fields: [
         {

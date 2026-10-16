@@ -1,6 +1,6 @@
 import React from "react";
 import { cloudinaryImage } from "../../lib/cloudinary";
-import { amazonProductUrl } from "../../lib/asin.mjs";
+import { amazonProductUrl, extractAsin } from "../../lib/asin.mjs";
 
 export type TableProps = {
   data: {
@@ -15,9 +15,11 @@ const storedURL = (url: string | undefined) => (url && url !== "MISSING" ? url :
 // A cell's affiliate product. `amazon` is set at build time by lib/amazon (null if there's no
 // fetched product) and missing in the visual editor.
 function affiliateProduct(affiliate) {
+  // Stored URLs for a different product than the ASIN are left over from before it was changed
+  const stored = !affiliate.asin || extractAsin(affiliate.linkURL) === affiliate.asin;
   return {
-    linkURL: affiliate.amazon?.url || storedURL(affiliate.linkURL) || (affiliate.asin ? amazonProductUrl(affiliate.asin) : ""),
-    imageURL: affiliate.amazon?.imageURL || storedURL(affiliate.imageURL),
+    linkURL: affiliate.amazon?.url || (stored && storedURL(affiliate.linkURL)) || (affiliate.asin ? amazonProductUrl(affiliate.asin) : ""),
+    imageURL: affiliate.amazon?.imageURL || (stored && storedURL(affiliate.imageURL)) || "",
     inEditor: affiliate.amazon === undefined,
   };
 }
