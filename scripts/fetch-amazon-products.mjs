@@ -14,9 +14,10 @@
 // What's fit to show is written to public/amazon-products.json, which lib/amazon.ts reads while
 // pages are generated and the visual editor loads in the browser.
 //
-// It never fails the build, and it reports what changed since the last run.
+// It never fails the build. It reports what changed since the last run in the build log, and
+// production builds email the changes (see sendAlerts).
 //
-//   node scripts/fetch-amazon-products.mjs
+//   node scripts/fetch-amazon-products.mjs [--test-email]
 
 import fs from "node:fs";
 import path from "node:path";
@@ -119,12 +120,13 @@ function update(references, cache, { results, error }, now, { partial = false } 
 
     if (result && result !== INVALID) {
       products[asin] = { status: "ok", ...toProduct(result), fetchedAt: nowISO };
-      if (previous?.status === "notFound") events.push({ type: "back", asin, files: files(asin) });
+      if (previous?.status === "notFound") events.push({ type: "back", asin, files: files(asin), title: products[asin].title });
     } else if (result === INVALID && !outage && hadData(previous)) {
       const missingSince = previous.missingSince ?? nowISO;
       if (hoursSince(missingSince, now) >= GRACE_HOURS) {
-        products[asin] = { status: "notFound", since: missingSince };
-        events.push({ type: "gone", asin, files: files(asin) });
+        // The title is kept so alerts can say what the product was
+        products[asin] = { status: "notFound", since: missingSince, title: previous.title ?? null };
+        events.push({ type: "gone", asin, files: files(asin), title: previous.title ?? null });
       } else {
         products[asin] = { ...previous, status: "missing", missingSince };
       }
@@ -233,7 +235,90 @@ function report(references, cache, events, summary) {
   }
 }
 
+// Alert emails, sent through Resend (resend.com) by production builds when something changed.
+// RESEND_API_KEY and ALERT_EMAILS (comma-separated) turn them on. Until allaboutmomma.com is
+// verified in Resend, they come from Resend's test sender, which only reaches the Resend account's
+// own address.
+const SITE_URL = "https://allaboutmomma.com";
+const ALERT_FROM = process.env.ALERT_FROM || "All About Momma <onboarding@resend.dev>";
+const MAX_PENDING_ALERTS = 100;
+const COLLECTIONS = { posts: "post", pages: "page", categories: "category" };
+
+// "posts/best-travel-crib.mdx" → a line linking to it in the editor
+function editLink(file) {
+  const [folder, name] = file.split("/");
+  const filename = name.replace(/\.mdx?$/, "");
+  return `  - ${filename}: ${SITE_URL}/admin#/collections/edit/${COLLECTIONS[folder] ?? folder}/${filename}`;
+}
+
+function alertEmail(alerts) {
+  const gone = alerts.filter((a) => a.type === "gone");
+  const back = alerts.filter((a) => a.type === "back");
+  const problems = alerts.filter((a) => ["failing", "outage", "expired"].includes(a.type));
+  const lines = [];
+
+  if (gone.length) {
+    lines.push("These products need replacing:", "");
+    for (const a of gone) {
+      const name = a.title ? `${a.title.slice(0, 90)} (ASIN ${a.asin})` : `ASIN ${a.asin}`;
+      lines.push(`• ${name}`);
+      lines.push(a.isNew ? "  Just added, but Amazon doesn't recognise it. Check the ASIN." : "  No longer on Amazon.");
+      lines.push("  Used in:", ...a.files.map(editLink), "");
+    }
+    lines.push(`Until they're replaced, they show a plain "Check Amazon Price" button with no image.`, "");
+  }
+  if (back.length) {
+    lines.push("Back on Amazon (nothing to do):", ...back.map((a) => `• ${a.title ?? `ASIN ${a.asin}`}`), "");
+  }
+  const other = alerts.filter((a) => !["gone", "back"].includes(a.type));
+  if (other.length) {
+    lines.push("Amazon refresh:", ...other.map((a) => `• ${describe(a).replace(/^- /, "")} (${a.at})`), "");
+  }
+  lines.push("Sent by the site's build when something changes with its Amazon products.");
+
+  const subject = gone.length
+    ? `All About Momma: ${gone.length} Amazon product${gone.length === 1 ? "" : "s"} to replace`
+    : problems.length
+      ? "All About Momma: problem refreshing Amazon products"
+      : "All About Momma: Amazon products update";
+  return { subject, text: lines.join("\n") };
+}
+
+/** Emails the alerts; true if they were sent. */
+async function sendAlerts(alerts) {
+  const to = (process.env.ALERT_EMAILS || "").split(",").map((s) => s.trim()).filter(Boolean);
+  if (!process.env.RESEND_API_KEY || !to.length) {
+    console.warn(`Amazon: ${alerts.length} change(s) to email, but RESEND_API_KEY or ALERT_EMAILS isn't set`);
+    return false;
+  }
+  const { subject, text } = alertEmail(alerts);
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ from: ALERT_FROM, to, subject, text }),
+    });
+    if (!res.ok) throw new Error(`${res.status} ${await res.text()}`);
+    console.log(`Amazon: emailed ${alerts.length} change(s) to ${to.join(", ")}`);
+    return true;
+  } catch (error) {
+    // Kept for the next production build to try again
+    console.warn(`Amazon: alert email failed, ${error.message}`);
+    return false;
+  }
+}
+
 async function main() {
+  // `--test-email` sends a sample alert, to check the email settings
+  if (process.argv.includes("--test-email")) {
+    const at = new Date().toISOString();
+    await sendAlerts([
+      { type: "gone", asin: "B00AKKDSNG", title: "Guava Lotus Travel Crib (sample)", files: ["posts/best-travel-crib.mdx"], at },
+      { type: "failing", message: "sample problem", at },
+    ]);
+    return;
+  }
+
   const now = Date.now();
   const references = scanContent();
   const previous = readCache();
@@ -262,6 +347,14 @@ async function main() {
     : recent
       ? `${toFetch.length} new fetched, the rest refreshed at ${previous.lastRefreshAt}`
       : "all refreshed";
+
+  // Changes wait here until a production build emails them, so a preview build never uses one up
+  cache.pendingAlerts = [...(previous.pendingAlerts ?? []), ...events.map((e) => ({ ...e, at: nowISO }))].slice(
+    -MAX_PENDING_ALERTS
+  );
+  if (process.env.VERCEL_ENV === "production" && cache.pendingAlerts.length) {
+    if (await sendAlerts(cache.pendingAlerts)) cache.pendingAlerts = [];
+  }
 
   fs.mkdirSync(path.dirname(CACHE_FILE), { recursive: true });
   fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 1));
