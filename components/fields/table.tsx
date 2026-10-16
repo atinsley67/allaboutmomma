@@ -129,17 +129,6 @@ export const TableInput = wrapFieldsWithMeta(({ input }) => {
       );
       onChange({ headers, rows: updatedRows });
     }
-
-    const handleSnippetChange = (rowIndex, cellIndex, snippet, caption) => {
-      const imageMatch = snippet.match(/<img.*?src="(.*?)"/);
-      const linkMatch = snippet.match(/<a.*?href="(.*?)"/);
-      handleAffiliateChange(rowIndex, cellIndex, {
-        asin: findAsin(snippet) || '',
-        imageURL: imageMatch ? imageMatch[1].replace(/&amp;/g, '&') : null,
-        linkURL: linkMatch ? linkMatch[1].replace(/&amp;/g, '&') : null,
-        caption: caption || "Check Amazon Price",
-      });
-    }
   
     return (
       <div>
@@ -199,7 +188,7 @@ export const TableInput = wrapFieldsWithMeta(({ input }) => {
                     onChange={(e) => handleCellValueChange(rowIndex, columnIndex, e.target.value)}
                     className="w-full text-sm"
                   />
-                  <label className="text-xs pt-2">Amazon Product (link, snippet or ASIN)</label>
+                  <label className="text-xs pt-2">Amazon Product (link or ASIN)</label>
                   <input
                       name="asin"
                       type="string"
@@ -211,33 +200,6 @@ export const TableInput = wrapFieldsWithMeta(({ input }) => {
                   {cell.affiliate?.asin && !ASIN.test(cell.affiliate.asin) && (
                     <span className="text-xs text-red-500">No Amazon product found in that</span>
                   )}
-                  <label className="text-xs pt-1">Affiliate Snippet</label>
-                  <input
-                         name="Snippet"
-                         id="snippet"
-                         type="string"
-                         className="text-xs"
-                         value=""
-                         onChange={(e) => handleSnippetChange(rowIndex, columnIndex, e.target.value, cell.affiliate?.caption || '')}
-                  />
-                  <label className="text-xs pt-1">Affiliate Image URL</label>
-                  <input
-                      name="imageURL"
-                      id="imageURL"
-                      type="string"
-                      className="text-xs"
-                      value={cell.affiliate?.imageURL || ''}
-                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, { imageURL: e.target.value })}
-                  />
-                  <label className="text-xs pt-1">Affiliate Link URL</label>
-                  <input
-                      name="LinkURL"
-                      id="linkURL"
-                      type="string"
-                      className="text-xs"
-                      value={cell.affiliate?.linkURL || ''}
-                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, { linkURL: e.target.value })}
-                  />
                   <label className="text-xs pt-1">Caption</label>
                   <input
                       name="caption"
@@ -246,6 +208,24 @@ export const TableInput = wrapFieldsWithMeta(({ input }) => {
                       className="text-xs"
                       value={cell.affiliate?.caption || ''}
                       onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, { caption: e.target.value })}
+                  />
+                  <label className="text-xs pt-1">Not on Amazon? Image URL</label>
+                  <input
+                      name="imageURL"
+                      id="imageURL"
+                      type="string"
+                      className="text-xs"
+                      value={cell.affiliate?.imageURL || ''}
+                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, { imageURL: e.target.value })}
+                  />
+                  <label className="text-xs pt-1">Not on Amazon? Link URL</label>
+                  <input
+                      name="LinkURL"
+                      id="linkURL"
+                      type="string"
+                      className="text-xs"
+                      value={cell.affiliate?.linkURL || ''}
+                      onChange={(e) => handleAffiliateChange(rowIndex, columnIndex, { linkURL: e.target.value })}
                   />
                   </div>
                 </td>

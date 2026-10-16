@@ -3,7 +3,6 @@ import type { Template } from "tinacms";
 import { cloudinaryImage } from "../../lib/cloudinary";
 import { ASIN, amazonProductUrl, extractAsin, findAsin } from "../../lib/asin.mjs";
 import type { AmazonProduct } from "../../lib/amazon";
-import { AffiliateURLsInput } from "../fields/affiliateUrls";
 
 export type AffiliateLinkProps = {
   altText: string;
@@ -86,7 +85,7 @@ export const affiliateLinkTemplate: Template = {
       name: "asin",
       label: "Amazon Product",
       description:
-        "Paste the product's Amazon link, a SiteStripe snippet or its ASIN. The image and link are filled in when the site is published.",
+        "Paste the product's Amazon link or its ASIN. The image and link are filled in when the site is published.",
       type: "string",
       ui: {
         // Keep just the ASIN from whatever was pasted
@@ -103,56 +102,9 @@ export const affiliateLinkTemplate: Template = {
       type: "string",
     },
     {
-      name: "affiliateURLs",
-      label: "Affiliate URLs (optional, used when Amazon data isn't available)",
-      type: "object",
-      fields: [
-        {
-          name: "linkURL",
-          type: "string",
-        },
-        {
-          name: "imageURL",
-          type: "string",
-        }
-      ],
-      ui: {
-        parse: (val) => {
-          if (val.snippet) {
-            // Execute existing code for snippet
-            const imageMatch = val.snippet.match(/<img.*?src="(.*?)"/);
-            const imageSnippet = imageMatch ? imageMatch[1].replace(/&amp;/g, '&') : null;
-            const linkMatch = val.snippet.match(/<a.*?href="(.*?)"/);
-            const linkSnippet = linkMatch ? linkMatch[1].replace(/&amp;/g, '&') : null;
-
-            return {
-              linkURL: linkSnippet,
-              imageURL: imageSnippet,
-            };
-          } else {
-            // Update linkURL or imageURL
-            const updatedValue = {} as any;
-            if (val.linkURL) {
-              updatedValue.linkURL = val.linkURL;
-            }
-
-            if (val.imageURL) {
-              updatedValue.imageURL = val.imageURL;
-            }
-
-            return {
-              ...val,
-              ...updatedValue,
-            };
-          }
-        },
-        component: AffiliateURLsInput,
-      }
-    },
-    {
-      name: "image",
-      label: "Image",
-      type: "image",
+      label: "Caption",
+      name: "caption",
+      type: "string",
     },
     {
       label: "Button",
@@ -160,14 +112,33 @@ export const affiliateLinkTemplate: Template = {
       type: "boolean",
     },
     {
-      label: "Caption",
-      name: "caption",
-      type: "string",
-    },
-    {
       label: "Float Left",
       name: "floatLeft",
       type: "boolean",
+    },
+    {
+      name: "image",
+      label: "Own Image",
+      description: "Shown instead of Amazon's product image.",
+      type: "image",
+    },
+    {
+      name: "affiliateURLs",
+      label: "Link and Image URLs",
+      description: "For products that aren't on Amazon. Amazon products don't need these.",
+      type: "object",
+      fields: [
+        {
+          name: "linkURL",
+          label: "Link URL",
+          type: "string",
+        },
+        {
+          name: "imageURL",
+          label: "Image URL",
+          type: "string",
+        }
+      ],
     },
   ],
 };
