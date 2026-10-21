@@ -102,6 +102,9 @@ blocks:
       - post: content/posts/road-cycling-with-your-toddler.mdx
       - post: content/posts/hiking-with-toddlers-ultimate-guide.mdx
       - post: content/posts/hiking-with-you-baby-0-6-months.mdx
+      - post: content/posts/Skiing-with-Young-Kids-Beginners-Guide.mdx
+      - post: content/posts/the-ultimate-guide-to-camping-with-a-babytips-and-essentials.mdx
+      - post: content/posts/guide-to-backyard-camping-toddler.mdx
     _template: featuredPosts
   - title: Categories To Explore
     items:
