@@ -136,6 +136,7 @@ blocks:
       - title: Kid
         text: 'Elementary age kids outdoor gear and adventures to get the family prepared and excited '
         image: 'https://res.cloudinary.com/ds8uw7t44/image/upload/v1792598825/lucas-outdoor_srhyc1.jpg'
+        url: /category/kid
         imageBackground: true
     color: tint
     _template: features
