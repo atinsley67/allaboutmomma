@@ -25,14 +25,16 @@ blocks:
       - post: content/posts/Best-Family-Friendly-Ski-Mountains-in-Poconos-PA.mdx
       - post: content/posts/Skiing-with-Young-Kids-Beginners-Guide.mdx
       - post: content/posts/Great-Wolf-Lodge-Poconos-Family-Review.mdx
+      - post: content/posts/25-great-outdoor-winter-activities-for-toddlers.mdx
+      - post: content/posts/Travel-Review-Shawnee-Mountain-Ski-Area-with-Kids-.mdx
     _template: featuredPosts
   - title: Featured Posts
     items:
+      - post: content/posts/best-toddler-snow-boots-and-winter-socks.mdx
       - post: content/posts/best-toddler-bikes-for-a-1-2-and-3-year-old.mdx
       - post: content/posts/best-scooter-for-3-year-old.mdx
       - post: content/posts/best-toddler-swim-vest-for-1-2-3-and-4-year-old.mdx
       - post: content/posts/best-rain-gear-for-toddlers.mdx
-      - post: content/posts/best-baby-water-carrier.mdx
       - post: content/posts/best-toddler-hiking-pants-for-outdoor-toddlers.mdx
     color: tint
     _template: featuredPosts
