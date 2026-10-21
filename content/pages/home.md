@@ -133,6 +133,10 @@ blocks:
         image: 'http://res.cloudinary.com/ds8uw7t44/image/upload/v1688669894/momma_categorie_card_tcyomn.jpg'
         url: /category/momma
         imageBackground: true
+      - title: Kid
+        text: 'Elementary age kids outdoor gear and adventures to get the family prepared and excited '
+        image: 'https://res.cloudinary.com/ds8uw7t44/image/upload/v1792598825/lucas-outdoor_srhyc1.jpg'
+        imageBackground: true
     color: tint
     _template: features
 ---
